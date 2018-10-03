@@ -11,6 +11,9 @@ public class Attack{
 
 	public function updateAttack(){
 		//placeholder
+		//move transform
+		//update location in map
+		//count down the death counter
 	}
  
     //removes object
@@ -20,6 +23,10 @@ public class Attack{
 
     public function getAttData(){
     	return data;
+    }
+
+    public function getLocation(){
+    	//uses transform to update location in grid.
     }
 
 }

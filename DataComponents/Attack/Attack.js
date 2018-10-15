@@ -1,11 +1,10 @@
-public class Attack{
-	private var tf : Transform;
+ public class Attack{
+	private var attGO : GameObject;
 	//private var obj : AttackObjects;
 	private var data: AttackData;
 
-	public function Attack(t:Transform,  dt: AttackData){
-        tf=t;
-        //obj=ao;
+	public function Attack(aGo:GameObject, dt: AttackData){
+        attGO=aGo;
         dt=data;
 	}
 
@@ -18,7 +17,8 @@ public class Attack{
  
     //removes object
 	public function destroyObject(){
-	    Destroy(this.gameObject);//maybe requires different method of referencing object
+		Destroy(attGO);
+	    //Destroy(this.gameObject);//maybe requires different method of referencing object
     }
 
     public function getAttData(){

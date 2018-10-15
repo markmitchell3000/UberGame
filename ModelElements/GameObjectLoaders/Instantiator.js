@@ -61,14 +61,14 @@ public class Instantiator extends MonoBehaviour{
 		    	var asp:boolean=gB.grid[yVal,xVal]==TILE_TYPE.ASPHALT;
 		    	if(grd||sdw||asp){
 					playerPlaced =true;
-					playerObj.transform.position.z = adjCoord(yVal);
-					playerObj.transform.position.x = adjCoord(xVal);			   	
+					playerObj.transform.position.z = ObjectAdjuster.getOA().adjCoord(yVal);
+					playerObj.transform.position.x = ObjectAdjuster.getOA().adjCoord(xVal);			   	
 			    }
 		    }
 	    }
 	    else{
-	    	playerObj.transform.position.z = adjCoord(dm.getPlayerData().yCoord);
-			playerObj.transform.position.x = adjCoord(dm.getPlayerData().xCoord);
+	    	playerObj.transform.position.z = ObjectAdjuster.getOA().adjCoord(dm.getPlayerData().yCoord);
+			playerObj.transform.position.x = ObjectAdjuster.getOA().adjCoord(dm.getPlayerData().xCoord);
 	    }
 	    playerObj.transform.position.y = yPos;
 		//place units

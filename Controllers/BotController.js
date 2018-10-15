@@ -1,6 +1,24 @@
 public class BotController extends Controller{
-	private unitType: UnitType;
-    
+	private var unitType: UnitType;
+    private var hasTurrent: boolean;
+    private var turrent: GameObject;//null if not present
+   /*
+   this should be handled by the unit types
+function unitSetup(){
+	var tempType = transform.GetComponent(Unit_Data).getType();
+	if(tempType==UNIT_TYPE.TOWER||tempType==UNIT_TYPE.BASE||tempType==UNIT_TYPE.BONUS){
+		var tempObj = Global_Variables.turret_001;
+		var tempPos = transform.transform.position;
+		tempPos.y = tempPos.y+90;
+		turret = Instantiate(tempObj,tempPos,transform.transform.rotation);
+		turret.transform.parent = transform;
+	}
+	if(gameObject.GetComponentInChildren(Animator)!=null)
+	{
+		isAnimated = true;
+		transform.GetComponent(humanoidAnimation).initAnimation();
+	}
+}*/
     public function BotController(ut:UnitType){
     	unitType=ut;
     }
@@ -118,12 +136,13 @@ public class BotController extends Controller{
 	    transform.position += transform.right * randomSpeed1/4 * Time.deltaTime;	
     }
 
+    //called in update.  If unit is in position this should be 
 	private function rotateToTarget(){
-		var tmpSpd = rotationSpeed*Time.deltaTime;
+		var tmpSpd = super.rotationSpeed*Time.deltaTime;
 		var tmpType : UNIT_TYPE = transform.GetComponent(Unit_Data).getType();
 		var tempTrans : Transform;
 		tempTrans = targetObj.transform;
-		if(tmpType!= UNIT_TYPE.BASE &&tmpType!= UNIT_TYPE.TOWER &&tmpType!= UNIT_TYPE.BONUS){
+		if(!hasTurrent){
 			var targetDir = tempTrans.position- transform.position;
 			var newDir = Vector3.RotateTowards(transform.forward, targetDir, tmpSpd, 0.0);
 	    	transform.rotation = Quaternion.LookRotation(newDir);

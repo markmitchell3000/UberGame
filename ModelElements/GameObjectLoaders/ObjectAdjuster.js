@@ -19,7 +19,15 @@ public class ObjectAdjuster{
 		modelObject.transform.position.y = yVal;
 	}
 
+    /*given a x or y value for the gird return an x or y value that translates 
+    to a transform location*/
 	public function adjCoord(val:int){
 		return val*tc.getMultiplier() -tc.getOffset();
+	}
+
+    /*Given a transform value translate to an integer that can be used relative 
+    to the grid*/
+	public function makeCoord(val:float){
+        return parseInt((val/tc.getMultiplier())+tc.getOffset());
 	}
 }

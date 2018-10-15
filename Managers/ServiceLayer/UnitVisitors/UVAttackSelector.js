@@ -17,6 +17,11 @@ public class UVAttackSelector implements UnitVisitor{
 		curAttackString=ua.attackPref;
         checkCooldowns(ua);
 	}
+
+    public function getAttackString(unit:Unit){
+        unit.acceptVisitor(this);
+        return curAttackString;
+    }
     
     private function checkCooldowns(ua){
     	if(curAttackString=="melee"){

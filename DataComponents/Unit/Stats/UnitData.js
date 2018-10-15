@@ -9,14 +9,18 @@ public class UnitData{
 		v.visit(udInner);
 	}
 
+        /*melee attacks are in 4x4 square, pursue is 6x6 square, pursue range is
+         the limit that unit will chase before retargeting.  Pursuers get a 
+         speed boost to prevent simply drawing units away while avoiding attacks
+         */
 	class UDInner{
                 public var archetype:Archetype;
                 public var team:Team;
                 public var unitName:String;
                 public var modelString:String;
                 public var portraitString:String;
-                public var unitStats:UnitStats;
-                public var pursueRange:int;//maxed at a finite point but may scale some, attacks are 1 for melee 3 for ranged, maybe more
+                public var pursueRange:int; //max, as the crow flies, distance that unit will pursue
+                public var unitStats:UnitStats; 
                 public var traits:Traits[];
                 public var unitAttacks:UnitAttacks;
                 public var killFacts:UnitKillFacts;

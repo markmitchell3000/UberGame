@@ -4,7 +4,7 @@
 	private var attacking : boolean = false;
 	private var regenTime : int = 10;
 	private var attackSpellSpeed: float = 0.75;
-		private var locCounter:int=0;//reset on 16
+	private var locCounter:int=0;//reset on 16
 	private var saveCounter:int=0;//reset on 11
 	*/
 public class PlayerController extends Controller{

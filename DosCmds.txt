@@ -1,0 +1,5 @@
+# search text for string
+findstr /spin /c:"string" [files]
+findstr /S /I /M /C:"search text" *.*
+i.e. findstr /S /I /M /C:"UNIT_STATE" *.*
+#s = recursive, p = skip non-printable characters, i = case insensitive, n = print line numbers

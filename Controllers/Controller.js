@@ -2,7 +2,7 @@ public class Controller extends MonoBehaviour{
 	public var unitState:UnitStateInfo;//current animation/behavior state
 	public var isAnimated:boolean;//some units are not animated, so don't call animation controller
 	public var unit:Unit;//Unit managed by controller
-    private var target:GameObject;//this is where unit will walk to,escort, collect or attack if in range.
+
     protected var rotationSpeed:float=2.0;//unsure what this should be but this should be true of all units
     
     public function Controller(unt:Unit, animated:boolean){

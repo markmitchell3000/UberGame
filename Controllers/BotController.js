@@ -2,6 +2,7 @@ public class BotController extends Controller{
 	private var unitType: UnitType;
     private var hasTurrent: boolean;
     private var turrent: GameObject;//null if not present
+    private var target:GameObject;//this is where unit will walk to,escort, collect or attack if in range.
    /*
    this should be handled by the unit types
 function unitSetup(){

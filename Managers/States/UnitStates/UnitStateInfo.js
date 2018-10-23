@@ -1,4 +1,4 @@
-//enum UNIT_STATE {IDLE, WALK, ATTACK, PURSUE, FLEE, DIE, CAPTURE, LEFTSTRAFE, RIGHTSTRAFE, BACKRUN};
+
 //Used for animation and other behavioral differences
 //Still used by nonanimated units in order to determine behavior
 public class UnitStateInfo{

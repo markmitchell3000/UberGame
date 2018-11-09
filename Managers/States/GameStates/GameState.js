@@ -1,14 +1,22 @@
 public class GameState{
+	/*Attacks are cycled and as damage is applied, locations are updated and 
+	attacks are vanished.  Attacks are similar to objects or units but so quick 
+	and efferal that they are not save with the other game data.*/
     protected var attacks:AttackCollection;
-
+    /*Game board stores all data that can be stored and loaded from saved game 
+    such as units and objects.*/
+    protected var gameBoard:GameBoard;
+    
+    //updates to attacks and gameboard are handled here.
 	public function cycleState(){
+
 	}
 
     //my be done by visitor or at a lower level.
     protected function addAttack(att:Attack){
 	    //add attack to collection
     }
-
+}
     /*
 		function checkAttacks(){
 			var tmpAtt : GameObject;
@@ -238,4 +246,3 @@ public class GameState{
 			}
 		}
     */
-}

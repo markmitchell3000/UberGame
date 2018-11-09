@@ -1,23 +1,25 @@
 import System.Collections.Generic;
 //might extend hash manager
-//Static class that tracks location of all units
+//Static class that tracks location of all units and objects
 public class HMObjLocation{
     private var onTile: Hashtable;
     private var objLoc: Hashtable;//units, attacks and objs.  Each must have static id and a transform
-    private static var hmul:HMobjLocation;
+    private static var hmol:HMObjLocation;
 
-    public function HMobjLocation(){
+    public function HMObjLocation(){
     	onTile=new Hashtable();
     	objLoc=new Hashtable();
     }
 
-    public static function getHMUL(){
-        if(hmul==null){
-            hmul=new HMobjLocation();
+    public static function getHMOL(){
+        if(hmol==null){
+            hmol=new HMObjLocation();
         }
-        return hmul;
+        return hmol;
     }
     
+
+     
     /*given a transform and hashid a list of collision hashids 
     is returned. This does not include the original hashid. These hashids are 
     used to verify if the collision is with an enemy, primarily for attacks 
@@ -35,6 +37,11 @@ public class HMObjLocation{
             }
         }
         return ids;
+    }
+
+    /*Returns a list, or empty list if unit is gone, of points that the unit is touching.*/
+    public function getObjLoc(hashid:String){
+        return (ArrayList)objLoc[hashid];
     }
 
     /*returns list or empty list of units at that spot, can be used for get 

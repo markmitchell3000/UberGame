@@ -1,5 +1,5 @@
 public class GameGrid{
-	private var grid: Tile[,];
+	private var grid: Tile[,];//collection of static tile objects
 
 	public function GameGrid(size:int){
         grid = new Tile[size,size];

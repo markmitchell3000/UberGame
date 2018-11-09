@@ -4,6 +4,7 @@ model path is the value.  Temp objects also use a hash table where the right
 corner is the key, the value however is a unit that is either inanimate, base 
 tower or bonus.*/
 //enum TILE_TYPE{FLOOR, GROUND, SIDEWALK, ASPHALT, WALL, DOOR, STATIC_OBJ, TEMP_OBJ};
+//extented classes are all static
 public class Tile{
 	protected var texString:String;//location of tile 3d object
 	protected var passable:boolean;
@@ -29,5 +30,9 @@ public class Tile{
 
     //abstract function
     public function build(go:GOStructureProps, pos:Vector3, rot:Vector3, point:Point){
+    }
+
+    /*Abstract function used to return singleton of that specific tile*/
+    public static function getTile(){
     }
 }

@@ -11,4 +11,14 @@ public class UnitTypeBonus extends UnitType{
     public function getModelArr(umf: UMFWar){
         return umf.getBonusModels();
     }
+
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+        var bnsTemp=place.bonusSpots[unitCnt.bonusCnt];
+        gbUnit.yCoord=bnsTemp[0]+place.yOffset;
+        gbUnit.xCoord=bnsTemp[1]+place.xOffset;
+        unitCnt.bonusCnt++;
+        //width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable
+        placeTempObject(1,1,new Point(gbUnit.xCoord, gbUnit.yCoord), "bonus_holder", tempObjs);
+        grid[gbUnit.yCoord, gbUnit.xCoord]=TileTempObj.getTile();
+    }
 }

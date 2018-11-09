@@ -54,5 +54,41 @@ public class UnitType{
     	//buildings have a statusBarYOffset = Screen.height/5;
     	//units have a statusBarYOffset =0;
     }
+
+    /*Abstract class implemented by each of the unittypes that handles how they 
+    are placed on the gameboard*/
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    }
+
+    //used by any type that happens to be a building
+    protected function placeTempObject(width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable){
+        var gbo:GBObject=new GBObject();
+        gbo.modelString=model;
+        gbo.xWidth=width;
+        gbo.yHeight=height;
+        gbo.destroyable=true;
+        gbo.under=TileGround.getTile();
+        gbo.byRow=true;
+        gbo.xCoord=pnt.x;
+        gbo.yCoord=pnt.y;
+        tempObjs[y+","+x]=gbo;
+    }
+
+    //used by unit types to ensure that there placement is in a safe location
+    protected function safePlacement(gU: GBUnit, grid:GameGrid){
+        var cnt:int=0;
+        while(!grid.getSpot(new Point(gU.yCoord, gU.xCoord)).isPassable()){
+            var randY:int=Random.Range(-5,5);
+            var randX:int=Random.Range(-5,5);
+            var validY:boolean=((gU.yCoord+randY)>0)&&((gU.yCoord+randY)<sizeXY-1);
+            var validX:boolean=((gU.xCoord+randX)>0)&&((gU.xCoord+randX)<sizeXY-1);
+            gU.yCoord= validY?(gU.yCoord+randY):gU.yCoord;
+            gU.xCoord= validX?(gU.xCoord+randX):gU.xCoord;
+            cnt++;
+            if(cnt>100){
+                Debug.Log("GBUnit should be removed");
+            }
+        }
+    }
 }
 

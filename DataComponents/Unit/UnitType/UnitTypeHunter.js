@@ -11,4 +11,12 @@ public class UnitTypeHunter extends UnitType{
     public function getModelArr(umf: UMFCombat){
         return umf.getLtOrHunterModels();
     }
+
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+        var hntTemp=place.hunterSpots[untCnt.hunterCnt];
+        gbUnit.yCoord=hntTemp[0]+place.yOffset;
+        gbUnit.xCoord=hntTemp[1]+place.xOffset;
+        safePlacement(gbUnit, grid);
+        untCnt.hunterCnt++;
+    }
 }

@@ -1,4 +1,5 @@
 public class TileGround extends Tile{
+	private static var tg:TileGround;
 	public function TileGround(){
 		super("ground", true, 1);
 	}
@@ -8,5 +9,12 @@ public class TileGround extends Tile{
 		var modelObject :GameObject;
 		modelObject=Instantiate(go.outsideGround, pos,rot); //transform.position, transform.rotation);
 		oa.posObj(modelObject, i, j, 0);
+	}
+
+	public static function getTile(){
+		if(tg==null){
+			tg = new TileGround();
+		}
+		return tg;
 	}
 }

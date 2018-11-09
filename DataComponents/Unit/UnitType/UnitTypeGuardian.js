@@ -11,4 +11,12 @@ public class UnitTypeGuardian extends UnitType{
     public function getModelArr(umf: UMFCombat){
         return umf.getGuardianModels();
     }
+
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+        var grdTemp=place.guardianSpots[untCnt.guardianCnt];
+        gbUnit.yCoord=grdTemp[0]+place.yOffset;
+        gbUnit.xCoord=grdTemp[1]+place.xOffset;
+        safePlacement(gbUnit, grid);
+        untCnt.guardianCnt++;
+    }
 }

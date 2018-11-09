@@ -1,4 +1,5 @@
 public class TileDoor extends Tile{
+	private static var td:TileDoor;
 	public function TileDoor(){
 		super("door", true, 2);
 	}
@@ -14,5 +15,12 @@ public class TileDoor extends Tile{
 	    modelObject=Instantiate(go.mainWall, pos, rot);
 	    oa.posObj(modelObject, i, j, 70);
 	    modelObject.transform.localScale += new Vector3(20f, 0, 20f);
+	}
+
+	public static function getTile(){
+		if(td==null){
+			td = new TileDoor();
+		}
+		return td;
 	}
 }

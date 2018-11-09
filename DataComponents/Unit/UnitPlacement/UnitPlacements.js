@@ -11,15 +11,16 @@ public class UnitPlacements{
     four groups [0]=qdrts 0-3,[1]=qdrts 4-7,[2]=qdrts 8-11,[3]=qdrts 12-15
     */
     //spots describe placement within each quadrant
-    public var baseSpots:int[];
-    public var towerSpots=new ArrayList();
-    public var bonusSpots:int[];
+    public var baseSpots:int[];//single location per quadrant
+    public var towerSpots=new ArrayList();//should be arraylist of points
+    public var bonusSpots:new ArrayList();
     public var titanSpots=new ArrayList();
     public var guardianSpots=new ArrayList();
     public var hunterSpots=new ArrayList();
     public var ltSpots=new ArrayList();
     public var soldierSpots=new ArrayList();
     public var civOrZombSpots=new ArrayList();
+    public var workerSpots=new ArrayList();//not implemented yet
     //offset describe upper left corner on the gameboard of each quadrant
     public var xOffset:int;
     public var yOffset:int;
@@ -30,7 +31,7 @@ public class UnitPlacements{
     //private var xQVal:int[]=[29,59,29,59,173,203,173,203,30,60,30,60,173,203,173,203];//250 size
     //private var yQVal:int[]=[29,29,59,59,29,29,59,59,173,173,203,203,173,173,203,203];//250 size
 
-    public function Placements(quadrant:int){
+    public function UnitPlacements(quadrant:int){
         var sz:int=GameBoard.sizeXY;
         //assign x quadrant arr
         xQVal[0]=xQVal[2]=xQVal[8]=xQVal[10]=(.1*sz);

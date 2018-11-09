@@ -16,8 +16,8 @@ public class Unit{
 	class UnitInner{
 		//public var missionList=new ArrayList();//holds mission Objects
 		//private var inst:Instantiator=Instantiator.getInst();
-		public var id:int;
-		public var hashid: String;//id+team.name+unit.name
+		public var id:int;//created by counter used for indexing may be dropped
+		public var hashid: String;//id+team.name+unit.name, used for hash function
 		public var avatar:GameObject;//holds model and controller//public var unitTransform: UnitTransform;
         public var unitData: UnitData;
         public var unitType: UnitType;

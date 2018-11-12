@@ -1,12 +1,18 @@
 public class UnitTypeSoldier extends UnitType{
-	private var baseHealth:int=40;
-	private var baseMana:int=40;
-	private var baseAttRange:float=5.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,10.0);
-		super.isBuilding=false;
+    private static var uts:UnitTypeSoldier;
+
+    public function UnitTypeSoldier(){
+        //basehealth=20,basemana=20,baseAttrange 5, pursuerange 5, isbld false
+        super(40,40,5.0,10.0,false);
     }
+
+    public function getUTS(){
+        if(uts==null){
+            uts= new UnitTypeSoldier();
+        }
+        return uts;
+    }
+
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFCombat){
         return umf.getSoldierModels();

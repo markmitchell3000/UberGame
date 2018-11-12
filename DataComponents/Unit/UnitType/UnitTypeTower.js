@@ -1,12 +1,18 @@
 public class UnitTypeTower extends UnitType{
-	private var baseHealth:int=1500;
-	private var baseMana:int=1500;
-	private var baseAttRange:float=20.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,0.0);
-		super.isBuilding=true;
+    private static var utt:UnitTypeTower;
+
+    public function UnitTypeTower(){
+        //basehealth=1500,basemana=1500,baseAttrange 20, pursuerange 0, isbld true
+        super(1500,1500,20.0,0.0,true);
     }
+
+    public function getUTT(){
+        if(utt==null){
+            utt= new UnitTypeTower();
+        }
+        return utt;
+    }
+
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFWar){
         return umf.getTowerModels();

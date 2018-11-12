@@ -13,46 +13,52 @@ Zombies have mid level stats and can move, pursue or attack.  They will attack a
 Workers are like civilians but preform certain tasked that grow the wealth of the state they belong. 
 */
 //BASE, TOWER, BONUS, SOLDIER, LIEUTENANT, HUNTER, GUARDIAN, TITAN, CIVILIAN, ZOMBIE, WORKER
+//All children are singletons
 public class UnitType{
-    protected var maxHealth:int;
-    protected var maxMana:int;
-    protected var attRange:float;
-    protected var pursueRange:float;
-    protected var isBuilding:boolean
+    //set based on level and unittype bonues
+    protected var baseHealth:int;
+    protected var baseMana:int;
+    protected var baseAttRange:float;
+    protected var basePursueRange:float;//range beyond attack that unit will chase
+    protected var isBuilding:boolean;
+
+    //called by extended classes which have unique values
+    public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
+        baseHealth=bh;
+        baseMana=bm;
+        baseAttRange=bar;
+        basePursueRange=pr;
+        isBuilding=isbld;
+    }
+
     //abstract function uses the umf to return the appropriate array of models for that type
     public function getModelArr(umf: UnitModelFactory){
 
     }
-
-    //populated by values from child classes, ie.: health, mana, attackrange, pursuerange
-    public function setStats(lvl:int, bonus:float, bH:int, bM:int, aR:float,pR:float){
-        maxHealth = bH*(1+(0.1*lvl));
-		maxMana = bM*(1+(0.1*lvl));
-		attRange= aR + bonus;//
-		pursueRange = pR+aR;
-    }
     
     //set by extended class
-    public function getMaxHealth(){
-    	return maxHealth;
+    public function getMaxHealth(lvl:int){
+    	//return maxHealth;
+        return baseHealth*(1+(0.1*lvl));
     }
     //set by extended class
-    public function getMaxMana(){
-    	return maxMana;
+    public function getMaxMana(lvl:int){
+    	//return maxMana;
+        return baseMana*(1+(0.1*lvl));
     }
-    //set by extended class
-    public function getAttackRange(){
-    	return attRange;
+    //set by extended class, arbonus is the base bonus i believe
+    public function getAttackRange(arbonus:float){
+    	//return attRange;
+        return baseAttRange+arbonus;
     }
     //set by extended class
     public function getPursueRange(){
-    	return pursueRange;
+    	//return pursueRange;
+        return baseAttRange+basePursueRange;
     }
     //set by extended class
     public function isBuilding(){
-    	return isBuilding;
-    	//buildings have a statusBarYOffset = Screen.height/5;
-    	//units have a statusBarYOffset =0;
+        return isBuilding;//base, tower and bonus return true
     }
 
     /*Abstract class implemented by each of the unittypes that handles how they 

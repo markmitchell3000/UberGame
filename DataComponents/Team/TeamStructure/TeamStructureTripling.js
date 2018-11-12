@@ -3,8 +3,16 @@ public class TeamStructureTripling extends TeamStructure{
     //[6]=guardian,[7]=hunter, [8]=lts, [9]=soldier
 	private var triplingArr:int[]=[0,0,0,0,0,1,3,3,9,27];
 	private var size:int=43;
+	private static var ts:TeamStructureTripling;//singleton
 
 	public function loadUnits (gp:GBGroup) {
         UnitLoader.getUL().loadMissionStyleUnits(gp);
 	}
+
+	public static function getTs(){
+        if(ts==null){
+            ts=new TeamStructureTripling();
+        }
+        return ts;
+    }
 }

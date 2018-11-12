@@ -1,7 +1,6 @@
 public class GBGroup{
     public var groupId:int;
 	public var powerLevel:int =1;
-	public var teamStruct:TeamStructure;
 	public var bonusTitan:boolean=false;
 	public var size:int=0;//when brought down to 0 group can be removed.
 	public var groupName:String;
@@ -9,12 +8,11 @@ public class GBGroup{
 	public var teamName:TeamString;//Holds name and folder string
 	private var units:GBUnitCollection;//holds GBUnits, id is key and unit is value.
 
-	public function GBGroup(ts: TEAM_STRUCTURE, bt:boolean, lvl:int, ts:TeamString){
-        teamStruct=ts;
+	public function GBGroup(bt:boolean, lvl:int, ts:String, grdId:int){
         bonusTitan=bt;
         powerLevel=lvl;//in all cases except arena and mission, teams level is used, otherwise a level relative to the player.
         units= new GBUnitCollection();
-        teamName=ts;
+        groupName=ts;//group name is used to find the team name and in turn the models
 	}
     
     //call this after team is set 

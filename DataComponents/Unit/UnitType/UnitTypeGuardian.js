@@ -1,12 +1,18 @@
 public class UnitTypeGuardian extends UnitType{
-	private var baseHealth:int=120;
-	private var baseMana:int=120;
-	private var baseAttRange:float=10.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,30.0);
-		super.isBuilding=false;
+    private static var utg:UnitTypeGuardian;
+
+    public function UnitTypeGuardian(){
+        //basehealth=120,basemana=120,baseAttrange 10, pursueRange 30, isbld false
+        super(120,120,10.0,30.0,false);
     }
+
+    public function getUTG(){
+        if(utg==null){
+            utg= new UnitTypeGuardian();
+        }
+        return utg;
+    }
+
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFCombat){
         return umf.getGuardianModels();

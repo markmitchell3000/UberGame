@@ -1,12 +1,18 @@
 public class UnitTypeWorker extends UnitType{
-	private var baseHealth:int=30;
-	private var baseMana:int=30;
-	private var baseAttRange:float=5.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,8.0);
-		super.isBuilding=false;
+    private static var utw:UnitTypeWorker;
+
+    public function UnitTypeTower(){
+        //basehealth=30,basemana=30,baseAttrange 5, pursuerange 8, isbld false
+        super(30,30,5.0,8.0,false);
     }
+
+    public function getUTW(){
+        if(utw==null){
+            utw= new UnitTypeWorker();
+        }
+        return utw;
+    }
+
     //should only receive UMFCrowd not UnitModelFactory
     public function getModelArr(umf: UMFCrowd){
         return umf.getUnitModels();

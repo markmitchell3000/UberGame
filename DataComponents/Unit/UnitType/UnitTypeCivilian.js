@@ -1,12 +1,18 @@
 public class UnitTypeCivilian extends UnitType{
-    private var baseHealth:int=20;
-	private var baseMana:int=20;
-	private var baseAttRange:float=5.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,5.0);
-		super.isBuilding=false;
+	private static var utc:UnitTypeCivilian;
+
+    public function UnitTypeCivilain(){
+        //basehealth=20,basemana=20,baseAttrange 5, pursuerange 5, isbld false
+        super(20,20,5.0,5.0,false);
     }
+
+    public function getUTC(){
+        if(utb==null){
+            utb= new UnitTypeCivilian();
+        }
+        return utb;
+    }
+
     //should only receive UMFCrowd not UnitModelFactory
     public function getModelArr(umf: UMFCrowd){
         return umf.getUnitModels();

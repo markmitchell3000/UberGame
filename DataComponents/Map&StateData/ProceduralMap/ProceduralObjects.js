@@ -17,7 +17,7 @@ public class ProceduralObjects{
         placeVehicles(ethSZ,qtrSZ);//loosely bases around number of buildings
         placeRocks(qtrSZ,halfSZ);//1x1 props
         placePlants(qtrSZ,halfSZ);//1x1 props for now
-        placeBarrelsBoxes(ethSZ,qtrSZ, TILE_TYPE.GROUND);//1x1 props for now
+        placeBarrelsBoxes(ethSZ,qtrSZ, TileGround.getTile());//1x1 props for now
         placeStatues(5,10);
 	}
 
@@ -29,14 +29,14 @@ public class ProceduralObjects{
 	}
 
 	public function placeMissionObjects(){
-		placeBarrelsBoxes(50,75, TILE_TYPE.FLOOR);//1x1 props for now
+		placeBarrelsBoxes(50,75, TileFloor.getTile());//1x1 props for now
 		placeEquipment(50,75);//1x1 props for now
 	}
 
 	private function placeVehicles(lower:int, higher:int){
 		var vehicleCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
-		under.Add(TILE_TYPE.ASPHALT);
+		under.Add(TileAsphalt.getTile());
 		var wide:int=byRow?4:2;
 		var high:int=byRow?2:4;
 		var modelStr:String=gB.stcFolders[2];
@@ -46,7 +46,7 @@ public class ProceduralObjects{
 	private function placeRocks(lower:int, higher:int){
 		var rockCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
-		under.Add(TILE_TYPE.GROUND);
+		under.Add(TileGround.getTile());
 		var wide:int=1;
 		var high:int=1;
 		var modelStr:String=gB.stcFolders[0];
@@ -56,14 +56,14 @@ public class ProceduralObjects{
 	private function placePlants(lower:int, higher:int){
 		var plantCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
-		under.Add(TILE_TYPE.GROUND);
+		under.Add(TileGround.getTile());
 		var wide:int=1;
 		var high:int=1;
 		var modelStr:String=gB.stcFolders[1];
         randomPlacer(plantCnt, under, wide,high, modelStr,true);
 	}
 
-	private function placeBarrelsBoxes(lower:int, higher:int, tt:TILE_TYPE){
+	private function placeBarrelsBoxes(lower:int, higher:int, tt:Tile){
 		var boxCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
 		under.Add(tt);
@@ -76,7 +76,7 @@ public class ProceduralObjects{
 	private function placeEquipment(lower:int, higher:int){
 		var eqpCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
-		under.Add(TILE_TYPE.FLOOR);
+		under.Add(TileFloor.getTile());
 		var wide:int=1;
 		var high:int=1;
 		var modelStr:String=gB.tmpFolders[1];
@@ -86,7 +86,7 @@ public class ProceduralObjects{
 	private function placeStatues(lower:int, higher:int){
 		var staCnt:int=Random.Range(lower,higher);
 		var under=new ArrayList();
-		under.Add(TILE_TYPE.GROUND);
+		under.Add(TileGround.getTile());
 		var wide:int=1;
 		var high:int=1;
 		var modelStr:String=gB.tmpFolders[3];
@@ -134,7 +134,7 @@ public class ProceduralObjects{
 			//place it
 			for(var l=row;l<row+high;l++){
 				for(var m=col;m<col+wide;m++){
-					gB.grid[l,m]=TILE_TYPE.STATIC_OBJ;
+					gB.grid[l,m]=TileStaticObject.getTile();
 				}
 			}
 			var gbo:GBObject=new GBObject();
@@ -159,7 +159,7 @@ public class ProceduralObjects{
     private function groundSafeChecker(arr:ArrayList, j:int,k:int):boolean{
     	var isSafe:boolean=false;
     	for(var i=0;i<arr.Count;i++){
-    		var temp:TILE_TYPE=arr.Item[i];
+    		var temp:Tile=arr.Item[i];
     		isSafe=(isSafe||(gB.grid[j,k]==temp));
     	}
         return isSafe;

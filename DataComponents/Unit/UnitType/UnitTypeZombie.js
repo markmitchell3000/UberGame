@@ -1,12 +1,18 @@
 public class UnitTypeZombie extends UnitType{
-	private var baseHealth:int=40;
-	private var baseMana:int=40;
-	private var baseAttRange:float=5.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,10.0);
-		super.isBuilding=false;
+    private static var utz:UnitTypeZombie;
+
+    public function UnitTypeZombie(){
+        //basehealth=40,basemana=40,baseAttrange 5, pursuerange 10, isbld false
+        super(40,40,5.0,10.0,false);
     }
+
+    public function getUTZ(){
+        if(utz==null){
+            utz= new UnitTypeZombie();
+        }
+        return utz;
+    }
+
     //should only receive UMFCrowd not UnitModelFactory
     public function getModelArr(umf: UMFCrowd){
         return umf.getUnitModels();

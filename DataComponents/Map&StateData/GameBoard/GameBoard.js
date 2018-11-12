@@ -14,10 +14,13 @@ public class GameBoard{
     value.*/
 	protected var staticObjs:Hashtable= new Hashtable();
     protected var tempObjs:Hashtable= new Hashtable();
-    protected var gbSize:int;
+    protected var gbSize:int;//Gameboards are square so this is the height and width
+    protected var quadrantSize:int;
      
-    public function GameBoard(size:int){
-    	gbSize=size;
+    /*There can be 1, 4, 9 or 16 quadrants*/ 
+    public function GameBoard(numQuadrants:int){
+        quadrantSize=numQuadrants;
+    	gbSize=quadrantSize*16;//quadrants are 16x16 squares
     	gameGrid= new GameGrid(size);
     	initializeGround();
     	placeCorners();
@@ -71,5 +74,14 @@ public class GameBoard{
             //do stuff
             curNode=curNode.next;
         }
+    }
+    
+    /*For placing units according to there saved location*/
+    protected function placeUnits(gbUnitNodes:GBUnitNode){
+        //todo
+    }
+
+    protected function generateQuadrantsUnits(){
+
     }
 }

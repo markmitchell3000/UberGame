@@ -1,12 +1,18 @@
 public class UnitTypeTitan extends UnitType{
-	private var baseHealth:int=240;
-	private var baseMana:int=240;
-	private var baseAttRange:float=20.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,20.0);
-		super.isBuilding=false;
+    private static var utt:UnitTypeTitan;
+
+    public function UnitTypeTitan(){
+        //basehealth=240,basemana=240,baseAttrange 20, pursuerange 20, isbld false
+        super(240,240,20.0,20.0,false);
     }
+
+    public function getUTT(){
+        if(utt==null){
+            utt= new UnitTypeTitan();
+        }
+        return utt;
+    }
+
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFCombat){
         return umf.getTitanModels();

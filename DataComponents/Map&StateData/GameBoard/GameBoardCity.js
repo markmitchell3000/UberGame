@@ -1,3 +1,5 @@
+/*World map is mostly forest/desert etc but certian areas are city, these are 
+built from the Town classes*/
 public class GameBoardCity extends GameBoardWorldMap{
     public function GameBoardCity(size:int){
     	super(size);
@@ -7,12 +9,37 @@ public class GameBoardCity extends GameBoardWorldMap{
 
         //takes an int representing the town type: residential, gov_offices etc
     private function townLayout(tt:int){
-        if(tt==0){townType=TOWN_TYPE.RESIDENTIAL;}
-        else if(tt==1){townType=TOWN_TYPE.INDUSTRIAL;}
-        else if(tt==2){townType=TOWN_TYPE.FARMMINE;}
-        else if(tt==3){townType=TOWN_TYPE.MIL_BASE;}
-        else if(tt==4){townType=TOWN_TYPE.GOV_OFFICES;}
-        else{townType=TOWN_TYPE.BIG_CITY;}
+        var townType:Town;
+        switch(tt){
+            case 0:
+                townType=new TownResidential();
+                break;
+            case 1:
+                townType=new TownIndustrial();
+                break;
+            case 2:
+                townType=new TownFarm();
+                break;
+            case 3:
+                townType=new TownMine();
+                break;
+            case 4:
+                townType=new TownMilitary();
+                break;
+            case 5:
+                townType=new TownGovernment();
+                break;
+            case 6:
+                townType=new TownBigCity();
+                break;
+            case 7:
+                townType=new TownCommercial();
+                break;
+            default
+                townType=new TownResidential();
+                break;
+
+        }
         //build town
         var pt:ProceduralTown= new ProceduralTown(this);
         pt.buildTown();

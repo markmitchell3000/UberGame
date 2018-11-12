@@ -13,6 +13,7 @@ public class ArchetypeAssassin extends Archetype{
 		damagePref="Poison";
 		attackPref="Melee";
 	}
+}
 	/*
 			case ARCHETYPE.ASSASSIN:
 				tempNum1 = 11131;
@@ -35,4 +36,3 @@ public class ArchetypeAssassin extends Archetype{
 		windPower = 1 + Mathf.Pow(2,((tempNum2/10000)%10));*/
 		/*enum ARCHETYPE{  
 	ASSASSIN, NOMAD, ROGUE, KNIGHT, BRUTE, DARK_DWELLER, SALAMADER, STORMBREAKER};*/
-}

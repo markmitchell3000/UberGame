@@ -17,7 +17,7 @@ public class UnitData{
                 public var archetype:Archetype;
                 public var team:Team;
                 public var unitName:String;
-                public var modelString:String;
+                public var modelString:String;//Used to load models
                 public var portraitString:String;
                 public var pursueRange:int; //max, as the crow flies, distance that unit will pursue
                 public var unitStats:UnitStats; 

@@ -1,12 +1,18 @@
 public class UnitTypeHunter extends UnitType{
-	private var baseHealth:int=60;
-	private var baseMana:int=60;
-	private var baseAttRange:float=8.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,55.0);
-		super.isBuilding=false;
+    private static var uth:UnitTypeHunter;
+
+    public function UnitTypeBase(){
+        //basehealth=60,basemana=60,baseAttrange 8, pursuerange 55, isbld false
+        super(60,60,8.0,55.0,false);
     }
+
+    public function getUTH(){
+        if(uth==null){
+            uth= new UnitTypeHunter();
+        }
+        return uth;
+    }
+
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFCombat){
         return umf.getLtOrHunterModels();

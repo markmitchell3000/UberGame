@@ -18,8 +18,18 @@ zombies, numbering 25 total.
 */
 public class TeamStructure{
     private bonusTitan:boolean;//maybe this is an argument that is passed
+    private var nameGame:RandomNameGenerator;
+    private static var ts:TeamStructure;//singleton
+
     public function TeamStructure(){
-        var nameGame= new RandomNameGenerator();
+        nameGame= new RandomNameGenerator();
+    }
+
+    public static function getTs(){
+        if(ts==null){
+            ts=new TeamStructure();
+        }
+        return ts;
     }
 
 	//abstract in parent class, all subclasses should override

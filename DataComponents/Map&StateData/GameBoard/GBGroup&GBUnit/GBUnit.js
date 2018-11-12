@@ -12,10 +12,16 @@ public class GBUnit{
     public var modelNumber:int;//array id from the resources .load.  Real time will store the string?
     public var modelNumberSet:boolean=false;//when the unit is create for first time, this flag is set to true so that it will be the same model next time it is loaded
     public var hpPenalty:int=0;//damaged units can subtract this from maxHp when reloaded.
-    public var unitType:UnitType; 
-    public var archeType:ARCHETYPE=ARCHETYPE.BALANCED;
+    //public var unitType:UnitType;
+    public var unitTypeKey:String;//key used to unlock unitType
+    public var lvl:int;//?? used by unitType
+    public var bonus:int;//??? used by unitType
+    //public var archeType:ARCHETYPE=ARCHETYPE.BALANCED;
+    public var archeTypeKey:String;
+    //might be handled only by UnitType when unit is being created.
     public function getModelArr(umf: UnitModelFactory){
         //based on the type call the model group from its respect factory.
-        return unitType.getModelArr(umf);
+        //return unitType.getModelArr(umf);
+        // ----TODO--- 
     }
 }

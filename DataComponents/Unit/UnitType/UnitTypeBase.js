@@ -1,17 +1,24 @@
 public class UnitTypeBase extends UnitType{
-	private var baseHealth:int=3000;
-	private var baseMana:int=3000;
-	private var baseAttRange:float=20.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,0.0);
-		super.isBuilding=true;
+    private static var utb:UnitTypeBase;
+
+    public function UnitTypeBase(){
+        //basehealth=3000,basemana=3000,baseAttrange 20
+        super(3000,3000,20.0,0.0,true);
     }
+
+    public function getUTB(){
+        if(utb==null){
+            utb= new UnitTypeBase();
+        }
+        return utb;
+    }
+
     //should only receive UMFWar not UnitModelFactory
     public function getModelArr(umf: UMFWar){
         return umf.getBaseModels();
     }
-
+    
+    /*Used to set the coordinates in the GBUnits created*/
     public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
         gbUnit.yCoord=place.baseSpots[0]+place.yOffset;
         gbUnit.xCoord=place.baseSpots[1]+place.xOffset;

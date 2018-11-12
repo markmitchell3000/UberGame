@@ -1,11 +1,16 @@
 public class UnitTypeLt extends UnitType{
-	private var baseHealth:int=60;
-	private var baseMana:int=60;
-	private var baseAttRange:float=8.0;//not sure what this should be.
-	//bonus is typically 0
-    public function setStats(lvl:int, bonus:float){
-        super.setStats(lvl,bonus, baseHealth, baseMana, baseAttRange,15.0);
-		super.isBuilding=false;
+    private static var utl:UnitTypeLt;
+
+    public function UnitTypeLt(){
+        //basehealth=60,basemana=60,baseAttrange 8, pursueRange 15, isbld false
+        super(60,60,8.0,15.0,false);
+    }
+
+    public function getUTL(){
+        if(utl==null){
+            utl= new UnitTypeLt();
+        }
+        return utl;
     }
     //should only receive UMFCombat not UnitModelFactory
     public function getModelArr(umf: UMFCombat){

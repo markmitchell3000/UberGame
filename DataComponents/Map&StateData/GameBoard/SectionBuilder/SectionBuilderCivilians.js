@@ -1,11 +1,12 @@
 public class SectionBuilderCivilians extends SectionBuilder{
 
-	private var secBld:SectionBuilderCivilians;
+	private static var secBld:SectionBuilderCivilians;
 
 	public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int){
 		var civ= new GBGroup(false, lvl, "civilians", groupID);
-        civ
-        placeUnits(civ.generateUnits(), TeamStructureCivilian, i);
+		civ.generateUnits();
+        generateAndPlace(TeamStructureCivilian, quadrant, groupID);
+        return civ;//GBGroups are added to a collection
 	}
 
 	public static function getSecBld(){

@@ -76,6 +76,15 @@ public class GameBoard{
         }
     }
     
+    protected function createRealUnits(){
+        //take the GBGroupNode and Create collection of real units to return
+
+    }
+
+    protected function convertRealUnitsToGBUnits(ug:UnitGroup){
+       //takes a unit group and updates the GBCollection
+    }
+
     /*For placing units according to there saved location*/
     protected function placeUnits(gbUnitNodes:GBUnitNode){
         //todo

@@ -13,6 +13,7 @@ public class GBGroup{
         powerLevel=lvl;//in all cases except arena and mission, teams level is used, otherwise a level relative to the player.
         units= new GBUnitCollection();
         groupName=ts;//group name is used to find the team name and in turn the models
+        groupId=grdId;
 	}
     
     //call this after team is set 
@@ -21,7 +22,7 @@ public class GBGroup{
     }
 
     //only main teams should be selected for single lane and triple lane
-    public function generateUnits(){
+    public function generateUnits(teamStruct: TeamStructure){
         teamStruct.generate(units);      
     }
 

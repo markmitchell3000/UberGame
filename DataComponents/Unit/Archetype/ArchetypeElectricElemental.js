@@ -1,38 +1,14 @@
 public class ArchetypeElectricElemental extends Archetype{
+	private static var aee:ArchetypeElectricElemental;
+
 	public function ArchetypeElectricElemental(){
-		multipliers[0]=2;
-		multipliers[1]=2;
-		multipliers[2]=2;
-		multipliers[3]=23;
-		multipliers[4]=2;
-		multipliers[5]=2;
-		multipliers[6]=2;
-		multipliers[7]=2;
-		multipliers[8]=2;
-		multipliers[9]=2;
-		damagePref="Electric";
-		attackPref="Ranged";
+		super([2,2,2,23,2,2,2,2,2,2],"Electric","Ranged","Electric Elemental");
 	}
-	/*
-			case ARCHETYPE.ELECTRIC_ELEM:
-				tempNum1 = 05000;
-				tempNum2 = 00000;
-				damageType = DAMAGETYPE.ELECTRIC;
-				basicPref = BASIC_PREF.RANG_PREF;
-				break;
-	*/
-	/*
-			basicPower = 1 + Mathf.Pow(2,(tempNum1%10))+tempOffset;
-		bladesPower = 1 + Mathf.Pow(2,((tempNum1/10)%10));
-		earthPower = 1 + Mathf.Pow(2,((tempNum1/100)%10));
-		electricPower = 1 + Mathf.Pow(2,((tempNum1/1000)%10));
-		firePower = 1 + Mathf.Pow(2,((tempNum1/10000)%10));
-		icePower = 1 + Mathf.Pow(2,(tempNum2%10));
-		magicPower = 1 + Mathf.Pow(2,((tempNum2/10)%10));
-		poisonPower = 1 + Mathf.Pow(2,((tempNum2/100)%10));
-		waterPower = 1 + Mathf.Pow(2,((tempNum2/1000)%10));
-		windPower = 1 + Mathf.Pow(2,((tempNum2/10000)%10));*/
-		/*enum ARCHETYPE{FIRE_ELEM, 
-	ICE_ELEM, MAGIC_ELEM, POISON_ELEM, WATER_ELEM, WIND_ELEM, SEA_SENTINEL, SOCEROR, 
-	ASSASSIN, NOMAD, ROGUE, KNIGHT, BRUTE, DARK_DWELLER, SALAMADER, STORMBREAKER};*/
+
+    public static function getArch(){
+		if(aee==null){
+			aee=new ArchetypeElectricElemental();
+		}
+		return aee;
+	}
 }

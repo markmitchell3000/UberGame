@@ -11,19 +11,20 @@ public class UnitPlacements{
     four groups [0]=qdrts 0-3,[1]=qdrts 4-7,[2]=qdrts 8-11,[3]=qdrts 12-15
     */
     //spots describe placement within each quadrant
-    public var baseSpots:int[];//single location per quadrant
-    public var towerSpots=new ArrayList();//should be arraylist of points
-    public var bonusSpots:new ArrayList();
-    public var titanSpots=new ArrayList();
-    public var guardianSpots=new ArrayList();
-    public var hunterSpots=new ArrayList();
-    public var ltSpots=new ArrayList();
-    public var soldierSpots=new ArrayList();
-    public var civOrZombSpots=new ArrayList();
-    public var workerSpots=new ArrayList();//not implemented yet
+    protected var baseSpots:int[];//single location per quadrant
+    protected var towerSpots=new ArrayList();//should be arraylist of points
+    protected var bonusSpots:new ArrayList();
+    protected var titanSpots=new ArrayList();
+    protected var guardianSpots=new ArrayList();
+    protected var hunterSpots=new ArrayList();
+    protected var ltSpots=new ArrayList();
+    protected var soldierSpots=new ArrayList();
+    protected var civOrZombSpots=new ArrayList();
+    protected var workerSpots=new ArrayList();//not implemented yet
     //offset describe upper left corner on the gameboard of each quadrant
-    public var xOffset:int;
-    public var yOffset:int;
+    private var arrHash= new HashTable();//this is the hashtable of all the unit location arrays
+    protected var xOffset:int;
+    protected var yOffset:int;
     protected var xQVal:int[]=new int[16];
     protected var yQVal:int[]=new int[16];
     //private var xQVal:int[]=[39,59,39,59,140,160,140,160,39,59,39,59,140,160,140,160];//200 size
@@ -45,5 +46,28 @@ public class UnitPlacements{
         yQVal[10]=yQVal[11]=yQVal[14]=yQVal[15]=((.9*sz)-16);
         yOffset=yQVal[quadrant];//quadrant sets the offet values for y 
         xOffset=xQVal[quadrant];//quadrant sets the offet values for x
+        arrHash["base"]=baseSpots;
+        arrHash["tower"]=towerSpots;
+        arrHash["bonus"]=bonusSpots;
+        arrHash["titan"]=titanSpots;
+        arrHash["guardian"]=guardianSpots;
+        arrHash["hunter"]=hunterSpots;
+        arrHash["lt"]=ltSpots;
+        arrHash["soldier"]=soldierSpots;
+        arrHash["civilian"]=civOrZombSpots;//can be used for civilians or zombies
+        arrHash["zombie"]=civOrZombSpots;//can be used for civilians or zombies
+        arrHash["worker"]=workerSpots; 
+    }
+    
+    public function getXOffset(){
+        return xOffset;
+    }
+
+    public function getYOffset(){
+        return yOffset;
+    }
+
+    public function getUnitArr(unitType:String){
+        return arrHash[unitType];
     }
 }

@@ -2,12 +2,8 @@ public class TeamStructureTripleLane extends TeamStructure{
 	private static var ts:TeamStructureTripleLane;//singleton
 
     public function TeamStructureTripleLane(){
-    	super([1,6,3,0,0,2,3,3,10,30],57);
+    	super([1,6,3,0,0,2,3,3,10,30],57,"triple lane");
     }
-
-	public function loadUnits (gp:GBGroup) {
-        UnitLoader.getUL().loadWarStyleUnits(gp);
-	}
 
 	public static function getTs(){
         if(ts==null){

@@ -7,4 +7,10 @@ public class RuntimeGameBoard{
 	public function RuntimeGameBoard(gb:GameBoard){
 
 	}
+
+        public function loadFromGameBoard(){
+        }
+
+        public function saveStateToGameBoard(){
+        }
 }

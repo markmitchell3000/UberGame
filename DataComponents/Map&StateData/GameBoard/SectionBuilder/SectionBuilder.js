@@ -25,6 +25,8 @@ public class SectionBuilder{
     First it creates a group, populates it with GBUnits, then updates their 
     locations (places them) of these GBUnits*/
 	public function generateAndPlace(ts:TeamStructure, team:String, quadrant:int, groupID:int){
+            //Teams can will randomly select from there list of subteams if they have them
+            //Future work may include missions preselecting subteams.
         return teamBuilders[team].generateAndPlace(ts, quadrant, groupID);
 	}
 

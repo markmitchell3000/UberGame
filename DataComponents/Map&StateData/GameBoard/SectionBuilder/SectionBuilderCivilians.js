@@ -8,7 +8,7 @@ public class SectionBuilderCivilians extends SectionBuilder{
             return civ;//GBGroups are added to a collection
 	}
 
-        private function addPlacementsCiv(arr:ArrayList(),xOffset:int, yOffset:int, group:GBGroup){
+        private function addPlacementsCiv(arr:ArrayList, xOffset:int, yOffset:int, group:GBGroup){
             //here is where the x and y coordinates are set for the GBUnits within the group.
         }
 

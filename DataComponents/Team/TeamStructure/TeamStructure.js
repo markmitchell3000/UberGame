@@ -21,9 +21,10 @@ public class TeamStructure{
     protected var cntList: int[];
     protected var size: int;
     protected var tsType: String;
+    protected var isWar: boolean;
     private var nameGame:RandomNameGenerator;//not sure if this should be here
 
-    public function TeamStructure(cnt:int[], sze:int, mt:String){
+    public function TeamStructure(cnt:int[], sze:int, mt:String, iw:boolean){
         if(cnt.length != 11){
             Debug.Log("Structure must be size 11");
         }
@@ -31,8 +32,13 @@ public class TeamStructure{
             cntList=cnt;//must be size 11
             size=sze;
             nameGame= new RandomNameGenerator();
-            mapType=mt;
+            tsType=mt;
+            isWar=iw;
         }
+    }
+
+    public function getIsWar(){
+        return isWar;
     }
 
     //---- May Not Be Still Needed ---
@@ -48,7 +54,10 @@ public class TeamStructure{
     public function getTSType(){
         return tsType;
     } 
-    //abstract class
+    //abstract class for getting static object for any child of team structure
     public static function getTS(){}
+
+    //abstract class
+    public function getUnitPlacement(quadrant: int){}
     
 }

@@ -1,12 +1,12 @@
 public class UnitTypeWorker extends UnitType{
     private static var utw:UnitTypeWorker;
 
-    public function UnitTypeTower(){
+    public function UnitTypeWorker(){
         //basehealth=30,basemana=30,baseAttrange 5, pursuerange 8, isbld false
         super(30,30,5.0,8.0,false);
     }
 
-    public function getUTW(){
+    public function getUT(){
         if(utw==null){
             utw= new UnitTypeWorker();
         }

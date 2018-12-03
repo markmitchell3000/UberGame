@@ -6,7 +6,7 @@ public class UnitTypeTitan extends UnitType{
         super(240,240,20.0,20.0,false);
     }
 
-    public function getUTT(){
+    public function getUT(){
         if(utt==null){
             utt= new UnitTypeTitan();
         }

@@ -6,7 +6,7 @@ public class UnitTypeBase extends UnitType{
         super(3000,3000,20.0,0.0,true);
     }
 
-    public function getUTB(){
+    public function getUT(){
         if(utb==null){
             utb= new UnitTypeBase();
         }

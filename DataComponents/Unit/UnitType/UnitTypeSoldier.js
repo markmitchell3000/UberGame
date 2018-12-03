@@ -6,7 +6,7 @@ public class UnitTypeSoldier extends UnitType{
         super(40,40,5.0,10.0,false);
     }
 
-    public function getUTS(){
+    public function getUT(){
         if(uts==null){
             uts= new UnitTypeSoldier();
         }

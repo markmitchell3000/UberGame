@@ -30,6 +30,9 @@ public class UnitType{
         basePursueRange=pr;
         isBuilding=isbld;
     }
+    
+    //abstract class for getting singleton of each UnitType child object
+    public function getUT(){}
 
     //abstract function uses the umf to return the appropriate array of models for that type
     public function getModelArr(umf: UnitModelFactory){

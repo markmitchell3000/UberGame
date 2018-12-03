@@ -14,7 +14,7 @@ public class SectionBuilderZombies extends SectionBuilder{
 
     public static function getSecBld(){
         if(secBld==null){
-            secBld= new SectionBuilderCivilians();
+            secBld= new SectionBuilderZombies();
         }
         return secBld;
     }

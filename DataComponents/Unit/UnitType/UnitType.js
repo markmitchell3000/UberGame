@@ -66,7 +66,7 @@ public class UnitType{
 
     /*Abstract class implemented by each of the unittypes that handles how they 
     are placed on the gameboard*/
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitTypeCounter, gb:GameBoard){
     }
 
     //used by any type that happens to be a building

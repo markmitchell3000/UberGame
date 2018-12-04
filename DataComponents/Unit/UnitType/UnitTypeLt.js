@@ -17,11 +17,11 @@ public class UnitTypeLt extends UnitType{
         return umf.getLtOrHunterModels();
     }
 
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
         var ltTemp=place.ltSpots[untCnt.ltCnt];
         gbUnit.yCoord=ltTemp[0]+place.yOffset;
         gbUnit.xCoord=ltTemp[1]+place.xOffset;
-        safePlacement(gbUnit, grid);
+        safePlacement(gbUnit, gb.getGameGrid);
         untCnt.ltCnt++;
     }
 }

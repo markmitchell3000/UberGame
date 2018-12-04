@@ -31,8 +31,12 @@ public class GameBoard{
         gbGroupListHead=listHead;
     }
 
-    public function getGG(){
+    public function getGameGrid(){
         return gameGrid;
+    }
+
+    public function getTempObjs(){
+        return tempObjs;
     }
 
     protected function initializeGround(){
@@ -90,7 +94,9 @@ public class GameBoard{
         //todo
     }
 
+    //might not use
     protected function generateQuadrantsUnits(){
 
     }
+
 }

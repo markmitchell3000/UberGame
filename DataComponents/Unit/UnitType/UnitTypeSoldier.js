@@ -18,11 +18,11 @@ public class UnitTypeSoldier extends UnitType{
         return umf.getSoldierModels();
     }
 
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
         var sldTemp=place.soldierSpots[untCnt.soldierCnt];
         gbUnit.yCoord=sldTemp[0]+place.yOffset;
         gbUnit.xCoord=sldTemp[1]+place.xOffset;
-        safePlacement(gbUnit, grid);
+        safePlacement(gbUnit, gb.getGameGrid);
         untCnt.soldierCnt++;
     }
 }

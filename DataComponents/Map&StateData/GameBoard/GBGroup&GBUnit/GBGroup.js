@@ -8,12 +8,12 @@ public class GBGroup{
     public var teamName:TeamString;//Holds name and folder string
     private var units:GBUnitCollection;//holds GBUnits, id is key and unit is value.
 
-    public function GBGroup(lvl:int, gn:String, grdId:int,ts:TeamStructure, quadrant:int){
+    public function GBGroup(lvl:int, gn:String, grdId:int,ts:TeamStructure, quadrant:int, gb:GameBoard){
         powerLevel=lvl;//in all cases except arena and mission, teams level is used, otherwise a level relative to the player.
         units= new GBUnitCollection();
         groupName=gn;//group name is used to find the team name and in turn the models
         groupId=grdId;
-        generateUnits(ts, quadrant;
+        generateUnits(ts, quadrant,gb);
     }
     
     //call this after team is set 
@@ -22,11 +22,12 @@ public class GBGroup{
     }
 
     //only main teams should be selected for single lane and triple lane
-    private function generateUnits(teamStruct: TeamStructure, quadrant: int){
+    private function generateUnits(teamStruct: TeamStructure, quadrant: int, gb:GameBoard){
         var cntList = teamStruct.getArrCopy();
         var mapType = teamStruct.getTSType();
         var idCnt:int=0;
         var up:UnitPlacement = teamStruct.getUnitPlacement(quadrant);
+        var untCnt:GBUnitTypeCounter = new GBUnitTypeCounter();
         //iterates through unit type counts
         var types= new UnitType[11];
         //unit types need to be made
@@ -46,7 +47,7 @@ public class GBGroup{
             for(var uCnt=0;uCnt<spotCnt;uCnt++){
                 var tempUnit:GBUnit=new GBUnit();
                 tempUnit.unitType=types[pos];
-                tempUnit.unitType.placeUnitByType(up,tempUnit,grid,);//needs game grid, GBUNitCOunter and tempOObjs hashtable
+                tempUnit.unitType.placeUnitByType(up,tempUnit,unCnt, gb);
                 if(pos>2){
                     tempUnit.unitName= nameGame.createNewName();
                 }

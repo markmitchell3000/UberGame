@@ -18,11 +18,11 @@ public class UnitTypeWorker extends UnitType{
         return umf.getUnitModels();
     }
 
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
         var wrkTemp=place.workerSpots[untCnt.workerCnt];
         gbUnit.yCoord=wrkTemp[0]+place.yOffset;
         gbUnit.xCoord=wrkTemp[1]+place.xOffset;
-        safePlacement(gbUnit, grid);
+        safePlacement(gbUnit, gb.getGameGrid());
         untCnt.workerCnt++;
     }
 }

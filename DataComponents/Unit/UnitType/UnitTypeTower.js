@@ -18,13 +18,13 @@ public class UnitTypeTower extends UnitType{
         return umf.getTowerModels();
     }
 
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
         var towerTemp=place.towerSpots[unitCnt.towerCnt];
         gbUnit.yCoord=towerTemp[0]+place.yOffset;
         gbUnit.xCoord=towerTemp[1]+place.xOffset;
         unitCnt.towerCnt++;
         //width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable
-        placeTempObject(2,2,new Point(gbUnit.xCoord, gbUnit.yCoord), "tower_holder", tempObjs);
+        placeTempObject(2,2,new Point(gbUnit.xCoord, gbUnit.yCoord), "tower_holder", gb.getTempObjs());
         for(var kto=0;kto<2;kto++){
             for(var lto=0;lto<2;lto++){
                 grid[gbUnit.yCoord+kto, gbUnit.xCoord+lto]=TileTempObj.getTile();

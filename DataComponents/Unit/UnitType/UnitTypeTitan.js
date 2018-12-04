@@ -18,11 +18,11 @@ public class UnitTypeTitan extends UnitType{
         return umf.getTitanModels();
     }
 
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, grid:GameGrid, untCnt:GBUnitCounter, tempObjs:Hashtable){
+    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
         var titanTemp=place.titanSpots[untCnt.titanCnt];
         gbUnit.yCoord=titanTemp[0]+place.yOffset;
         gbUnit.xCoord=titanTemp[1]+place.xOffset;
-        safePlacement(gbUnit, grid);
+        safePlacement(gbUnit, gb.getGameGrid);
         untCnt.titanCnt++;
     }
 }

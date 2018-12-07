@@ -1,15 +1,22 @@
 public class SectionBuilderZombies extends SectionBuilder{
-
+    private var mainTeam:String = "zombies";
+    private var mainDir:String = "ZombieUnits/";
     private static var secBld:SectionBuilderZombies;
 
-    public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int){
-        var zom= new GBGroup(lvl, "zombies", groupID,ts);
-        addPlacementsZom(ts.getUnitArr("zombies"),ts.getXOffset(),ts.getYOffset(),zom);
-        return civ;//GBGroups are added to a collection
+    public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int,gb: GameBoard){
+        var zom= new GBGroup(lvl, getZombieSubteam(), groupID,ts, quadrant, gb);
+        return zom;//GBGroups are added to a collection
     }
 
-    private function addPlacementsZom(arr:ArrayList, xOffset:int, yOffset:int, group:GBGroup){
-        //here is where the x and y coordinates are set for the GBUnits within the group.
+    /*randomly selects a team name from a list of zombie teams, these are 
+    mostly used for grabbing the models for that team, and naming the group.*/
+    private function getZombieSubteam(){
+        var zomTeams = new ArrayList();
+        zomTeams.add(new Tuple(mainTeam,"AAA_Main_V001"));
+        //---TODO ---split up large groups
+        var index = getRandomIndex(zomTeams.Count)
+        var tuple:Tuple = (Tuple)zomTeams[index];
+        return new TeamString(mainTeam, (String)tuple.getFst(), mainDir+(String)tuple.getSnd());
     }
 
     public static function getSecBld(){

@@ -1,3 +1,6 @@
+
+// may be deprecated
+/*
 public class TeamStringBuilder{
 	private var tStrs=new TeamString[10];
 
@@ -17,4 +20,4 @@ public class TeamStringBuilder{
 	public function getTeamString(num:int){
 		return tStrs[num];
 	}
-}
+}*/

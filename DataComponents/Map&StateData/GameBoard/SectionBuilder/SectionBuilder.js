@@ -1,3 +1,6 @@
+using UnityEngine;
+using System.Collections;
+
 /*The section builders purpose is to take a teamstructure, a team, and a 
 quadrant and this is used to generate GBGroups with units that are have 
 coordinates (quadrants are used by team structure to populate locations using 
@@ -45,6 +48,10 @@ public class SectionBuilder{
 	public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int){
 		//abstract class
 	}
+    
+    protected function getRandomIndex(arrSize:int){
+        return Random.Range(0,arrSize-1);
+    }
 
 	public static function getSecBld(){
         if(secBld==null){

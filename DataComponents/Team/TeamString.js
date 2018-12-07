@@ -1,26 +1,38 @@
 /*enum TEAM_NAME{ETERNIAN_REPUBLIC, INITIATIVE, NIGHT_HORDE, PANTHEON, SENTAI_CLAN, SHADOW_EMPIRE, 
 	UNITED_LEAGUE, UTROM_SITH_ALLIANCE, CIVILIAN_GROUP, ZOMBIE_GROUP};*/
 public class TeamString{
-	protected var name:String;
-    protected var mainFolder:String;
-private var erModelNames: String[]=["Mossman"];
-private var inModelNames: String[]=["Spiderman"];
-private var nhModelNames: String[]=["BlackKnight"];
-private var paModelNames: String[]=["Bakasura"];
-private var scModelNames: String[]=["TerraFirma"];
-private var seModelNames: String[]=["Mordo"];
-private var ulModelNames: String[]=["Felicia"];
-private var usModelNames: String[]=["CadeBane"];
+    private var team:String;
+    private var subteam:String;
+    private var filepath:String;
 
-    protected var mainTeamPaths: String[]=["CivilianUnits/", "ZombieUnits/", 
-"EternianRepublicTeams/", "InitiativeTeams/", "NightHordeTeams/", 
+    public function TeamString(t:String, st: String, fp:String){
+        team = t;
+        subteam = st;
+        filepath = fp;
+    }
+
+    public function getTeam(){
+        return team;
+    }
+
+    public function getSubTeam(){
+        return subteam;
+    }
+
+    public function getFilePath(){
+        return filepath
+    }
+}    
+/*
+
+
+    protected var mainTeamPaths: String[]=[, , 
+ "InitiativeTeams/", "NightHordeTeams/", 
 "PantheonTeams/", "SentaiClanTeams/", "ShadowEmpireTeams/", 
 "UnitedLeagueTeams/", "UtromSithAllianceTeams/"];
 
 //extend class to seperate these
-private var erTeams:String[]=["AAA_Main_V001","BrotherhoodOfSteel_V001",
-"GorillaCity_V001","Inhumans_V001","KeyBlades_V001","NewRepublic_V001",
-"NightElves_V001","Terrans_V001","Thanagar_V001","TheOrder_V001"];
+
 private var inTeams:String[]=["AAA_Main_V001","Avengers_V001","BlueTeam_V001",
 "Defenders_V001","DepartmentK_V001","FantasticForce_V001",
 "GalacticFederation_V001","GuardiansOfTheGalaxy_V001","IronLegion_V001",
@@ -62,14 +74,4 @@ private var usTeams:String[]=["AAA_Main_V001","Apokolips_V001","BlackOrder_V001"
 "NewKryptonAuthority_V001", "Qward_V001","Sentinels_V001","Shadaloo_V001", 
 "SithImperialists_V001", "Skrulls_V001","Skynet_V001","UltronInitiative_V001",
 "Utrom_V001", "WilyIndustries_V001","XenoBots_V001","Xenomorph_V001"];
-
-    public function TeamString(nm:String, mf: String){
-    	name=nm;
-    	mainFolder=mf;
-    }
-
-    public function getFolder(subDir:String){
-        return mainFolder+"/"+subDir+"/";
-    }
-
-}
+*/

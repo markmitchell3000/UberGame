@@ -1,3 +1,4 @@
+//Simplify this
 public class AllPlayersData{
 	public var heroNames = new ArrayList();
 	public var heroRefs: Hashtable = new Hashtable();

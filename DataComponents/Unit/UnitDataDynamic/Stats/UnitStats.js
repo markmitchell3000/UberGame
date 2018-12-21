@@ -1,3 +1,4 @@
+//Stored and used at runtime.
 public class UnitStats extends BaseStats{
 	public var rank:int;
 	public var powerLevel: int;

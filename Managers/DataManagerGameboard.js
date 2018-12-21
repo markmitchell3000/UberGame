@@ -1,5 +1,6 @@
 public class DataManagerGameboard{
     private var curGameBoard:GameBoard;//Stored in state named folders but the can expand as the area is explored
+    private static var dmg:DataManagerGameboard;//singleton value
 
 	/* The name state and the yloc and xloc is used to load a gameBoard */
 	public function setGameBoard(stateName :String, yLoc:int, xLoc:int){
@@ -42,15 +43,23 @@ public class DataManagerGameboard{
 	    }
 	}
 
-	public function saveGameBoard(data: GameBoard){
+	public function saveGameBoard(){
 		var bf: BinaryFormatter = new BinaryFormatter();
 		var file: FileStream ;
-		if(!Directory.Exists(Application.persistentDataPath + "/worldMapData/"+curMapData.wName+"/"+curMapData.curState.stateName+"/")){
-	        Directory.CreateDirectory(Application.persistentDataPath + "/worldMapData/"+curMapData.wName+"/"+curMapData.curState.stateName+"/");
+		md=DataManager.dmMap.getMapDate();//mapdata, maps contains states that coorelate to collections of stored gameboards
+		if(!Directory.Exists(Application.persistentDataPath + "/worldMapData/"+md.wName+"/"+md.curState.stateName+"/")){
+	        Directory.CreateDirectory(Application.persistentDataPath + "/worldMapData/"+md.wName+"/"+md.curState.stateName+"/");
 	    }
-		file = File.Create(Application.persistentDataPath + "/worldMapData/"+curMapData.wName+"/"+curMapData.curState.stateName+"/"+data.getFileName()+".dat");
+		file = File.Create(Application.persistentDataPath + "/worldMapData/"+md.wName+"/"+md.curState.stateName+"/"+curGameBoard.getFileName()+".dat");
 		bf.Serialize(file, data);//writes serializable object to our file.
 		file.Close();
+	}
+
+	public static function getDMG(){
+		if(dmg==null){
+			dmg=new DataManagerGameboard();
+		}
+		return dmg;
 	}
 
 	public function getGameBoard(){

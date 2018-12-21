@@ -1,39 +1,17 @@
-//maps and world data
+//maps data
 public class DataManagerMap{
-	private var worldList:WorldData;//stores list of names of all worlds
 	private var curMapData: MapData;//world maps store global state information
+    private var dmm: DataManagerMap;//singleton value
 
-	public function getCurWorldName(){
-		return curMapData.wName;
-	}
-
-	public function SaveWorld(){
-		var bf: BinaryFormatter = new BinaryFormatter();
-		var file: FileStream ;
-		file = File.Create(Application.persistentDataPath + "/worldInfo.dat");
-		bf.Serialize(file, worldList);//writes serializable object to our file.
-		file.Close();
-	}
-
-	/* Load worlds returns the world data object which has a list of worlds, these worlds are the key that unlocks
-	the value in a hashtable which is the path to the mapData object that contains all the save data for that game/map.
-	*/
-	public function LoadWorlds(){
-		if(File.Exists(Application.persistentDataPath + "/worldInfo.dat")){
-			var bf: BinaryFormatter = new BinaryFormatter();
-			var file: FileStream = File.Open(Application.persistentDataPath + "/worldInfo.dat", FileMode.Open);
-			worldList= bf.Deserialize(file);
-			file.Close();
-			return worldList;
+	public static function getDMM(){
+		if (dmm==null){
+			dmm = new DataManagerMap();
 		}
-		else{
-			worldList= new WorldData();
-			return worldList;
-		}
+		return dmm;
 	}
 
 	/* The name of the world is used to load the correct mapdata object */
-	public function setMapData(mapName :String, size: NUMBER_NATIONS, diff: DIFFICULTY){
+	public function setMapData(mapName :String, size: int, diff: int){
 		if(File.Exists(Application.persistentDataPath + "/worldMapData/"+mapName+".dat")){
 			var bf: BinaryFormatter = new BinaryFormatter();
 			var file: FileStream = File.Open(Application.persistentDataPath + "/worldMapData/"+mapName+".dat", FileMode.Open);
@@ -48,19 +26,21 @@ public class DataManagerMap{
 	    	curMapData.setTeamNumber(size);
 			curMapData.difficulty=diff;
 			curMapData.setStartState(playerData.team);
-	    	saveMapData(curMapData);
+	    	saveMapData();
 	    }
 	}
 
-	public function saveMapData(data: MapData){
-		var bf: BinaryFormatter = new BinaryFormatter();
-		var file: FileStream ;
-		if(!Directory.Exists(Application.persistentDataPath + "/worldMapData/")){
-	        Directory.CreateDirectory(Application.persistentDataPath + "/worldMapData/");
+	public function saveMapData(){
+		if(curMapData!=null){
+			var bf: BinaryFormatter = new BinaryFormatter();
+			var file: FileStream ;
+			if(!Directory.Exists(Application.persistentDataPath + "/worldMapData/")){
+		        Directory.CreateDirectory(Application.persistentDataPath + "/worldMapData/");
+		    }
+			file = File.Create(Application.persistentDataPath + "/worldMapData/"+curMapData.wName+".dat");
+			bf.Serialize(file, curMapData);//writes serializable object to our file.
+			file.Close();
 	    }
-		file = File.Create(Application.persistentDataPath + "/worldMapData/"+data.wName+".dat");
-		bf.Serialize(file, data);//writes serializable object to our file.
-		file.Close();
 	}
 
 	public function getMapData(){
@@ -71,5 +51,4 @@ public class DataManagerMap{
 		return curMapData;
 	}
 
-	
 }

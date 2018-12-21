@@ -8,6 +8,11 @@ public class Tuple{
 		snd=second;
 	}
 
+	public function Tuple(first:String,second:int){
+		fst=first;
+		snd=second;
+	}
+
 	public function getFst(){
 		return fst;
 	} 

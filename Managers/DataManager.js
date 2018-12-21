@@ -5,14 +5,18 @@ import System.IO;
 public class DataManager{
 
     public var dmMap: DataManagerMap;
+    public var dmWorlds: DataManagerWorlds;//Only saved when new worlds are made, primarily used to store world name list
     public var dmPlayer:DataManagerPlayer;
+    public var dmPlayerList:DataManagerPlayerList;//stores and loads a list of players that are saved. 
     public var dmGameBoard: DataManagerGameboard;
     public static var dm:DataManager;
 
 	public function DataManager(){
 		//DontDestroyOnLoad (transform.gameObject);
-		dmPlayer = new DataManagerPlayer();
-		dmMap = new DataManagerMap();
+		dmPlayer = DataManagerPlayer.getDMP();
+		dmPlayerList=DataManagerPlayerList.getDMPL();
+		dmMap = DataManagerMap.getDMM();
+		dmWorlds = DataManagerWorlds.getDMW();
 		dmGameBoard = new DataManagerGameboard();
 	}
 
@@ -25,9 +29,9 @@ public class DataManager{
 
 
 	public function saveUpdate(){
-		savePlayerData(playerData);
-		saveMapData(curMapData);
-		saveGameBoard(curGameBoard);
+		dmPlayer.savePlayerData();
+		dmMap.saveMapData();
+		dmGameBoard.saveGameBoard();
 	}
 }
 

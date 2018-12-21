@@ -5,7 +5,7 @@ public class MapData{
 	public var teams:TeamData[];//=new TeamData[8];//array covers team data objects of all eight team, 
 	public var difficulty:int;//=1;//0=easy, 1=medium, 2=hard.  Effects enemy strength
 	public var numberNations:int;//=8;//8 is max, there can be 2,4 or 8
-	public var curState:StateData;
+	public var curState:int;//number used to load state data
 	public var sch:StateControlHash;
     
 	public function MapData(nm:String, diff:int, numNations:int){
@@ -142,16 +142,16 @@ public class MapData{
 		for(var i=0;i<32;i++){
 			var temp=Random.Range(0,32);
 			if(states[temp].ruler==t){
-				curState=states[temp];
-				dm.setGameBoard(curState.stateName,  0,0);
+				curState=temp;
+				dm.setGameBoard(states[curState].stateName,  0,0);
 				return;
 			}
 		}
 		//if random selection fails after 32 tries then pick the first state that matches
 		for(var j=0;j<32;j++){
 			if(states[j].ruler==t){
-				curState=states[j];
-				dm.setGameBoard(curState.stateName,  0,0);
+				curState=j;
+				dm.setGameBoard(states[curState].stateName,  0,0);
 				return;
 			}
 		}
@@ -159,8 +159,8 @@ public class MapData{
 	}
 
 	public function setCurState(num:int,yVal:int, xVal:int){
-		curState=states[num];
-		dm.setGameBoard(curState.stateName, yVal,xVal);
+		curState=num;
+		dm.setGameBoard(states[curState].stateName, yVal,xVal);
 	}
 
 	public function getTeamData(t:String){

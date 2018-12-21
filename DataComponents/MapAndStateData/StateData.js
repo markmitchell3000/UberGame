@@ -7,6 +7,10 @@ public class StateData{
 	public var adjacentStates = new ArrayList();
 	//public var areaGameBoards: Hashtable = new Hashtable();//as player visits each game board, tile values are generated.
 	public function StateData(nm:String, id:int, arr:int[]){
-
+        stateName=nm;
+        stateId=id;
+        for(int i=0;i<arr.length;i++){
+        	adjacentStates.Add(arr[i]);
+        }
 	}
 }

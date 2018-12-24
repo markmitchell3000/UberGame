@@ -1,51 +1,63 @@
 public class DamageTypeWater extends DamageType{
-	static private var melee : GameObject;
-    static private var ranged : GameObject;
-    static private var passive : GameObject;
-    static private var blast : GameObject;
-    static private var power : GameObject;
-    static private var ultimate : GameObject;
-    static private var aoe : GameObject;
+	private var melee : GameObject;
+    private var ranged : GameObject;
+    private var passive : GameObject;
+    private var blast : GameObject;
+    private var power : GameObject;
+    private var ultimate : GameObject;
+    private var aoe : GameObject;
+    static private var dtw : DamageTypeWater;
+
+    public function DamageTypeWater(){
+        super("Water");
+    }
+
+    public static function getDT(){
+        if(dtw==null){
+            dtw= new DamageTypeWater();
+        }
+        return dtw;
+    }
 
 	public function getMeleeObj(){
 		if(melee==null){
-            melee = super.getMeleeObj("Water");
+            melee = super.getMeleeObj();
         }
         return melee;
     }
     public function getRangedObj(){
     	if(ranged==null){
-            ranged = super.getRangedObj("Water");
+            ranged = super.getRangedObj();
         }
         return ranged;
     }
     public function getPassiveObj(){
     	if(passive==null){
-            passive = super.getPassiveObj("Water");
+            passive = super.getPassiveObj();
         }
         return passive;
     }
     public function getBlastObj(){
     	if(blast==null){
-            blast = super.getBlastObj("Water");
+            blast = super.getBlastObj();
         }
         return blast;
     }
     public function getPowerObj(){
     	if(power==null){
-            power = super.getPowerObj("Water");
+            power = super.getPowerObj();
         }
         return power;
     }
     public function getUltimateObj(){
     	if(ultimate==null){
-            ultimate = super.getUltimateObj("Water");
+            ultimate = super.getUltimateObj();
         }
         return ultimate;	
     }
     public function getAOEObj(){
     	if(aoe==null){
-            aoe = super.getAOEObj("Water");
+            aoe = super.getAOEObj();
         }
         return aoe;
     }

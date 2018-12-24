@@ -6,7 +6,7 @@ public class UnitTypeZombie extends UnitType{
         super(40,40,5.0,10.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utz==null){
             utz= new UnitTypeZombie();
         }

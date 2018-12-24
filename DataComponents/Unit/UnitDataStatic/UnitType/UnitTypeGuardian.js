@@ -6,7 +6,7 @@ public class UnitTypeGuardian extends UnitType{
         super(120,120,10.0,30.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utg==null){
             utg= new UnitTypeGuardian();
         }

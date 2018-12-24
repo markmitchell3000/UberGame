@@ -1,0 +1,2 @@
+## search current directory and directories within for files that have the string
+grep -Ril "string" .

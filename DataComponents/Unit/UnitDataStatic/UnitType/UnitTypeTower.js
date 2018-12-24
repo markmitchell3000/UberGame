@@ -6,7 +6,7 @@ public class UnitTypeTower extends UnitType{
         super(1500,1500,20.0,0.0,true);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utt==null){
             utt= new UnitTypeTower();
         }

@@ -1,51 +1,63 @@
 public class DamageTypeBasic extends DamageType{
-    static private var melee : GameObject;
-    static private var ranged : GameObject;
-    static private var passive : GameObject;
-    static private var blast : GameObject;
-    static private var power : GameObject;
-    static private var ultimate : GameObject;
-    static private var aoe : GameObject;
+    private var melee : GameObject;
+    private var ranged : GameObject;
+    private var passive : GameObject;
+    private var blast : GameObject;
+    private var power : GameObject;
+    private var ultimate : GameObject;
+    private var aoe : GameObject;
+    static private var dtb: DamageTypeBasic;
+
+    public function DamageTypeBasic(){
+        super("Basic");
+    }
+
+    public static function getDT(){
+        if(dtb==null){
+            dtb= new DamageTypeBasic();
+        }
+        return dtb;
+    }
 
 	public function getMeleeObj(){
 		if(melee==null){
-            melee = super.getMeleeObj("Basic");
+            melee = super.getMeleeObj();
         }
         return melee;
     }
     public function getRangedObj(){
     	if(ranged==null){
-            ranged = super.getRangedObj("Basic");
+            ranged = super.getRangedObj();
         }
         return ranged;
     }
     public function getPassiveObj(){
     	if(passive==null){
-            passive = super.getPassiveObj("Basic");
+            passive = super.getPassiveObj();
         }
         return passive;
     }
     public function getBlastObj(){
     	if(blast==null){
-            blast = super.getBlastObj("Basic");
+            blast = super.getBlastObj();
         }
         return blast;
     }
     public function getPowerObj(){
     	if(power==null){
-            power = super.getPowerObj("Basic");
+            power = super.getPowerObj();
         }
         return power;
     }
     public function getUltimateObj(){
     	if(ultimate==null){
-            ultimate = super.getUltimateObj("Basic");
+            ultimate = super.getUltimateObj();
         }
         return ultimate;	
     }
     public function getAOEObj(){
     	if(aoe==null){
-            aoe = super.getAOEObj("Basic");
+            aoe = super.getAOEObj();
         }
         return aoe;
     }

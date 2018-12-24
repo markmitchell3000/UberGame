@@ -6,7 +6,7 @@ public class UnitTypeHunter extends UnitType{
         super(60,60,8.0,55.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(uth==null){
             uth= new UnitTypeHunter();
         }

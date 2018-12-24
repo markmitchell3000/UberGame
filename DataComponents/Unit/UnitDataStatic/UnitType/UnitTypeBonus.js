@@ -6,7 +6,7 @@ public class UnitTypeBonus extends UnitType{
         super(500,500,20.0,0.0,true);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utb==null){
             utb= new UnitTypeBonus();
         }

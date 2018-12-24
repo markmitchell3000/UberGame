@@ -6,7 +6,7 @@ public class UnitTypeCivilian extends UnitType{
         super(20,20,5.0,5.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utb==null){
             utb= new UnitTypeCivilian();
         }

@@ -6,7 +6,7 @@ public class UnitTypeLt extends UnitType{
         super(60,60,8.0,15.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utl==null){
             utl= new UnitTypeLt();
         }

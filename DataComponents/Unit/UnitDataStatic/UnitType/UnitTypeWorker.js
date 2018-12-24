@@ -6,7 +6,7 @@ public class UnitTypeWorker extends UnitType{
         super(30,30,5.0,8.0,false);
     }
 
-    public function getUT(){
+    public static function getUT(){
         if(utw==null){
             utw= new UnitTypeWorker();
         }

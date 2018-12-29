@@ -7,6 +7,7 @@ public class UnitKillFacts{
     public var strongestFoeRank:int;
     public var workerKills: int;
     public var civilianKills:int;
+    public var zombieKills:int;
     public var soldierKills:int;
     public var ltHunterKills:int;
     public var sentinelKills:int;

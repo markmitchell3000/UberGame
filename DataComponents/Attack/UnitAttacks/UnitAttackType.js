@@ -3,7 +3,7 @@ This is used to generate individual attacks statistics when given the player
 modifications*/ 
 public class UnitAttackType{
 	protected var type:String;
-	protected var cooldown:int;//used to start death counters of created attacks
+	protected var cooldown:float;//used for determining when an attack can be created.
 	protected var distance:int;//max distance where attack will be called. (i.e. unit is 3 tiles away fire arrow)
 	protected var radius:int;//0 for all but aoe,ultimate and passive
     protected var range:int; //0 for attacks that do not move, how much it moves in the direction
@@ -13,13 +13,17 @@ public class UnitAttackType{
 
     public function UnitAttackType(tp:String, cd:int, dst:int, rds: int, rng:int,sp:int, ls:int, mul: int){
         type=tp;
-        cooldown=cd;
+        cooldown=(float)cd;
         distance=dst;
         radius=rds;
         range=rng;
         speed=sp;
         lifespan=ls;
         damageMulti=mul;
+    }
+
+    public static function getUAT(){
+        //abstract type used for grabbing a singleton
     }
 
 

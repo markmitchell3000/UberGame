@@ -7,6 +7,7 @@ public class MapData{
 	public var numberNations:int;//=8;//8 is max, there can be 2,4 or 8
 	public var curState:int;//number used to load state data
 	public var sch:StateControlHash;
+	public var missionList:Mission[];//probably an arraylist or linked list of missions
     
 	public function MapData(nm:String, diff:int, numNations:int){
 		if(numNations==2||numNations==4||numNations==8){

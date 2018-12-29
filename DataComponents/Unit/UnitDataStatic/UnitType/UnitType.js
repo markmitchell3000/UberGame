@@ -32,7 +32,7 @@ public class UnitType{
     }
     
     //abstract class for getting singleton of each UnitType child object
-    public function getUT(){}
+    public static function getUT(){}
 
     //abstract function uses the umf to return the appropriate array of models for that type
     public function getModelArr(umf: UnitModelFactory){

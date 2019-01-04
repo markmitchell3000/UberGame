@@ -1,16 +1,16 @@
-public class GBGroup{
+public class SubteamGroup{
     public var groupId:int;
     public var powerLevel:int =1;
     public var size:int=0;//when brought down to 0 group can be removed.
-    public var groupName:String;
+    public var groupName:String;//subteam
     public var mapType: String;//maybe pulled from teamStructure
-    public var modelStringFolder:String;//helps build reference for the GBUnits, Units track the number that the are 
+    public var modelStringFolder:String;//helps build reference for the Units, Units track the number that the are 
     public var teamName:TeamString;//Holds parent team name
-    private var units:GBUnitCollection;//holds GBUnits, id is key and unit is value.
+    private var units:UnitNode;//holds UnitData rather than units(which include models), id is key and unit is value.
 
-    public function GBGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard){
+    public function SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard){
         powerLevel=lvl;//in all cases except arena and mission, teams level is used, otherwise a level relative to the player.
-        units= new GBUnitCollection();
+        units=new UnitNode();// new GBUnitCollection();
         teamName=tStr.getTeam();
         groupName=tStr.getSubTeam();
         modelStringFolder=tStr.getFilePath();
@@ -76,8 +76,28 @@ public class GBGroup{
         }
     }
 
-    public function loadUnits(){
-        units.getListHead();
+    /*this will create all gameobjects which in turn pair unitdata and 
+    gameobject to make a unit which is added to the unit collection.*/
+    public function instantiateUnits(){
+        var tempNode:UnitNode=units;
+        while(tempNode!=null){
+            tempNode.getData().instantiateUnit();
+            tempNode=(UnitNode)tempNode.next;
+        }
+    }
+
+    public function updateUnits(){
+        var tempNode:UnitNode=units;
+        while(tempNode!=null){
+            if(!UnitCollection.getUC().unitIsDead(tempNode.getData().hashid)){
+                tempNode.getData().updateUnit();
+                tempNode=(UnitNode)tempNode.next;
+            }
+            else{
+                tempNode.removeSelf();//node is removed from list but still references next
+                tempNode=(UnitNode)tempNode.next;
+            }
+        }
     }
 }
 

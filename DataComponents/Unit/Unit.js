@@ -7,6 +7,14 @@ public class Unit{
     public var unitData:UnitData;
     public var unitModel:GameObject;
 
+    public function unit(ud:UnitData,tgm:TempGroupModels){
+        unitData=ud;
+        createModel();
+    }
+
+    private function createModel(){
+
+    }
 }
 
 

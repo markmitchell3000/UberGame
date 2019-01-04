@@ -2,7 +2,7 @@
 public class MapData{
 	public var wName:String;
 	public var states= new StateData[32];//array covers basic info for each state
-	public var teams:TeamData[];//=new TeamData[8];//array covers team data objects of all eight team, 
+	public var teams:String[];//=new TeamData[8];//array covers team data objects of all eight team, 
 	public var difficulty:int;//=1;//0=easy, 1=medium, 2=hard.  Effects enemy strength
 	public var numberNations:int;//=8;//8 is max, there can be 2,4 or 8
 	public var curState:int;//number used to load state data
@@ -15,18 +15,18 @@ public class MapData{
 			wName=nm;
 			difficulty=diff;
 			numberNations=numberNations;
-			teams=new TeamData[numberNations];
+			teams=new String[numberNations];
 			var i=0;
-			teams[i++]=new Team("Eternian Republic","EternianRepublic/");//TEAM_NAME.ETERNIAN_REPUBLIC;
-		    teams[i++]=new Team("Night Horde","NightHorde/");
+			teams[i++]="Eternian Republic";
+		    teams[i++]="Night Horde";
 		    if(numberNations>2){
-				teams[i++]=new Team("Initiative","Initiative/");
-				teams[i++]=new Team("Pantheon","Pantheon/");//TEAM_NAME.PANTHEON;
+				teams[i++]="Initiative";
+				teams[i++]="Pantheon";
 			    if(numberNations>4){
-					teams[i++]=new Team("Sentai Clan","SentaiClan/");//TEAM_NAME.SENTAI_CLAN;
-					teams[i++]=new Team("Shadow Empire","ShadowEmpire/");//TEAM_NAME.SHADOW_EMPIRE;
-					teams[i++]=new Team("United League","UnitedLeague/");//TEAM_NAME.UNITED_LEAGUE;
-					teams[i++]=new Team("Utrom Sith Alliance","UtromSithAlliance/");//TEAM_NAME.UTROM_SITH_ALLIANCE;
+					teams[i++]="Sentai Clan";
+					teams[i++]="Shadow Empire";
+					teams[i++]="United League";
+					teams[i++]="Utrom Sith Alliance";
 		        }
 		    }
 		    makeNewMap();

@@ -22,6 +22,17 @@ public class UnitData{
     
     public var wornItems:Item[];//on unit, able to give them stat/trait boosts
     public var unitStats:UnitStats;//Data about units health, power etc.
+
+    public function updateUnit(timeChange:float){
+        /*depending on state move or update unit, this includes accessing the 
+        units model via the hashid in the unitcollection.*/
+    }
+
+    public function instantiateUnit(){
+        /*Instantiates a gameobject using data found in this class.  A unit is 
+        created by pairing this with the gameobject.  Then the unit is added to 
+        the unitCollection with the hashid as the key for the unit value.*/
+    }
 }
 
 /*

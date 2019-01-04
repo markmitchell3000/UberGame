@@ -1,9 +1,11 @@
 public class GameBoard{
-    /*create or loads GBGroup that is used to create a UnitGroup. The UnitGroup 
-    updates the GBGroup, periodically the GBGroup data is saved along with other
-    GB data etc.*/
-    public var gbGroupListHead:GBGroupNode;//each group has lists for iterating and hashtable for lookups
-    public var styles:MapStyleStrings;
+    /*create or loads SubteamGroup these manage unit data and is used to create 
+    units (the pairing of unit data and unit models). The models move which 
+    updates the estimated location of the unit data location which can be 
+    stored.  Other data such as hitpoints is directly updated in the unit data 
+    which can then be stored.*/
+    public var groupListHead:SubteamGroupNode;//each group has lists for iterating and hashtable for lookups
+    public var styles:MapStyleStrings;//collection of strings
     public var stateName:String;
 	protected var gameGrid:GameGrid;
     /*each of the hashtables below take a string representing the location of 
@@ -27,8 +29,8 @@ public class GameBoard{
     }
 
     //used when the groups are prepopulated and the gamegrid is being loaded.
-    public function setGroupList(listHead:GBGroupNode){
-        gbGroupListHead=listHead;
+    public function setGroupList(listHead:SubteamGroupNode){
+        groupListHead=listHead;
     }
 
     public function getGameGrid(){
@@ -80,13 +82,12 @@ public class GameBoard{
         }
     }
     
-    protected function createRealUnits(){
-        //take the GBGroupNode and Create collection of real units to return
-
-    }
-
-    protected function convertRealUnitsToGBUnits(ug:UnitGroup){
-       //takes a unit group and updates the GBCollection
+    protected function instantiateUnits(){
+        var tempNode:SubteamGroupNode=groupListHead;
+        while(tempNode!=null){
+            tempNode.getData().instantiateUnits();
+            tempNode=(SubteamGroupNode)tempNode.next;
+        }
     }
 
     /*For placing units according to there saved location*/
@@ -94,9 +95,29 @@ public class GameBoard{
         //todo
     }
 
-    //might not use
+    //abstract function extended by child classes.
     protected function generateQuadrantsUnits(){
 
+    }
+
+    public function getGroupListHead(){
+        return groupListHead;
+    }
+
+    public function addGBGroup(group: SubteamGroup){
+        var tempNode:SubteamGroupNode= new SubteamGroupNode(group);
+        tempNode.insertNext(groupListHead);
+        groupListHead.insertLast(tempNode);
+        groupListHead=tempNode;
+        
+    }
+
+    public function updateGroups(){
+        var tempNode:SubteamGroupNode=groupListHead;
+        while(tempNode!=null){
+            tempNode.getData().updateUnits();
+            tempNode=(SubteamGroupNode)tempNode.next;
+        }
     }
 
 }

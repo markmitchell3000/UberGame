@@ -1,19 +1,15 @@
-/*Identical to GBUnitNode except this stores only data of Unit type.*/
+/*Linked list of unitdata, units (the pairing of unitdata and models) are stored
+in hashtable according to their unique hashid stored in the unitdata class*/
 public function UnitNode extends Node(){
-	private var data:Unit;
+	private var data:UnitData;
 
-	public function GBUnitNode(unit:Unit){
+	public function UnitNode(unit:UnitData){
 		data=unit;
 	}
 
 	public function getData(){
 		return data;
 	}
-
-    public function getHashId(){
-        var unitHash=new UVGetUnitHashLoc()
-        return unitHash.getHashId(data)
-    }
 
     //node should be assumed to be without last and next
     public function insertNext(node:UnitNode){

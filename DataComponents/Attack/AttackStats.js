@@ -8,7 +8,7 @@ public class AttackStats{
     public var range: int;
     public var speed: int;
     public var lifespan:int;
-    public var damages: int[];//highest damage type determines the model used
+    public var damages: HashTable;//highest damage type determines the model used, maybe should be hashtable where type is key, damage is value
     public var curLoc: Point;
     public var direction: Point;
 
@@ -26,13 +26,13 @@ public class AttackStats{
 
 	private function makeDamages(damMult:int, traits:Traits[]){
         var highestDam:int=0;
-        damages= new int[traits.length];
+        damages= new HashTable;//new int[traits.length];
         for(var i=0;i<traits.length;i++){
             if(traits[i].damage>highestDam){
             	highestDam=traits[i].damage;
             	mainDamage=traits[i].type;
             }
-            damages[i]=traits[i].damage*damMult;
+            damages[traits[i].type]=traits[i].damage*damMult;
         }
 	}
 

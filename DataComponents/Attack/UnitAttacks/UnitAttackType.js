@@ -38,7 +38,8 @@ public class UnitAttackType{
         }
 	}
 
-    /*Used by player to determine if attack is in range to be called.*/
+    /*Used by unit to determine if attack is in range to be called.  Currently
+    bonusDistance will be set at zero this may be altered later.*/
     public function getDistance(bonusDistance: int){
         return distance+bonusDistance;
     }

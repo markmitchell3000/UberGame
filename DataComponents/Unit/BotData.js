@@ -1,4 +1,4 @@
 public class BotData extends UnitData{
-	public var targetPath:Point[];
-	public var target: hashId;
+	public var targetPath:Point[];//tile locations made from pathfinding state
+	public var targetHashId:String;//target hashId is used for finding the unit in the unitcollection
 }

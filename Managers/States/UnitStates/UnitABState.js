@@ -4,17 +4,14 @@
 //non animated units will only use behavior
 public class UnitABState{
 	protected var stateName:String;//should match the key that stores it, used for animation reference
-    protected var hasTimer:boolean;//unit may go idle or another state for a time 
-    protected var timer:int;//state has set time remaining in some cases
-    public function UnitABState(sn:String){
-    	stateName=sn;
-    	hasTimer=false;
-    }
+    /*states change periodically, this can vary based on type, towers and bases 
+    switch beteen idle and scan but can go into attack when scan detects 
+    something.  Other units may transistion between walk and scan.*/
+    protected var timer:float;
 
-    public function UnitABState(sn:String, t: int){
+    public function UnitABState(sn:String, t: float){
     	stateName=sn;
-    	timer=t;
-    	hasTimer=true;
+    	timer=t;//number of seconds
     }
     
     /*This returns the key for next state which is often the current state.
@@ -22,71 +19,64 @@ public class UnitABState{
       as scan or pursue check for targets and may transition to another state 
       such as attack.  If target it killed unit will go to a scan state to 
       acquire new target*/
-    public function getNextStateString(){
-
+    public function getNextStateString(unitType:String){
+        return "Idle";//default but should be overridden 
     }
 
-    public function update(){
+    /*Takes a unit and the value for deltatime then does stuff to the unit*/
+    public function update(unit:Unit,time:float){
         //perform states actions, may cause new next state.
     }
 
-    //called in update to decrement timer and check if has hit zero
-    public function checkTimer(){
-    	if(hasTimer){
-    		timer--;//may use a timer delta
-    		if(timer<=0){return true;}//timer is out
-    		else{return false;}//timer is not out.
-    	}
-    	else{
-    		return false;//timer doesn't exist so cannot run out
-    	}
+    //Called when initial state is set, this allows the state to be decremented by the unit.
+    public function getTimer(){
+    	return timer;
     }
 
     //takes units speed and figures out how much was moved that frame
-    private function calMoveDistance(speed:int){
-        var randomSpeed2:int = Random.Range(10+(speed/2),30+(speed/2));//unsure if half of speed is good multiplier
-        return (randomSpeed2/2 * Time.deltaTime);
+    private function calMoveDistance(speed:int, time:float){
+        var randomSpeed:int = Random.Range(10+(speed/2),30+(speed/2));//unsure if half of speed is good multiplier
+        return (randomSpeed/2 * time);
     }
 
-    private function calRightMove(){
+    /*private function calRightMove(time:float){
         var randomSpeed: int = Random.Range(-40,40);
-        return (randomSpeed/4 * Time.deltaTime);
-    }
+        return (randomSpeed/4 * time);
+    }*/
     
-    private function moveToTarget(unitTf: Transform, speed: int){
-        unitTf.position += unitTf.forward * calMoveDistance(speed);//maybe this should be position.x or similar
-        unitTf.position += unitTf.right *calRotation();//not sure why this is to right
+    protected function moveToTarget(unit:Unit,time:float){
+        var unitTF=unit.unitModel.transform;
+        var speed=unit.unitData.unitStats.moveSpeed;
+        unitTf.position += unitTf.forward * calMoveDistance(speed,time);//maybe this should be position.x or similar
+        unitTf.position += unitTf.right *calRotation(time);//not sure why this is to right
     }
 
     /*Can be called directly at current time. RotSpeed could be function of 
       speed.  If unit has a turret, then the transform of the turret is 
       provided rather than the unit transform.*/
-    public function rotateToTarget(rotSpd:int, hasTurret:boolean, unitTf: Transform, targTf: Transform){
-        var rotSpeed:float;
-        if(!hasTurrent){
-            rotationSpeed=rotSpd*Time.deltaTime;
+    protected function rotateToTarget(unit:Unit, time:float){
+        var rotSpeed:float=unit.unitData.unitStats.rotationSpeed;
+        var hasTurret:boolean=((UnitType)(UnitTypeHash.getValue(unit.unitData.unitType))).isBuilding();
+        var unitTF=unit.unitModel.transform;
+        var targTF=((Unit)UnitCollection.getUC().getUnit(((BotData)unit.unitData).targetHashId)).unitModel.transform;
+        if(!hasTurret){
+            rotSpeed=rotSpeed*time;
         }
         else{
-            rotationSpeed=3*rotSpd*Time.deltaTime;
+            rotSpeed=3*rotSpeed*time;
         }
         var targetDir = targTf.position- unitTf.position;
         var newDir = Vector3.RotateTowards(unitTf.forward, targetDir, rotSpeed, 0.0);
         unitTf.rotation = Quaternion.LookRotation(newDir);
     }
 
-    /*Unit moves walks/runs (handled by speed value provided) the target, first 
-      rotation is handled then the target moves.  ---RULE--- Units that walk 
-      will have no turret, tanks etc roll to target*/ 
-    public function walkToTarget(unitTf: Transform, targTf: Transform, speed: int){
-        rotateToTarget((int)(speed/4), false, unitTf, targTf);
-        moveToTarget(unitTf, speed);
-    }
+
 
     /*Unit moves rolls the target, first rotation is handled then the target 
       moves.  ---RULE--- Units that walk will have no turret, tanks etc roll to 
       target*/ 
-    public function rollToTarget(){
-        rotateToTarget((int)(speed/4), true, unitTf, targTf);
-        moveToTarget(unitTf, speed);
-    }
+    /*protected function rollToTarget(unitTf: Transform, targTf: Transform, speed: int, time:float){
+        rotateToTarget((int)(speed/4), true, unitTf, targTf,time);
+        moveToTarget(unitTf, speed,time);
+    }*/
 }

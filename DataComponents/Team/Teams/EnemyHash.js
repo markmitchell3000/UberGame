@@ -18,6 +18,12 @@ public class EnemyHash{
 		if(eh==null){
 			eh=new EnemyHash();
 		}
-        return eh.teamWar[t1+","+t2];
+		var key:String =t1+","+t2;
+		if(eh.teamWar.ContainsKey(key)){
+            return eh.teamWar[key];
+        }
+        else{
+        	return false;
+        }
 	}
 }

@@ -11,7 +11,7 @@ essentially making them a vector which takes damage.
 /*Attack is pairing of the game object for the attack and the data that the 
 attack is made from.*/
 public class Attack{
-    private var attObject : GameObject;
+    public var attObject : GameObject;
     private var attStats: AttackStats;//
 
     public function Attack(as:AttackStats){

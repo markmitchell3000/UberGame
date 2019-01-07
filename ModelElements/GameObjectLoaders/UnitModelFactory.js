@@ -6,7 +6,7 @@ the GBUnits from a team structure as models that are handed
 public class UnitModelFactory{
     /*Real unit groups and real units need the model information, GBGroups and 
     units are just the template that is used to save and load*/
-    public function loadUnitModels(gp: GBUnitGroup, umf: UnitModelFactory){
+    public function loadUnitModels(gp: SubteamGroup, umf: UnitModelFactory){
     	var gpArr:ArrayList=gp.loadUnits();
     	for(var uId=0;uId<gpArr.Count;uId++){
 			var tempUnit:GBUnit=gpArr.Item[uId];
@@ -19,7 +19,7 @@ public class UnitModelFactory{
 		}
     }
 
-	protected function unitObjSelector(tempUnit:GBUnit, modelArr:Object[]){
+	protected function unitObjSelector(tempUnit:UnitData, modelArr:Object[]){
 		var objNum:int;
 		if(tempUnit.modelNumberSet){
 	        objNum=tempUnit.modelNumber;

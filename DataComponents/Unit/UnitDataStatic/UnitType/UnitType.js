@@ -21,6 +21,7 @@ public class UnitType{
     protected var baseAttRange:float;
     protected var basePursueRange:float;//range beyond attack that unit will chase
     protected var isBuilding:boolean;
+    //protectec var isTank:boolean;//for objects that move and still have a turret, not yet supported
 
     //called by extended classes which have unique values
     public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean){

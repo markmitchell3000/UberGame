@@ -1,32 +1,28 @@
 import System.Collections.Generic;
-//might extend hash manager
-//Static class that tracks location of all units and objects
-public class HMObjLocation{
-    private var onTile: Hashtable;
-    private var objLoc: Hashtable;//units, attacks and objs.  Each must have static id and a transform
-    private static var hmol:HMObjLocation;
-
-    public function HMObjLocation(){
-    	onTile=new Hashtable();
-    	objLoc=new Hashtable();
-    }
-
-    public static function getHMOL(){
-        if(hmol==null){
-            hmol=new HMObjLocation();
-        }
-        return hmol;
-    }
+//Static class that tracks location of all units 
+public class UnitLocation{
+    private var onTile: Hashtable;//what units are on the tile
+    private var unitLocation: Hashtable;//units, attacks and objs.  Each must have static id and a transform
     
 
+    private static var unitLoc:UnitLocation;//singleton value
+
+    public function UnitLocation(){
+    	onTile=new Hashtable();
+    	unitLocation=new Hashtable();
+    }
+
+    public static function getUnitLocHash(){
+        if(unitLoc==null){
+            unitLoc=new UnitLocation();
+        }
+        return unitLoc;
+    }
      
-    /*given a transform and hashid a list of collision hashids 
-    is returned. This does not include the original hashid. These hashids are 
-    used to verify if the collision is with an enemy, primarily for attacks 
-    hitting units*/
-    public function getCollisions(tf:Transform, hashId:String){
-        updateLoc(tf, hashId);
-        var pnts:Point[]=(Point [])objLoc[hashId];
+    /*given an attack a list of unit collision hashids is returned. These 
+    hashids are used to verify if the collision is with an enemy.*/
+    public function getAttackCollisions(att:Attack){
+        var pnts:Point[]=getFourPoints(att.attObject.transform);
         var ids: List.<String> =  new List.<String>();
         for(var pnt: Point in pnts){
             var tempIds = (String [])onTile[pnt.x+","+pnt.y];
@@ -40,8 +36,8 @@ public class HMObjLocation{
     }
 
     /*Returns a list, or empty list if unit is gone, of points that the unit is touching.*/
-    public function getObjLoc(hashid:String){
-        return (ArrayList)objLoc[hashid];
+    public function getUnitLoc(hashid:String){
+        return (ArrayList)unitLocation[hashid];
     }
 
     /*returns list or empty list of units at that spot, can be used for get 
@@ -50,35 +46,43 @@ public class HMObjLocation{
         return (ArrayList)onTile[pnt.x+","+pnt.y];//or List.<String>
     }
 
-    /*given a transform and hash id it can call addlocation 
-    by generating 4 new points and checking 4 old points, 
-    old points can be an empty list*/
-    private function updateLoc(tf:Transform, hashId:String){
-        var oldSqrs:Point[];
-        //might a remove this from add location
-        if(objLoc.ContainsKey(hashid)){
-            oldSqrs=(Point [])objLoc[hashid];
-        }
+    private function getFourPoints(tf:Transform){
         var baseX:int = ObjectAdjuster.getOA().makeCoord(tf.x);
         var baseY:int = ObjectAdjuster.getOA().makeCoord(tf.y);
-        var newSqrs:new Point[4];
+        var newSqrs=new Point[4];
         newSqrs[0]=new Point(baseX,baseY);
         newSqrs[1]=new Point(baseX+1,baseY);
         newSqrs[2]=new Point(baseX,baseY+1);
         newSqrs[3]=new Point(baseX+1,baseY+1);
+        return newSqrs;
+    }
+
+    /*given a transform and hash id it can call addlocation by generating 4 new 
+    points and checking 4 old points, old points can be an empty list.  The Unit 
+    data is also updated based on the transform location*/
+    private function updateLoc(unit:Unit){
+        var tf:Transform=unit.unitModel.transform;
+        var hashid:String=unit.unitData.hashid;
+        var oldSqrs:Point[];
+        //might a remove this from add location
+        if(unitLocation.ContainsKey(hashid)){
+            oldSqrs=(Point [])unitLocation[hashid];
+        }
+        var newSqrs=getFourPoints(tf);
+        unit.unitData.curLoc=newSqrs[0];
         addlocation(newSqrs, oldSqrs, hashid);
     }
 
     //removes old locations and sets new locations
     private function addLocation(newSqrs:Point[], oldSqrs:Point[], hashid:String){
-    	if(objLoc.ContainsKey(hashid)){
+    	if(unitLocation.ContainsKey(hashid)){
     		removeOld(oldSqrs, hashid);
     	}
         addNew(newSqrs,hashid);
     }
 
     private function addNew(newSqrs:Point[],hashid:String){
-        objLoc[hashid]=newSqrs;
+        unitLocation[hashid]=newSqrs;
         for(var i=0;i<4;i++){
             onTile[newSqrs[i].x+","+newSqrs[i].y]=addNewHelper(newSqrs[i],hashid);
         }
@@ -91,7 +95,7 @@ public class HMObjLocation{
     }
 
     private function removeOld(oldSqrs:Point[],hashid:String){
-        objLoc.Remove(hashid);
+        unitLocation.Remove(hashid);
         for(var i=0;i<4;i++){
             onTile[oldSqrs[i].x+","+oldSqrs[i].y]=removeOldHelper(oldSqrs[i],hashid);
         }

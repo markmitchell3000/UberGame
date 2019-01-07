@@ -5,7 +5,7 @@ public class SubteamGroup{
     public var groupName:String;//subteam
     public var mapType: String;//maybe pulled from teamStructure
     public var modelStringFolder:String;//helps build reference for the Units, Units track the number that the are 
-    public var teamName:TeamString;//Holds parent team name
+    public var teamName:String;//Holds parent team name
     private var units:UnitNode;//holds UnitData rather than units(which include models), id is key and unit is value.
 
     public function SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard){
@@ -80,8 +80,11 @@ public class SubteamGroup{
     gameobject to make a unit which is added to the unit collection.*/
     public function instantiateUnits(){
         var tempNode:UnitNode=units;
+        var tempGroupModels=new TempGroupModels(modelStringFolder);
+        /*for spawning this should persist inside of a spawner that adds members
+        to the group.*/
         while(tempNode!=null){
-            tempNode.getData().instantiateUnit();
+            tempNode.getData().instantiateUnit(tempGroupModels);
             tempNode=(UnitNode)tempNode.next;
         }
     }

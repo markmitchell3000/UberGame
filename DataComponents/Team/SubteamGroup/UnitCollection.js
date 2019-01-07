@@ -44,4 +44,9 @@ public class UnitCollection{
     public function addUnit(unit:Unit){
         units[unit.unitData.hashid]=unit;
     }
+
+    //grab a particular unit to do stuff with, used for updates and issuing damage etc.
+    public function getUnit(hashid:String){
+        return units[hashid];
+    }
 }

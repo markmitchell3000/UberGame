@@ -4,13 +4,13 @@ public class UAHash{
 
     public function UAHash(){
         uats= new Hashtable();
-        uats["melee"]=UATMelee.getUAT();
-        uats["ranged"]=UATRanged.getUAT();
-        uats["blast"]=UATBlast.getUAT();
-        uats["power"]=UATPower.getUAT();
-        uats["aoe"]=UATAoe.getUAT();
-        uats["ultimate"]=UATUltimate.getUAT();
-        uats["passive"]=UATPassive.getUAT();//called every turn (if cooldown ready) regardless of other attacks
+        uats["Melee"]=UATMelee.getUAT();
+        uats["Ranged"]=UATRanged.getUAT();
+        uats["Blast"]=UATBlast.getUAT();
+        uats["Power"]=UATPower.getUAT();
+        uats["AOE"]=UATAoe.getUAT();
+        uats["Ultimate"]=UATUltimate.getUAT();
+        uats["Passive"]=UATPassive.getUAT();//called every turn (if cooldown ready) regardless of other attacks
     }
 
     public static getValue(str:String){

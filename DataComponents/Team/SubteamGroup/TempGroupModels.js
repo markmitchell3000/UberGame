@@ -10,9 +10,9 @@ public class TempGroupModels{
 	civilians001 civilians002 etc) since they do not at current have seperate 
 	unittypes.*/
  
-    public function TempGroupModels(team:String,subTeam:String){
+    public function TempGroupModels(filepath:String){
     	modelHash= new HashTable();
-    	mainFilePath=team+"/"+subTeam+"/";
+    	mainFilePath=filepath;
     }
 
     /*UnitType String is used for subfolder*/

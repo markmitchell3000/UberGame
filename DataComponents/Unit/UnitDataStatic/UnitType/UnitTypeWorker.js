@@ -25,4 +25,8 @@ public class UnitTypeWorker extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid());
         untCnt.workerCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Walk";
+    }
 }

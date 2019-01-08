@@ -25,4 +25,8 @@ public class UnitTypeSoldier extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.soldierCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Walk";
+    }
 }

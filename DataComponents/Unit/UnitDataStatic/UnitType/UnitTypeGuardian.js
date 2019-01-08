@@ -25,4 +25,8 @@ public class UnitTypeGuardian extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.guardianCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Idle";
+    }
 }

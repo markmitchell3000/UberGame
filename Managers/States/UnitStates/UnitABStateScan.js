@@ -13,7 +13,8 @@ public class UnitABStateScan extends UnitABState{
 
     /*UnitType has certain states provided that will redirect the unit*/
     public function getNextStateString(unitType:String){
-        return "Idle";//default but should be overridden 
+        return ((UnitType)UnitTypeHash.getValue(unitType)).getStatePostScan();
+        //return "Idle";//default but should be overridden 
     }
 
     /*Given a unit, scan for enemy targets. If the enemies are in attack range 

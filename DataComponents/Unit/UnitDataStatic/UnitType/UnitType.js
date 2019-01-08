@@ -100,5 +100,11 @@ public class UnitType{
             }
         }
     }
+
+    /*Default is to be idle, this is overriden by many unit for walking, 
+    possibly, returning to a location.*/
+    public function getStatePostScan(){
+        return "Idle";
+    }
 }
 

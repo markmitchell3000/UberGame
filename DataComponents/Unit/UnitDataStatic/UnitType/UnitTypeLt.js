@@ -24,4 +24,8 @@ public class UnitTypeLt extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.ltCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Walk";
+    }
 }

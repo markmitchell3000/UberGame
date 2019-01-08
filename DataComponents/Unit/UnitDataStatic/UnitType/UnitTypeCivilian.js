@@ -25,4 +25,8 @@ public class UnitTypeCivilian extends UnitType{
         safePlacement(gbUnit, gb,getGameGrid());
         untCnt.civOrZombCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Walk";//might randomly idle or walk
+    }
 }

@@ -25,4 +25,8 @@ public class UnitTypeHunter extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.hunterCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Walk";
+    }
 }

@@ -31,4 +31,8 @@ public class UnitTypeTower extends UnitType{
             }
         }
     }
+
+    public function getStatePostScan(){
+        return "Idle";
+    }
 }

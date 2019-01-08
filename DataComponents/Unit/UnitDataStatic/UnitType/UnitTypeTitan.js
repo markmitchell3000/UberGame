@@ -25,4 +25,8 @@ public class UnitTypeTitan extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.titanCnt++;
     }
+
+    public function getStatePostScan(){
+        return "Idle";//might walk back to base then go idle 
+    }
 }

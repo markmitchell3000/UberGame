@@ -30,4 +30,8 @@ public class UnitTypeBase extends UnitType{
             }
         }
     }
+
+    public function getStatePostScan(){
+        return "Idle";
+    }
 }

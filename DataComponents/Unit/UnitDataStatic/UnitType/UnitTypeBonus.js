@@ -27,4 +27,8 @@ public class UnitTypeBonus extends UnitType{
         placeTempObject(1,1,new Point(gbUnit.xCoord, gbUnit.yCoord), "bonus_holder", gb.getTempObjs());
         grid[gbUnit.yCoord, gbUnit.xCoord]=TileTempObj.getTile();
     }
+
+    public function getStatePostScan(){
+        return "Idle";
+    }
 }

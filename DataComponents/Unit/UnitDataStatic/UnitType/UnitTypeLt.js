@@ -25,7 +25,4 @@ public class UnitTypeLt extends UnitType{
         untCnt.ltCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Walk";
-    }
 }

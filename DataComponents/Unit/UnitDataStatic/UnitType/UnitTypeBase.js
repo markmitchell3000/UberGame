@@ -2,8 +2,10 @@ public class UnitTypeBase extends UnitType{
     private static var utb:UnitTypeBase;
 
     public function UnitTypeBase(){
+
         //basehealth=3000,basemana=3000,baseAttrange 20
         super(3000,3000,20.0,0.0,true);
+        super.overrideNextState("Scan","Idle");
     }
 
     public static function getUT(){
@@ -31,7 +33,4 @@ public class UnitTypeBase extends UnitType{
         }
     }
 
-    public function getStatePostScan(){
-        return "Idle";
-    }
 }

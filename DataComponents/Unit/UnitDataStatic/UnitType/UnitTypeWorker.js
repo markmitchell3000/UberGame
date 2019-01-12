@@ -26,7 +26,4 @@ public class UnitTypeWorker extends UnitType{
         untCnt.workerCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Walk";
-    }
 }

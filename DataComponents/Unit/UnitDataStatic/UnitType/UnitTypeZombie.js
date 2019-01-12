@@ -25,8 +25,4 @@ public class UnitTypeZombie extends UnitType{
         safePlacement(gbUnit, gb.getGameGrid());
         untCnt.civOrZombCnt++;
     }
-
-    public function getStatePostScan(){
-        return "Walk";
-    }
 }

@@ -26,7 +26,4 @@ public class UnitTypeCivilian extends UnitType{
         untCnt.civOrZombCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Walk";//might randomly idle or walk
-    }
 }

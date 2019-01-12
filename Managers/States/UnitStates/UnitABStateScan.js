@@ -13,7 +13,7 @@ public class UnitABStateScan extends UnitABState{
 
     /*UnitType has certain states provided that will redirect the unit*/
     public function getNextStateString(unitType:String){
-        return ((UnitType)UnitTypeHash.getValue(unitType)).getStatePostScan();
+        return ((UnitType)UnitTypeHash.getValue(unitType)).getNextState("Scan");
         //return "Idle";//default but should be overridden 
     }
 

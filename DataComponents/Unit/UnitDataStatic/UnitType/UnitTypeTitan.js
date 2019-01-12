@@ -4,6 +4,7 @@ public class UnitTypeTitan extends UnitType{
     public function UnitTypeTitan(){
         //basehealth=240,basemana=240,baseAttrange 20, pursuerange 20, isbld false
         super(240,240,20.0,20.0,false);
+        super.overrideNextState("Scan", "Idle");//unit may select to walk if unit is away from base
     }
 
     public static function getUT(){
@@ -26,7 +27,4 @@ public class UnitTypeTitan extends UnitType{
         untCnt.titanCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Idle";//might walk back to base then go idle 
-    }
 }

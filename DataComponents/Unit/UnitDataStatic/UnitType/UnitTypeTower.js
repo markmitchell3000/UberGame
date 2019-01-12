@@ -4,6 +4,7 @@ public class UnitTypeTower extends UnitType{
     public function UnitTypeTower(){
         //basehealth=1500,basemana=1500,baseAttrange 20, pursuerange 0, isbld true
         super(1500,1500,20.0,0.0,true);
+        super.overrideNextState("Scan","Idle");
     }
 
     public static function getUT(){
@@ -32,7 +33,4 @@ public class UnitTypeTower extends UnitType{
         }
     }
 
-    public function getStatePostScan(){
-        return "Idle";
-    }
 }

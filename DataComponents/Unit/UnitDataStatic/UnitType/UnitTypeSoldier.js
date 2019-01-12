@@ -26,7 +26,4 @@ public class UnitTypeSoldier extends UnitType{
         untCnt.soldierCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Walk";
-    }
 }

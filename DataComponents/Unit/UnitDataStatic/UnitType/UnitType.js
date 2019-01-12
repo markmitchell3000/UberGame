@@ -22,6 +22,7 @@ public class UnitType{
     protected var basePursueRange:float;//range beyond attack that unit will chase
     protected var isBuilding:boolean;
     //protectec var isTank:boolean;//for objects that move and still have a turret, not yet supported
+    protected var nextState:Hashtable;//current state is key, next state is value
 
     //called by extended classes which have unique values
     public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
@@ -30,6 +31,29 @@ public class UnitType{
         baseAttRange=bar;
         basePursueRange=pr;
         isBuilding=isbld;
+        initNextState();
+    }
+
+    private function initNextState(){
+        nextState=new Hashtable();
+        nextState["Walk"]="Scan";
+        nextState["Scan"]="Walk";
+        nextState["Run"]="Walk";
+        nextState["RightStrafe"]="Idle";
+        nextState["LeftStrafe"]="Idle";
+        nextState["Pursue"]="Scan";
+        nextState["Idle"]="Scan";
+        nextState["Flee"]="Scan";
+        nextState["Dead"]="Idle";
+        nextState["Capture"]="Scan";
+        nextState["BackWalk"]="Idle";
+        nextState["BackRun"]="BackWalk";
+        nextState["Attack"]="Scan";
+    }
+
+    /*Used by extended classes to individualize there nextstate table*/
+    protected function overrideNextState(curState:String,nextState:String){
+        nextState[curState]=nextState;
     }
     
     //abstract class for getting singleton of each UnitType child object
@@ -103,8 +127,13 @@ public class UnitType{
 
     /*Default is to be idle, this is overriden by many unit for walking, 
     possibly, returning to a location.*/
-    public function getStatePostScan(){
-        return "Idle";
+    public function getNextState(curState:String){
+        if(nextstate.ContainsKey(curState)){
+            return (String)nextstate[curState];
+        }
+        else{
+            return "Idle";
+        }
     }
 }
 

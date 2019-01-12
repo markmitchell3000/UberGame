@@ -3,7 +3,7 @@
 	ASSASSIN, NOMAD, ROGUE, KNIGHT, BRUTE, DARK_DWELLER, SALAMADER, STORMBREAKER};*/
 public class Archetype{
 	public var kind:String;//name of extended class, used for displayed stats
-	public var damagePref:String;
+	public var damagePref:String;//may not be used since most powerful of multipliers is what is used for models
 	public var attackPref:String;
     protected var multipliers:int[]=new int[10];//basic, poison etc defense and attack multipliers
 

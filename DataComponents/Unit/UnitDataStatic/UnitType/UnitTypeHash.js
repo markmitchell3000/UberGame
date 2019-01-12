@@ -1,8 +1,8 @@
 public class UnitTypeHash{
-	private static var uth:UnitTypeHash;
-	private var unitTypeTable:HashTable;
+    private static var uth:UnitTypeHash;
+    private var unitTypeTable:HashTable;
 
-	public function UnitTypeHash(){
+    public function UnitTypeHash(){
         unitTypeTable["Base"]=new UnitTypeBase();
         unitTypeTable["Tower"]=new UnitTypeTower();
         unitTypeTable["Bonus"]=new UnitTypeBonus();
@@ -14,12 +14,12 @@ public class UnitTypeHash{
         unitTypeTable["Hunter"]=new UnitTypeHunter();
         unitTypeTable["Guardian"]=new UnitTypeGuardian();
         unitTypeTable["Titan"]=new UnitTypeTitan();
-	}
+    }
 
-	public static function getValue(str:String){
-		if(uth==null){
-			uth= new UnitTypeHash();
-		}
-		return uth.unitTypeTable[str];
-	}
+    public static function getValue(str:String){
+        if(uth==null){
+            uth= new UnitTypeHash();
+        }
+        return uth.unitTypeTable[str];
+    }
 }

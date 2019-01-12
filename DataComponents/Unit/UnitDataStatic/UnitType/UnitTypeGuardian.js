@@ -4,6 +4,7 @@ public class UnitTypeGuardian extends UnitType{
     public function UnitTypeGuardian(){
         //basehealth=120,basemana=120,baseAttrange 10, pursueRange 30, isbld false
         super(120,120,10.0,30.0,false);
+        super.overrideNextState("Scan", "Idle");//unit may select to walk if unit is away from base
     }
 
     public static function getUT(){
@@ -26,7 +27,4 @@ public class UnitTypeGuardian extends UnitType{
         untCnt.guardianCnt++;
     }
 
-    public function getStatePostScan(){
-        return "Idle";
-    }
 }

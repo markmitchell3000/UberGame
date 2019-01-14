@@ -1,21 +1,27 @@
+/*
+    Similar to run but since the target is moving rescan every half second
+*/ 
 public class UnitABStatePursue extends UnitABState{
 
     public function UnitABStatePursue(){
-    	super("pursue");
+    	super("Pursue",0.5);
     }
 
-    //Unit is pursuing for set time, then may rescan or retarget
-    public function UnitABStatePursue(t:int){
-    	super("pursue", t);
+    public function update(unit:Unit,time:float){
+        if(UnitCollection.getUC().unitIsDead(((BotData)unit).targetHashId)){
+            unit.unitData.setState("Scan");//unit being chases is dead so rescan
+        }
+        else{
+            runToTarget(unit,time);
+        }
     }
 
-    /*
-    Pursue
-    0. arguments unit location, target location/state, attack range
-    1. check state of target, if null rescan
-    2. check distance of target, relative to attack range (next attack in attack
-       selection cycle). If distance is greater continue pursuit, else switch 
-       state to attack.
-    3. if still pursuing rotate to target and walk
-    */ 
+
+    /*Unit moves walks/runs (handled by speed value provided) the target, first 
+      rotation is handled then the target moves.  ---RULE--- Units that walk 
+      will have no turret, tanks etc roll to target*/ 
+    protected function runToTarget(unit:Unit time:float){
+        rotateToTarget(unit, time*1.5);
+        moveToTarget(unit, time*1.5);//running acts the same a walking but the speed up is handled as though more time has passed relative to everything else
+    }
 }

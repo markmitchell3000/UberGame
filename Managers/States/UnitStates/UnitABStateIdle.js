@@ -1,11 +1,15 @@
+/*
+    Idle is Just like it sounds, the unit animates standing still and scans for 
+    enemies once a second.  Bases and towers use this state constantly.
+*/
 public class UnitABStateIdle extends UnitABState{
 
     public function UnitABStateIdle(){
-    	super("idle");
+    	super("Idle", 1.0);
     }
 
-    //Unit is stunned or set to idle for small amount of time
-    public function UnitABStateIdle(t:int){
-    	super("idle", t);
+    public function update(unit:Unit,time:float){
+        //do nothing
     }
+    
 }

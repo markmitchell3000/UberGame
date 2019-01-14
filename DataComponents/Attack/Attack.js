@@ -14,9 +14,11 @@ public class Attack{
     public var attObject : GameObject;
     private var attStats: AttackStats;//
 
-    public function Attack(as:AttackStats){
+    public function Attack(as:AttackStats,tf:Transform){
     	attStats=as;
-        //instantiate gameobject
+        var attModel= AttackTypeHash.getValue(as.type).getAttackObject(as.mainDamage);
+        Instantiate(bld, tf.position, tf.rotation);
+        AttackCollection.getAC().addAttackNode(new AttackNode(this));//adds the attack into the collection
     }
 
     public function updateAttack(){

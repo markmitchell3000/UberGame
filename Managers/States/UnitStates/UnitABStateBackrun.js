@@ -2,11 +2,11 @@
 public class UnitABStateBackrun extends UnitABState{
 
     public function UnitABStateBackrun(){
-    	super("backrun");
+    	super("BackRun",0.5);
     }
 
-    //Unit is running backwards till winded
-    public function UnitABStateBackrun(t:int){
-    	super("backrun", t);
+    public function update(unit:Unit,time:float){
+        //not currently support but this will move the unit object back
     }
+
 }

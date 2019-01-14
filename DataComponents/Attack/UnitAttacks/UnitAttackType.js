@@ -47,7 +47,7 @@ public class UnitAttackType{
     /*takes the level from the UnitPowers TypeRank tuples and uses this as a 
     multiplier, it then goes through each of the ranks to create the AttackStats 
     for the attack data object*/
-	public function getAttStats(traits:Traits[],lvl:int, bonusRadius: int, bonusRange: int, bonusLifespan: int,curLoc:Point,direction:point){
-        return new AttackStats(type, radius+bonusRadius, range+bonusRange, speed, lifespan+bonusLifespan, damageMulti,traits, curLoc, direction);
+	public function getAttStats(traits:Traits[], bonusRadius: int, bonusRange: int, bonusLifespan: int){
+        return new AttackStats(type, radius+bonusRadius, range+bonusRange, speed, lifespan+bonusLifespan, damageMulti,traits);
 	}
 }

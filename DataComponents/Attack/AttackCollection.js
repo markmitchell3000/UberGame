@@ -1,23 +1,30 @@
-//probably share parent with GBUnitcollection
 public class AttackCollection{
 	private var listHead:AttackNode;
-	//maybe a tail
-	private var attacks:Hashtable;
+    private static var ac:AttackCollection
+
     public function AttackCollection(){
-    	attacks= new Hashtable();
     }
 
-    public function removeUnit(id:int){
-        if(attacks.ContainsKey(id)){
-    	    attacks.Remove(""+id);
-    	    //size--;
+    public static function getAC(){
+        if(ac==null){
+            ac=new AttackCollection();
         }
-        else{
-        	Debug.Log("Attempting to remove untracked attack");
+        return ac;
+    }
+
+    
+    public function update(timeChange:float){
+        //move all attacks and check for collisions, issue damage
+        //if attack has aged past its limit destroy the attack and remove from list
+    }
+
+    public function addAttackNode(newNode:AttackNode){
+        if(listHead==null){
+            listHead=newNode;
+        }
+        else {
+            listHead.insertLast(newNode);
         }
     }
 
-    public function getListHead(){
-    	return listHead;
-    }
 }

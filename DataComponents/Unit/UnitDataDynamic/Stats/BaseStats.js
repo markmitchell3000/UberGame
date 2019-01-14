@@ -17,6 +17,6 @@ public class BaseStats{
 	public var endurance: int;
 	public var luck: int;
 	public var moveSpeed: int;
-	public var attackSpeed: int;
+	public var attackSpeed: float;//
 	public var rotationSpeed: int;
 }

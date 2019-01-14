@@ -2,7 +2,7 @@ public class GameState{
 	/*Attacks are cycled and as damage is applied, locations are updated and 
 	attacks are vanished.  Attacks are similar to objects or units but so quick 
 	and efferal that they are not save with the other game data.*/
-    protected var attacks:AttackCollection;
+    protected var attacks:AttackCollection;//singleton class
     /*Game board stores all data that can be stored and loaded from saved game 
     such as units and objects.*/
     protected var gameBoard:GameBoard;

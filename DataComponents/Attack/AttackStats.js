@@ -1,26 +1,24 @@
 /*Attack stats are unique to individual attacks.  Attacks are short lived and 
 never stored in save game files.*/
 public class AttackStats{
-	public var type: String;
-    public var mainDamage: String;
+	public var type: String;//AttackType
+    public var mainDamage: String;//DamageType
     public var team:String;	
     public var radius: int;
     public var range: int;
     public var speed: int;
     public var lifespan:int;
     public var damages: HashTable;//highest damage type determines the model used, maybe should be hashtable where type is key, damage is value
-    public var curLoc: Point;
-    public var direction: Point;
+    public var curLoc: Point;//Derived from transform of unit that instantiates the attack
+    public var direction: Point;//unsure how this is made
 
-	public function AttackStats(tp:String, tm: String, rd:int,rng:int,spd:int,ls:int,dm:int,traits:Traits[],cl:Point,dir:Point){
+	public function AttackStats(tp:String, tm: String, rd:int,rng:int,spd:int,ls:int,dm:int,traits:Traits[]){
 		type=tp;
 		team=tm;
 		radius=rd;
 		range=rng;
 		speed=spd;
 		lifespan=ls;
-		curLoc=cl;
-		direction=dir;
 		makeDamages(dm,traits);
 	}
 

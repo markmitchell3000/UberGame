@@ -3,18 +3,12 @@ public class UnitABStateScan extends UnitABState{
 
     //Unit is scanning, effectively idle but checking every frame called
     public function UnitABStateScan(){
-    	super("scan", 0);
+    	super("Scan", 0.1);
     }
 
     public function update(unit:Unit,time:float){
-        //depending on speed, randomly skip some percent of scans
+        //depending on speed, randomly skip some percent of scans maybe
     	scan(unit);
-    }
-
-    /*UnitType has certain states provided that will redirect the unit*/
-    public function getNextStateString(unitType:String){
-        return ((UnitType)UnitTypeHash.getValue(unitType)).getNextState("Scan");
-        //return "Idle";//default but should be overridden 
     }
 
     /*Given a unit, scan for enemy targets. If the enemies are in attack range 
@@ -75,8 +69,7 @@ public class UnitABStateScan extends UnitABState{
 
     private function setNextState(unit:Unit, enemy:String,state:String){
         ((BotData)unit.unitData).targetHashId=enemy;
-        unit.unitData.unitState=state;
-        unit.unitData.stateCountDown=HashUnitABState.getValue(state).getTimer();
+        unit.unitData.setState(state);
     }
 
     private function getAttackRange(unit:Unit){

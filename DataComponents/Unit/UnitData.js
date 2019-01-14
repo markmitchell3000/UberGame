@@ -21,6 +21,7 @@ public class UnitData{
 
     public var traits:Traits[];
     public var attackCooldowns:UnitAttackCooldowns;//class subtracts delta time from all cooldown values > 0, new attacks reset cooldown
+    public var actionCooldown: float;//every attack sets this to 1.0 then time decrements it, any attack requires this to be zero, future work may reduce this number with an attack speed reduction.
     
     public var wornItems:Item[];//on unit, able to give them stat/trait boosts
     public var unitStats:UnitStats;//statistics/Data about units health, power etc.
@@ -30,14 +31,18 @@ public class UnitData{
         /*depending on state move or update unit, this includes accessing the 
         units model via the hashid in the unitcollection.*/
         //Set condition for initial state (maybe based on unittype)
-        stateCountDown-=timeChange;
         if(stateCountDown<=0){
             unitState=HashUnitABState.getValue(unitState).getNextStateString(unitType);
             stateCountDown=HashUnitABState.getValue(unitState).getTimer();
         }
         var tempUnit:Unit=(Unit)UnitCollection.getUC().getUnit(hashid);
         HashUnitABState.getValue(unitState).update(tempUnit,timeChange);
+        stateCountDown-=timeChange;
+    }
 
+    public function setState(newState:String){
+        unitState=newState;
+        stateCountDown=HashUnitABState.getValue(unitState).getTimer();
     }
 
     public function instantiateUnit(tgm:TempGroupModel){

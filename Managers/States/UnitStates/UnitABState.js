@@ -15,12 +15,9 @@ public class UnitABState{
     }
     
     /*This returns the key for next state which is often the current state.
-      Some states may be on a timer, others are chained together. States such 
-      as scan or pursue check for targets and may transition to another state 
-      such as attack.  If target it killed unit will go to a scan state to 
-      acquire new target*/
+      If target it killed unit will go to a scan state to acquire new target*/
     public function getNextStateString(unitType:String){
-        return "Idle";//default but should be overridden 
+        return ((UnitType)UnitTypeHash.getValue(unitType)).getNextState(stateName);
     }
 
     /*Takes a unit and the value for deltatime then does stuff to the unit*/

@@ -1,12 +1,12 @@
 //used primarily or exclusively by player
 public class UnitABStateLeftStrafe extends UnitABState{
 
+    //Unit should strafe for only a moment then go idle
     public function UnitABStateLeftStrafe(){
-    	super("leftstrafe");
+    	super("LeftStrafe", 0.5);
     }
 
-    //Unit should strafe for only a moment then go idle
-    public function UnitABStateLeftStrafe(t:int){
-    	super("leftstrafe", t);
+    public function update(unit:Unit,time:float){
+        //Not yet support but will move object to the left
     }
 }

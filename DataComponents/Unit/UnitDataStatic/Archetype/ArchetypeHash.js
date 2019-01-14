@@ -27,9 +27,9 @@ public class ArchetypeHash{
     }
 
     public static function getValue(str:String){
-	if(ath==null){
-	    ath= new ArchetypeHash();
-	}
-	return ath.archetypeTable[str];
+	    if(ath==null){
+	        ath= new ArchetypeHash();
+	    }
+	    return ath.archetypeTable[str];
     }
 }

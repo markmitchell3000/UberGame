@@ -2,11 +2,10 @@
 public class UnitABStateBackwalk extends UnitABState{
 
     public function UnitABStateBackwalk(){
-    	super("backwalk");
+    	super("BackWalk", 0.5);
     }
 
-    //Unit is walking backwards for certain time, side effect of spell perhaps
-    public function UnitABStateBackwalk(t:int){
-    	super("backwalk", t);
+    public function update(unit:Unit,time:float){
+        //not currently support but this will move the unit object back
     }
 }

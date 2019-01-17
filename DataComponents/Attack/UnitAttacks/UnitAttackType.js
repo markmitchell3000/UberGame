@@ -9,6 +9,7 @@ public class UnitAttackType{
     protected var range:int; //0 for attacks that do not move, how much it moves in the direction
     protected var speed:int; //speed attack moves along the direction
     protected var lifespan:int;//how long will the attack live for
+    //dam multi must be nonzero
     protected var damageMulti:int;//Used multiply damage, i.e. melee or range =1, ultimate=6
 
     public function UnitAttackType(tp:String, cd:int, dst:int, rds: int, rng:int,sp:int, ls:int, mul: int){
@@ -19,7 +20,8 @@ public class UnitAttackType{
         range=rng;
         speed=sp;
         lifespan=ls;
-        damageMulti=mul;
+        if(mul>0){damageMulti=mul;}
+        else{damageMulti=1;}
     }
 
     public static function getUAT(){
@@ -47,7 +49,7 @@ public class UnitAttackType{
     /*takes the level from the UnitPowers TypeRank tuples and uses this as a 
     multiplier, it then goes through each of the ranks to create the AttackStats 
     for the attack data object*/
-	public function getAttStats(traits:Traits[], bonusRadius: int, bonusRange: int, bonusLifespan: int){
+	public function getAttStats(traits:UnitTraitCollection, bonusRadius: int, bonusRange: int, bonusLifespan: int){
         return new AttackStats(type, radius+bonusRadius, range+bonusRange, speed, lifespan+bonusLifespan, damageMulti,traits);
 	}
 }

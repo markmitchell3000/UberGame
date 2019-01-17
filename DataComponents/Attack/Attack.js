@@ -12,7 +12,7 @@ essentially making them a vector which takes damage.
 attack is made from.*/
 public class Attack{
     public var attObject : GameObject;
-    private var attStats: AttackStats;//
+    public var attStats: AttackStats;//
 
     public function Attack(as:AttackStats,tf:Transform){
     	attStats=as;
@@ -21,13 +21,23 @@ public class Attack{
         AttackCollection.getAC().addAttackNode(new AttackNode(this));//adds the attack into the collection
     }
 
-    public function updateAttack(){
-        //placeholder
-        //move transform
-        //update location in map
-        //count down the death counter
+    public function updateAttack(timeChange:float){
+        if(attStats.speed>0){
+            moveAttack(timeChange);//move transform
+        }
+        var ids: List.<String>=UnitLocation.getUnitLocHash().getAttackCollisions(this);
+        for(var id: String in ids){
+            issueDamage(id);//if the unit is an enemy issue damage
+        }
+        attStats.lifespan-=timeChange;//shorten lifespan   
     }
  
+     protected function moveAttack(time:float){
+        var attackTF=attObject.transform;
+        var speed=unit.unitData.unitStats.moveSpeed;
+        attackTf.position += attackTf.forward * attStats.speed * time;
+    }
+
     //removes object
     public function destroyObject(){
         Destroy(attObject);
@@ -35,17 +45,12 @@ public class Attack{
     }
 
 
-    //******TO DO ******
-        //called by blast and ranged, maybe others...  may not be here, may be extended
-    protected function getForwardVector(fireAttackSpeed: float, v3: Vector3){
-        return (v3.forward * fireAttackSpeed) ;
-        //myTransform.transform.Translate(Vector3.forward * fireAttackSpeed);
-    }
+    //checks for collision with enemy, issue damage
+    public function issueDamage(unitId:String){
+        var otherTeam:String=((Unit)UnitCollection.getUC().getUnit(unitId)).unitData.team;
+        if(EnemyHash.checkState(attStats.team, otherTeam){
 
-    //checks for collision with enemy
-    public function checkStatus(t:Team){
-        t2= attStats.getTeam();//attacks team of origin
-        //check if attack is colliding with an enemy team unit
+        }
     }
 
 }

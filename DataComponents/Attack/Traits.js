@@ -3,6 +3,8 @@ public class Traits{
 	public var type:String;//basic, blades, earth, electric, fire, ice, magic, poison, water, wind
 	public var damage:int;// actual damage is damage minus defense for matching trait pair
 	public var defense:int;// levels about half the speed of as damage
+    //public var linger:int;
+    //public var oddsOfLinger:float;
 
     //Teams could begin with different advantages though these can be set later.
 	public function Traits(tp:String, dm:int,df:int){

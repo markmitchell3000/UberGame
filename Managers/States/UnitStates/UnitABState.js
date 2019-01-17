@@ -31,6 +31,7 @@ public class UnitABState{
     }
 
     //takes units speed and figures out how much was moved that frame
+    //speed might be a float
     private function calMoveDistance(speed:int, time:float){
         var randomSpeed:int = Random.Range(10+(speed/2),30+(speed/2));//unsure if half of speed is good multiplier
         return (randomSpeed/2 * time);

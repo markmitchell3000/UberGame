@@ -27,9 +27,7 @@ public class UnitLocation{
         for(var pnt: Point in pnts){
             var tempIds = (String [])onTile[pnt.x+","+pnt.y];
             for(var id:String in tempIds){
-                if(id!=hashId){
-                    ids.Add(id);
-                }
+                ids.Add(id);
             }
         }
         return ids;

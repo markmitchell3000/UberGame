@@ -12,10 +12,19 @@ public class AttackCollection{
         return ac;
     }
 
-    
+    /*Move all attacks and check for collisions, issue damage.
+      If attack has aged past its limit destroy the attack and remove from 
+      list*/
     public function update(timeChange:float){
-        //move all attacks and check for collisions, issue damage
-        //if attack has aged past its limit destroy the attack and remove from list
+        var curNode:AttackNode=listHead;
+        while(!(curNode==null)){
+            ((Attack)curNode.getData()).updateAttack(timeChange);
+            if(((Attack)curNode.getData()).attStats.lifespan<=0){
+                var temp:AttackNode=curNode.next;
+                curNode.removeSelf();
+                curNode=temp;
+            }
+        }
     }
 
     public function addAttackNode(newNode:AttackNode){

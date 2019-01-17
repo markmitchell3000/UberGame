@@ -19,12 +19,22 @@ public class UnitData{
 
     public var pursueRange:int; //max, as the crow flies, distance that unit will pursue
 
-    public var traits:Traits[];
+    public var traits:UnitTraitCollection;//make trait hashtable object that can output damage and possibly lingering effects.
     public var attackCooldowns:UnitAttackCooldowns;//class subtracts delta time from all cooldown values > 0, new attacks reset cooldown
     public var actionCooldown: float;//every attack sets this to 1.0 then time decrements it, any attack requires this to be zero, future work may reduce this number with an attack speed reduction.
     
     public var wornItems:Item[];//on unit, able to give them stat/trait boosts
     public var unitStats:UnitStats;//statistics/Data about units health, power etc.
+
+    public function UnitData(ut:String,at:String,tm:String,st:String,lvl:int){
+        unitType=ut;
+        archetype=at;
+        team=tm;
+        subTeam=st;
+        //lvl is passed to stat creation
+        traits=new UnitTraitCollection(archetype,lvl:int);
+        //do more stuff to populate stats
+    }
 
     /*Player data should override this*/
     public function updateUnit(timeChange:float){
@@ -53,6 +63,7 @@ public class UnitData{
         var unit:Unit=new Unit(this,model);
         unitCollection.getUC().addUnit(unit);//this will automatically use the hashid as the key 
     }
+
 }
 
 /*

@@ -6,33 +6,51 @@ public class AttackStats{
     public var team:String;	
     public var radius: int;
     public var range: int;
-    public var speed: int;
-    public var lifespan:int;
+    public var speed: float;//speed that the object moves across map, 0 if melee etc.
+    public var lifespan: float;//time remaining till attack disappears
     public var damages: HashTable;//highest damage type determines the model used, maybe should be hashtable where type is key, damage is value
-    public var curLoc: Point;//Derived from transform of unit that instantiates the attack
-    public var direction: Point;//unsure how this is made
+    //lingering time and chance possibly
 
-	public function AttackStats(tp:String, tm: String, rd:int,rng:int,spd:int,ls:int,dm:int,traits:Traits[]){
+	public function AttackStats(tp:String, tm: String, rd:int,rng:int,spd:int,ls:int,dm:int,traits:UnitTraitCollection){
 		type=tp;
 		team=tm;
 		radius=rd;
 		range=rng;
-		speed=spd;
-		lifespan=ls;
+		speed=(float)spd;
+		lifespan=(float)ls;
 		makeDamages(dm,traits);
 	}
 
-	private function makeDamages(damMult:int, traits:Traits[]){
+	private function makeDamages(damMult:int, traits:UnitTraitCollection){
         var highestDam:int=0;
-        damages= new HashTable;//new int[traits.length];
-        for(var i=0;i<traits.length;i++){
-            if(traits[i].damage>highestDam){
-            	highestDam=traits[i].damage;
-            	mainDamage=traits[i].type;
+        damages= new HashTable();//new int[traits.length];
+        for(var i=0;i<traits.tableSize;i++){
+            var damType:String=DamageTypeHash.getDTString(i);
+            var traitRef:Traits = traits.getTrait(damType);
+            if(traitRef.damage>highestDam){
+            	highestDam=traitRef.damage;
+            	mainDamage=traitRef.type;
             }
-            damages[traits[i].type]=traits[i].damage*damMult;
+            damages[damType]=traitRef.damage*damMult;
         }
 	}
+
+    public function applyDamages(unit:Unit){
+        //iterate across damages and apply affects
+        var ud:UnitData=unit.unitData;
+        var utc:UnitTraitCollection=ud.traits;
+        var totalDam:int=0;
+        for(var i=0;i<utc.tableSize;i++){
+            var damType:String=DamageTypeHash.getDTString(i);
+            var traitRef:Traits = traits.getTrait(damType);
+            var dam:int=((int)damages[damType])-traitRef.defense;
+            if(dam>0){
+                totalDam+=dam;
+                //possible lingering effect here
+            }
+        }
+        ud.unitStats.curHealth-=totalDam;//issue damage
+    }
 
     /*This function uses the type of attacks string and primary damage type 
     string and uses the static classes to select the model for the right attack 
@@ -43,6 +61,7 @@ public class AttackStats{
 		return attType.getAttackObject(DamageType);
 	}
 
+    /********Decrement Potentially***********/
     /*function uses the static hash table that takes the string for team and 
     returns the team object.*/
 	public function getTeam(){

@@ -1,22 +1,12 @@
+/*Units may be populated by a watered down archetype*/
 public class Item{
-	protected var itemInner:ItemInner;
+	public var itemType:String;
+	public var icon:String;//string used to load icon image
+    public var traits: UnitTraitCollection;
+    public var levelReq:int;
+    public var baseStats:BaseStats;
 
-	public function Item(str:String){
-		itemInner=new ItemInner(str);
-	} 
-
-	public function acceptVisitor(v:Visitor){
-		v.visit(itemInner);
-	}
-
-	class ItemInner{
-		public var itemType:String;
-		public var icon:String;//string used to load icon image
-        public var traits: Traits [];
-        public var levelReq:int;
-        public var baseStats:BaseStats;
-        public function ItemInner(s:String){
-        	itemType=s;
-        }
-	}
+    public function Item(s:String){
+        itemType=s;
+    }
 }

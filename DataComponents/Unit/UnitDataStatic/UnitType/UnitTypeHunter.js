@@ -3,7 +3,7 @@ public class UnitTypeHunter extends UnitType{
 
     public function UnitTypeBase(){
         //basehealth=60,basemana=60,baseAttrange 8, pursuerange 55, isbld false
-        super(60,60,8.0,55.0,false);
+        super(60,60,8.0,55.0,false,true);
         super.overrideNextState("Scan", "Pursue");//unit selects a target and will chase it across map, ignoring others unless scan selects a near target to attack
     }
 

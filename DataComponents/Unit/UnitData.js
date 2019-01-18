@@ -13,6 +13,7 @@ public class UnitData{
 
     public var curLoc:Point;//summary of the model position, move model then set the unitdata position
     public var homeLoc:Point;//Location of base used for returning or other types of unit states.
+    public var altLoc:Point//Used for rotation, this is a point that is the opposite corner from home, where to look when spawning
     
     public var modelNum:int;//Used to load models
     public var portraitString:String;//used for portrait selection
@@ -55,6 +56,7 @@ public class UnitData{
         stateCountDown=HashUnitABState.getValue(unitState).getTimer();
     }
 
+    /*Unit does not exist yet*/
     public function instantiateUnit(tgm:TempGroupModel){
         /*Instantiates a gameobject using data found in this class.  A unit is 
         created by pairing this with the gameobject.  Then the unit is added to 
@@ -62,6 +64,13 @@ public class UnitData{
         var model:GameObject=(GameObject)tgm.getValue(unitType,modelNum);
         var unit:Unit=new Unit(this,model);
         unitCollection.getUC().addUnit(unit);//this will automatically use the hashid as the key 
+    }
+
+    /*Unit was dead and is spawning a new model at home base*/
+    public function spawnModel(){
+        var tgm:TempGroupModel=new TempGroupModel(TeamStringHash.getModelPath(subTeam));
+        var model:GameObject=(GameObject)tgm.getValue(unitType,modelNum);
+        ((Unit)UnitCollection.getUC().getUnit(hashid)).spawnModel(model);
     }
 
 }

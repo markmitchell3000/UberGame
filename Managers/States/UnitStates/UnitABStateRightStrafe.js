@@ -9,5 +9,6 @@ public class UnitABStateRightStrafe extends UnitABState{
 
     public function update(unit:Unit,time:float){
         //Not yet support but will move object to the left
+        super.update(unit, time);
     }
 }

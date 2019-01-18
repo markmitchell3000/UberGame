@@ -7,6 +7,7 @@ public class UnitABStateWalk extends UnitABState{
 
     public function update(unit:Unit,time:float){
         walkToTarget(unit,time);
+        super.update(unit, time);
     }
 
     /*Unit moves walks/runs (handled by speed value provided) the target, first 

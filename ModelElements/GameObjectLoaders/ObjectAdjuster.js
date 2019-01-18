@@ -28,6 +28,6 @@ public class ObjectAdjuster{
     /*Given a transform value translate to an integer that can be used relative 
     to the grid*/
 	public function makeCoord(val:float){
-        return parseInt((val/tc.getMultiplier())+tc.getOffset());
+        return parseInt(((val+.5)/tc.getMultiplier())+tc.getOffset());//the .5 is added since integer division rounds down
 	}
 }

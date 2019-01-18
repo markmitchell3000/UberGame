@@ -3,7 +3,7 @@ public class UnitTypeBonus extends UnitType{
 
     public function UnitTypeBonus(){
         //basehealth=500,basemana=500,baseAttrange 20
-        super(500,500,20.0,0.0,true);
+        super(500,500,20.0,0.0,true,true);
         super.overrideNextState("Scan","Idle");
     }
 

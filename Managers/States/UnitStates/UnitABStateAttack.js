@@ -15,6 +15,7 @@ public class UnitABStateAttack extends UnitABState{
         if(unit.unitData.actionCooldown==0){
             selectAndCreateAttack(unit);
         }
+        super.update(unit, time);
     }
 
     private function selectAndCreateAttack(unit:Unit){

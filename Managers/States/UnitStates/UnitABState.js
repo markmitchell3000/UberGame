@@ -20,9 +20,11 @@ public class UnitABState{
         return ((UnitType)UnitTypeHash.getValue(unitType)).getNextState(stateName);
     }
 
-    /*Takes a unit and the value for deltatime then does stuff to the unit*/
+    /*Takes a unit and the value for deltatime then does stuff to the unit, 
+    overriden but called by all children after they do their special update 
+    steps*/
     public function update(unit:Unit,time:float){
-        //perform states actions, may cause new next state.
+        unit.unitData.attackCooldowns.reduceCooldowns(time);
     }
 
     //Called when initial state is set, this allows the state to be decremented by the unit.
@@ -64,11 +66,11 @@ public class UnitABState{
             rotSpeed=3*rotSpeed*time;
         }
         var targetDir = targTf.position- unitTf.position;
-        var newDir = Vector3.RotateTowards(unitTf.forward, targetDir, rotSpeed, 0.0);
+        var newDir = Vector3.RotateTowards(unitTf.forward, targetDir, rotSpeed, 0.0);//might be quaternion
         unitTf.rotation = Quaternion.LookRotation(newDir);
     }
 
-
+    
 
     /*Unit moves rolls the target, first rotation is handled then the target 
       moves.  ---RULE--- Units that walk will have no turret, tanks etc roll to 

@@ -9,6 +9,7 @@ public class UnitABStateScan extends UnitABState{
     public function update(unit:Unit,time:float){
         //depending on speed, randomly skip some percent of scans maybe
     	scan(unit);
+        super.update(unit, time);
     }
 
     /*Given a unit, scan for enemy targets. If the enemies are in attack range 
@@ -16,9 +17,8 @@ public class UnitABStateScan extends UnitABState{
     range.  Buildings have a 0 pursue range so the surronding loop is set based 
     on which is the larger range.*/
     private function scan(unit:Unit){}
-        //unitId: String, range:int){
-        //queries the grid hash table with a preset range of 1,2,3, or 4 
-        //Ontop of the unit (0) is 2x2, 1 is 4x4, 2 is 6x6, 3 is 8x8
+        //queries the grid hash table with a preset range of 1,2,3, or maybe 4 
+        //Ontop of the unit (0) is 3x3, 1 is 5x5, 2 is 7x7, 3 is 9x9
 	    var unitLocHash :UnitLocation= UnitLocation.getUnitLocHash();
 	    unitLocHash.updateLoc(unit);//maybe this should only be called when moving
 	    var centerArr=unitLocHash.getUnitLoc(unitHash);
@@ -29,7 +29,7 @@ public class UnitABStateScan extends UnitABState{
         var maxRange:int;
         if(attRange>pursueRange){maxRange=attRange;}
         else{maxRange=pursueRange;}
-	    for(var i=0;i<4;i++){
+	    for(var i=0;i<9;i++){
 	        var nearUnits:ArrayList=(ArrayList)unitLocHash.checkSpot((Point)centerArr[i]);
             var enemy:String=(String)getEnemyHashId(nearUnits,unit.unitData.team);
 	        if(enemy!="None"){
@@ -48,7 +48,7 @@ public class UnitABStateScan extends UnitABState{
     Whether this is for attacks or pursuit is determined outside of this 
     function.*/
     private function scanPerimeter(unitPnt:Point,unit:Unit,range, state){
-        var low:int=-1*range;
+        var low:int=-1*range-1;
         var high:int=range+1;
         for(var i=0;i<(2*range+2);i++){
             var tryPnts=new Point[4];
@@ -61,10 +61,11 @@ public class UnitABStateScan extends UnitABState{
                 var enemy:String=(String)getEnemyHashId(nearUnits,unit.unitData.team);
                 if(enemy!="None"){
                     setNextState(unit,enemy,state);
-                    return;//enemy is set return
+                    return true;//enemy is set return
                 }
             }
         }
+        return false;
     }
 
     private function setNextState(unit:Unit, enemy:String,state:String){

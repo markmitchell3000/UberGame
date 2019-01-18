@@ -10,6 +10,7 @@ public class UnitABStateIdle extends UnitABState{
 
     public function update(unit:Unit,time:float){
         //do nothing
+        super.update(unit, time);
     }
     
 }

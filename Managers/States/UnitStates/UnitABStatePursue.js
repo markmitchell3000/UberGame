@@ -14,6 +14,7 @@ public class UnitABStatePursue extends UnitABState{
         else{
             runToTarget(unit,time);
         }
+        super.update(unit, time);
     }
 
 

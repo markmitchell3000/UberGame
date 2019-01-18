@@ -3,7 +3,7 @@ public class UnitTypeLt extends UnitType{
 
     public function UnitTypeLt(){
         //basehealth=60,basemana=60,baseAttrange 8, pursueRange 15, isbld false
-        super(60,60,8.0,15.0,false);
+        super(60,60,8.0,15.0,false,true);
     }
 
     public static function getUT(){

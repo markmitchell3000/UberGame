@@ -11,7 +11,19 @@ public class UnitABStateDead extends UnitABState{
 
 
     public function update(unit:Unit,time:float){
-        //do nothing
+        // destroy model and respawn relaunches it
+        if(unit.unitModel!=null){
+            unit.destroyModel();
+        }
+        var ut:String=unit.unitData.unitType;
+        var restorable:boolean=((UnitType)UnitTypeHash.getValue(ut)).willRespawn();
+        //do nothing, timer till next state should decrement on its own
+        if(restorable){
+            super.update(unit, time);
+        }
+        else{
+            UnitCollection.getUC().removeUnit(unit.unitData.hashid);
+        }
     }
 
 }

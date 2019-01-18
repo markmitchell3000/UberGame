@@ -89,11 +89,11 @@ public class SubteamGroup{
         }
     }
 
-    public function updateUnits(){
+    public function updateUnits(time:float){
         var tempNode:UnitNode=units;
         while(tempNode!=null){
             if(!UnitCollection.getUC().unitIsDead(tempNode.getData().hashid)){
-                tempNode.getData().updateUnit();
+                tempNode.getData().updateUnit(float);
                 tempNode=(UnitNode)tempNode.next;
             }
             else{

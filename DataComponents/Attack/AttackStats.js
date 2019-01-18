@@ -50,6 +50,10 @@ public class AttackStats{
             }
         }
         ud.unitStats.curHealth-=totalDam;//issue damage
+        if(ud.unitStats.curHealth<=0){
+            //unit is in dead state
+            ud.setState("Dead");
+        }
     }
 
     /*This function uses the type of attacks string and primary damage type 

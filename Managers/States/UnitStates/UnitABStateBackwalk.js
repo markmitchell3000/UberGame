@@ -7,5 +7,6 @@ public class UnitABStateBackwalk extends UnitABState{
 
     public function update(unit:Unit,time:float){
         //not currently support but this will move the unit object back
+        super.update(unit, time);
     }
 }

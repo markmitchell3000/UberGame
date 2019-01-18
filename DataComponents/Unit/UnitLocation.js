@@ -3,8 +3,8 @@ import System.Collections.Generic;
 public class UnitLocation{
     private var onTile: Hashtable;//what units are on the tile
     private var unitLocation: Hashtable;//units, attacks and objs.  Each must have static id and a transform
+    private var unitSize:int=9;//Units touch 9 squares
     
-
     private static var unitLoc:UnitLocation;//singleton value
 
     public function UnitLocation(){
@@ -22,7 +22,7 @@ public class UnitLocation{
     /*given an attack a list of unit collision hashids is returned. These 
     hashids are used to verify if the collision is with an enemy.*/
     public function getAttackCollisions(att:Attack){
-        var pnts:Point[]=getFourPoints(att.attObject.transform);
+        var pnts:Point[]=getPoints(att.attObject.transform);
         var ids: List.<String> =  new List.<String>();
         for(var pnt: Point in pnts){
             var tempIds = (String [])onTile[pnt.x+","+pnt.y];
@@ -44,14 +44,20 @@ public class UnitLocation{
         return (ArrayList)onTile[pnt.x+","+pnt.y];//or List.<String>
     }
 
-    private function getFourPoints(tf:Transform){
+    private function getPoints(tf:Transform){
         var baseX:int = ObjectAdjuster.getOA().makeCoord(tf.x);
         var baseY:int = ObjectAdjuster.getOA().makeCoord(tf.y);
-        var newSqrs=new Point[4];
+        var newSqrs=new Point[unitSize];
+        //count all spots around unit as unit position
         newSqrs[0]=new Point(baseX,baseY);
         newSqrs[1]=new Point(baseX+1,baseY);
         newSqrs[2]=new Point(baseX,baseY+1);
         newSqrs[3]=new Point(baseX+1,baseY+1);
+        newSqrs[4]=new Point(baseX-1,baseY);
+        newSqrs[5]=new Point(baseX-1,baseY-1);
+        newSqrs[6]=new Point(baseX,baseY-1);
+        newSqrs[7]=new Point(baseX-1,baseY+1);
+        newSqrs[8]=new Point(baseX+1,baseY-1);
         return newSqrs;
     }
 
@@ -66,7 +72,7 @@ public class UnitLocation{
         if(unitLocation.ContainsKey(hashid)){
             oldSqrs=(Point [])unitLocation[hashid];
         }
-        var newSqrs=getFourPoints(tf);
+        var newSqrs=getPoints(tf);
         unit.unitData.curLoc=newSqrs[0];
         addlocation(newSqrs, oldSqrs, hashid);
     }
@@ -81,7 +87,7 @@ public class UnitLocation{
 
     private function addNew(newSqrs:Point[],hashid:String){
         unitLocation[hashid]=newSqrs;
-        for(var i=0;i<4;i++){
+        for(var i=0;i<unitSize;i++){
             onTile[newSqrs[i].x+","+newSqrs[i].y]=addNewHelper(newSqrs[i],hashid);
         }
     }
@@ -94,7 +100,7 @@ public class UnitLocation{
 
     private function removeOld(oldSqrs:Point[],hashid:String){
         unitLocation.Remove(hashid);
-        for(var i=0;i<4;i++){
+        for(var i=0;i<unitSize;i++){
             onTile[oldSqrs[i].x+","+oldSqrs[i].y]=removeOldHelper(oldSqrs[i],hashid);
         }
     }

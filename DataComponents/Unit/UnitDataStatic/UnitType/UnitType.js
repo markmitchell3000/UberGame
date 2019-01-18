@@ -21,11 +21,22 @@ public class UnitType{
     protected var baseAttRange:float;
     protected var basePursueRange:float;//range beyond attack that unit will chase
     protected var isBuilding:boolean;
+    protected var respawns:boolean;//most units do not respawn
     //protectec var isTank:boolean;//for objects that move and still have a turret, not yet supported
     protected var nextState:Hashtable;//current state is key, next state is value
 
     //called by extended classes which have unique values
     public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
+        initHelper(bh,bm,bar,pr,isbld);
+        respawns=false;
+    }
+
+    public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean,rs:boolean){
+        initHelper(bh,bm,bar,pr,isbld);
+        respawns=rs;
+    }
+
+    private function initHelper(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
         baseHealth=bh;
         baseMana=bm;
         baseAttRange=bar;
@@ -44,7 +55,8 @@ public class UnitType{
         nextState["Pursue"]="Scan";
         nextState["Idle"]="Scan";
         nextState["Flee"]="Scan";
-        nextState["Dead"]="Idle";
+        nextState["Dead"]="Restore";
+        nextstate["Restore"]="Idle";
         nextState["Capture"]="Scan";
         nextState["BackWalk"]="Idle";
         nextState["BackRun"]="BackWalk";
@@ -87,6 +99,11 @@ public class UnitType{
     //set by extended class
     public function isBuilding(){
         return isBuilding;//base, tower and bonus return true
+    }
+
+    //set by extended class
+    public function willRespawn(){
+        return respawns;//hunters, lts and bonuses return true
     }
 
     /*Abstract class implemented by each of the unittypes that handles how they 

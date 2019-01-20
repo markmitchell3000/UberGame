@@ -52,8 +52,4 @@ public class UnitTransform{
 	   		v.enabled = true;
 		}  
     }
-
-    public function acceptVisitor(vis:TransformVisitorInterface){
-    	vis.visitUnit(childAvatar);
-    }
 }

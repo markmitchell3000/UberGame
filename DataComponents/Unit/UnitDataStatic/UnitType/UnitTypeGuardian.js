@@ -14,16 +14,11 @@ public class UnitTypeGuardian extends UnitType{
         return utg;
     }
 
-    //should only receive UMFCombat not UnitModelFactory
-    public function getModelArr(umf: UMFCombat){
-        return umf.getGuardianModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
         var grdTemp=place.guardianSpots[untCnt.guardianCnt];
-        gbUnit.yCoord=grdTemp[0]+place.yOffset;
-        gbUnit.xCoord=grdTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid);
+        unitData.curLoc.y=grdTemp[0]+place.yOffset;
+        unitData.curLoc.x=grdTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid,gb.getGBSize());
         untCnt.guardianCnt++;
     }
 

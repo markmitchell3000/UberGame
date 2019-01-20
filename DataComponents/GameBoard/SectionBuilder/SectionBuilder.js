@@ -36,9 +36,9 @@ public class SectionBuilder{
         teamBuilders["workers"]             = SectionBuilderWorkers.getSecBld();
     }
 
-    /*Takes a team Structure, a team and a quadrant and returns a GBGroup.  
-    First it creates a group, populates it with GBUnits, then updates their 
-    locations (places them) of these GBUnits*/
+    /*Takes a team Structure, a team and a quadrant and returns a subteamGroup.  
+    First it creates a group, populates it with Units, then updates their 
+    locations (places them)*/
 	public function generateAndPlace(ts:TeamStructure, team:String, quadrant:int, groupID:int){
             //Teams can will randomly select from there list of subteams if they have them
             //Future work may include missions preselecting subteams.

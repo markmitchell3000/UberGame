@@ -13,16 +13,11 @@ public class UnitTypeZombie extends UnitType{
         return utz;
     }
 
-    //should only receive UMFCrowd not UnitModelFactory
-    public function getModelArr(umf: UMFCrowd){
-        return umf.getUnitModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb: GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb: GameBoard){
         var civZomTemp=place.civOrZombSpots[untCnt.civOrZombCnt];
-        gbUnit.yCoord=civZomTemp[0]+place.yOffset;
-        gbUnit.xCoord=civZomTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid());
+        unitData.curLoc.y=civZomTemp[0]+place.yOffset;
+        unitData.curLoc.x=civZomTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid(), gb.getGBSize());
         untCnt.civOrZombCnt++;
     }
 

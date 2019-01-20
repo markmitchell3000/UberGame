@@ -27,4 +27,16 @@ public class TempGroupModels{
         }
         return modelArr[modelNum];
 	}
+
+    public function getArrSize(unitType:String){
+        var modelArr:Object[];
+        if(modelHash.ContainsKey(unitType)){
+            modelArr=(Object[])modelHash[unitType];
+        }
+        else{
+            modelArr = Resources.LoadAll(mainFilePath+unitType, GameObject);
+            modelHash[unitType]=modelArr;
+        }
+        return modelArr.length;
+    }
 }

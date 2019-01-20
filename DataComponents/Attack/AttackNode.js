@@ -1,5 +1,4 @@
-//used to iterate through all attacks and will remove them as they die.
-//should probably share parent with GBUnitNode
+/*used to iterate through all attacks and will remove them as they die.*/
 public class AttackNode extends Node{
 	private var data:Attack;
 

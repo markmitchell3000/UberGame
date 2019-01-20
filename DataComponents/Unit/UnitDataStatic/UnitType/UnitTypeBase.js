@@ -14,21 +14,16 @@ public class UnitTypeBase extends UnitType{
         }
         return utb;
     }
-
-    //should only receive UMFWar not UnitModelFactory
-    public function getModelArr(umf: UMFWar){
-        return umf.getBaseModels();
-    }
     
-    /*Used to set the coordinates in the GBUnits created*/
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
-        gbUnit.yCoord=place.baseSpots[0]+place.yOffset;
-        gbUnit.xCoord=place.baseSpots[1]+place.xOffset;
+    /*Used to set the coordinates in the units created*/
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
+        unitData.curLoc.y=place.baseSpots[0]+place.yOffset;
+        unitData.curLoc.x=place.baseSpots[1]+place.xOffset;
         //width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable
-        placeTempObject(4,4,new Point(gbUnit.xCoord, gbUnit.yCoord), "base_holder", gb.getTempObjs());
+        placeTempObject(4,4,new Point(unitData.curLoc.x, unitData.curLoc.y), "base_holder", gb.getTempObjs());
         for(var kba=0;kba<4;kba++){
             for(var lba=0;lba<4;lba++){
-                grid[gbUnit.yCoord+kba, gbUnit.xCoord+lba]=TileTempObj.getTile();
+                grid[unitData.curLoc.y+kba, unitData.curLoc.x+lba]=TileTempObj.getTile();
             }
         }
     }

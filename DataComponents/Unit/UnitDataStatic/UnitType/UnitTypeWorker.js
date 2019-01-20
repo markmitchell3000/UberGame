@@ -13,16 +13,11 @@ public class UnitTypeWorker extends UnitType{
         return utw;
     }
 
-    //should only receive UMFCrowd not UnitModelFactory
-    public function getModelArr(umf: UMFCrowd){
-        return umf.getUnitModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
         var wrkTemp=place.workerSpots[untCnt.workerCnt];
-        gbUnit.yCoord=wrkTemp[0]+place.yOffset;
-        gbUnit.xCoord=wrkTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid());
+        unitData.curLoc.y=wrkTemp[0]+place.yOffset;
+        unitData.curLoc.x=wrkTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid(),gb.getGBSize());
         untCnt.workerCnt++;
     }
 

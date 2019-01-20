@@ -13,17 +13,12 @@ public class UnitTypeHunter extends UnitType{
         }
         return uth;
     }
-
-    //should only receive UMFCombat not UnitModelFactory
-    public function getModelArr(umf: UMFCombat){
-        return umf.getLtOrHunterModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
+    
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
         var hntTemp=place.hunterSpots[untCnt.hunterCnt];
-        gbUnit.yCoord=hntTemp[0]+place.yOffset;
-        gbUnit.xCoord=hntTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid);
+        unitData.curLoc.y=hntTemp[0]+place.yOffset;
+        unitData.curLoc.x=hntTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid,gb.getGBSize());
         untCnt.hunterCnt++;
     }
 

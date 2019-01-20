@@ -13,16 +13,11 @@ public class UnitTypeSoldier extends UnitType{
         return uts;
     }
 
-    //should only receive UMFCombat not UnitModelFactory
-    public function getModelArr(umf: UMFCombat){
-        return umf.getSoldierModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
         var sldTemp=place.soldierSpots[untCnt.soldierCnt];
-        gbUnit.yCoord=sldTemp[0]+place.yOffset;
-        gbUnit.xCoord=sldTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid);
+        unitData.curLoc.y=sldTemp[0]+place.yOffset;
+        unitData.curLoc.x=sldTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid,gb.getGBSize());
         untCnt.soldierCnt++;
     }
 

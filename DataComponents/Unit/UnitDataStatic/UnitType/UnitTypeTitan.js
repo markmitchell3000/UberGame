@@ -14,16 +14,11 @@ public class UnitTypeTitan extends UnitType{
         return utt;
     }
 
-    //should only receive UMFCombat not UnitModelFactory
-    public function getModelArr(umf: UMFCombat){
-        return umf.getTitanModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb:GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb:GameBoard){
         var titanTemp=place.titanSpots[untCnt.titanCnt];
-        gbUnit.yCoord=titanTemp[0]+place.yOffset;
-        gbUnit.xCoord=titanTemp[1]+place.xOffset;
-        safePlacement(gbUnit, gb.getGameGrid);
+        unitData.curLoc.y=titanTemp[0]+place.yOffset;
+        unitData.curLoc.x=titanTemp[1]+place.xOffset;
+        safePlacement(unitData, gb.getGameGrid,gb.getGBSize());
         untCnt.titanCnt++;
     }
 

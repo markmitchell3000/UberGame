@@ -28,6 +28,7 @@ public class UnitData{
     public var unitStats:UnitStats;//statistics/Data about units health, power etc.
 
     public function UnitData(ut:String,at:String,tm:String,st:String,lvl:int,idNum:int,name:String){
+        modelNum=-1;//Used as flag that random number hasn't been set
         unitType=ut;
         archetype=at;
         team=tm;
@@ -58,11 +59,14 @@ public class UnitData{
         stateCountDown=HashUnitABState.getValue(unitState).getTimer();
     }
 
-    /*Unit does not exist yet, it will need to select a model to create a unit*/
+    /*Unit does not exist yet, it will need to select a model to create a unit.
+    Instantiates a gameobject using data found in this class.  A unit is created
+    by pairing this with the gameobject.  Then the unit is added to the 
+    unitCollection with the hashid as the key for the unit value.*/
     public function instantiateUnit(tgm:TempGroupModel){
-        /*Instantiates a gameobject using data found in this class.  A unit is 
-        created by pairing this with the gameobject.  Then the unit is added to 
-        the unitCollection with the hashid as the key for the unit value.*/
+        if(modelNum==-1){
+            modelNum=Random.Range(0,tgm.getArrSize(unitType));//sets the model number
+        }
         var model:GameObject=(GameObject)tgm.getValue(unitType,modelNum);
         var unit:Unit=new Unit(this,model);
         unitCollection.getUC().addUnit(unit);//this will automatically use the hashid as the key 

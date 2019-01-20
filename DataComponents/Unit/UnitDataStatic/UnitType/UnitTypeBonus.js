@@ -14,19 +14,14 @@ public class UnitTypeBonus extends UnitType{
         return utb;
     }
 
-    //should only receive UMFWar not UnitModelFactory
-    public function getModelArr(umf: UMFWar){
-        return umf.getBonusModels();
-    }
-
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitCounter, gb: GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unitData:UnitData, untCnt:UnitCounter, gb: GameBoard){
         var bnsTemp=place.bonusSpots[unitCnt.bonusCnt];
-        gbUnit.yCoord=bnsTemp[0]+place.yOffset;
-        gbUnit.xCoord=bnsTemp[1]+place.xOffset;
+        unitData.curLoc.y=bnsTemp[0]+place.yOffset;
+        unitData.curLoc.x=bnsTemp[1]+place.xOffset;
         unitCnt.bonusCnt++;
         //width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable
-        placeTempObject(1,1,new Point(gbUnit.xCoord, gbUnit.yCoord), "bonus_holder", gb.getTempObjs());
-        grid[gbUnit.yCoord, gbUnit.xCoord]=TileTempObj.getTile();
+        placeTempObject(1,1,new Point(unitData.curLoc.x, unitData.curLoc.y), "bonus_holder", gb.getTempObjs());
+        grid[unitData.curLoc.y, unitData.curLoc.x]=TileTempObj.getTile();
     }
 
     public function logKill(ukf:UnitKillFacts){

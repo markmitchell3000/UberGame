@@ -41,6 +41,10 @@ public class GameBoard{
         return tempObjs;
     }
 
+    public function getGBSize(){
+        return gbSize;
+    }
+
     protected function initializeGround(){
         for(var i:int=0;i<sizeXY;i++){
             for(var j:int=0;j<sizeXY;j++){
@@ -66,17 +70,17 @@ public class GameBoard{
     }
 
     /*For the initial placement of units onto a gameboard. 
-    gbUnitNodes is the head list of GBUnits (provided by GBCollections), these 
+    UnitNodes is the head list of Units (provided by GBCollections), these 
     are used to instantiate real Units*/
-    protected function placeUnits(gbUnitNodes:GBUnitNode, struct:TeamStructure, quadrant:int){
+    protected function placeUnits(unitNodes:UnitNode, struct:TeamStructure, quadrant:int){
         var civOrZombTemp;
-        var gbUntCnt= new GBUnitTypeCounter();
+        var untCnt= new UnitTypeCounter();
         //Struct used to select type of placement
         var place:UnitPlacements=new UnitPlacements(quadrant);
-        curNode=gbUnitNodes;
+        curNode=unitNodes;
         while(curNode!=null){
             var tmpType: UnitType=curNode.getData().unitType;
-            tmpType.placeUnitByType(place, curNode.getData(), gameGrid, gbUntCnt, tempObjs);
+            tmpType.placeUnitByType(place, curNode.getData(), gameGrid, untCnt, tempObjs);
             //do stuff
             curNode=curNode.next;
         }
@@ -91,7 +95,7 @@ public class GameBoard{
     }
 
     /*For placing units according to there saved location*/
-    protected function placeUnits(gbUnitNodes:GBUnitNode){
+    protected function placeUnits(unitNodes:UnitNode){
         //todo
     }
 

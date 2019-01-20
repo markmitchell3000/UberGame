@@ -1,6 +1,11 @@
 public class ArchetypeHash{
     private static var ath:ArchetypeHash;
     public var archetypeTable:HashTable;
+    public var atList:String[]=["WindElemental","WaterElemental","StormBreaker",
+    "Sorcerer","SeaSentinel","Salamandar","Rogue","PoisonElemental","Nomad",
+    "MagicElemental","Knight","IceElemental","Golem","FireElemental",
+    "ElectricElemental","EarthElemental","DarkDweller","Brute","BladeElemental",
+    "Balanced","Assassin"];
 
     public function ArchetypeHash(){
         archetypeTable["WindElemental"]=new ArchetypeWindElemental();

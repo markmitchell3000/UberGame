@@ -107,7 +107,7 @@ public class UnitType{
 
     /*Abstract class implemented by each of the unittypes that handles how they 
     are placed on the gameboard*/
-    public function placeUnitByType(place:UnitPlacement, gbUnit:GBUnit, untCnt:GBUnitTypeCounter, gb:GameBoard){
+    public function placeUnitByType(place:UnitPlacement, unit:UnitData, untCnt:UnitTypeCounter, gb:GameBoard){
     }
 
     //used by any type that happens to be a building
@@ -125,18 +125,19 @@ public class UnitType{
     }
 
     //used by unit types to ensure that there placement is in a safe location
-    protected function safePlacement(gU: GBUnit, grid:GameGrid){
+    protected function safePlacement(uD: UnitData, grid:GameGrid, size:int){
+        var sizeXY:int=size;
         var cnt:int=0;
-        while(!grid.getSpot(new Point(gU.yCoord, gU.xCoord)).isPassable()){
+        while(!grid.getSpot(new Point(uD.curLoc.y, uD.curLoc.x)).isPassable()){
             var randY:int=Random.Range(-5,5);
             var randX:int=Random.Range(-5,5);
-            var validY:boolean=((gU.yCoord+randY)>0)&&((gU.yCoord+randY)<sizeXY-1);
-            var validX:boolean=((gU.xCoord+randX)>0)&&((gU.xCoord+randX)<sizeXY-1);
-            gU.yCoord= validY?(gU.yCoord+randY):gU.yCoord;
-            gU.xCoord= validX?(gU.xCoord+randX):gU.xCoord;
+            var validY:boolean=((uD.curLoc.y+randY)>0)&&((uD.curLoc.y+randY)<sizeXY-1);
+            var validX:boolean=((uD.curLoc.x+randX)>0)&&((uD.curLoc.x+randX)<sizeXY-1);
+            uD.curLoc.y= validY?(uD.curLoc.y+randY):uD.curLoc.y;
+            uD.curLoc.x= validX?(uD.curLoc.x+randX):uD.curLoc.x;
             cnt++;
             if(cnt>100){
-                Debug.Log("GBUnit should be removed");
+                Debug.Log("Unit should be removed");
             }
         }
     }

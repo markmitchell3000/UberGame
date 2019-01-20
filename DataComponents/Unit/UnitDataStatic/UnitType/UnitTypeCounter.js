@@ -1,7 +1,7 @@
 /*Class is a data store for the number of units of in each quadrant of the 
 gameboard.  This is used by the unitplacement class since particular counts of 
 towers etc are in particular locations*/
-public class GBUnitTypeCounter{
+public class UnitTypeCounter{
 	public var towerCnt:int=0;
 	public var bonusCnt:int=0;
     public var titanCnt:int=0;

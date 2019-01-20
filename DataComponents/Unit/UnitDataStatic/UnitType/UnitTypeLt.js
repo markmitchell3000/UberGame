@@ -1,9 +1,9 @@
 public class UnitTypeLt extends UnitType{
     private static var utl:UnitTypeLt;
 
-    public function UnitTypeLt(){
-        //basehealth=60,basemana=60,baseAttrange 8, pursueRange 15, isbld false
-        super(60,60,8.0,15.0,false,true);
+    public function UnitTypeLt(rnk:int,rng:int){
+        //basehealth=60,basemana=60,baseAttrange 8, pursueRange 3, isbld false
+        super(rnk,60,60,rng,false,true);
     }
 
     public static function getUT(){
@@ -23,6 +23,10 @@ public class UnitTypeLt extends UnitType{
         gbUnit.xCoord=ltTemp[1]+place.xOffset;
         safePlacement(gbUnit, gb.getGameGrid);
         untCnt.ltCnt++;
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        ukf.ltKills++;
     }
 
 }

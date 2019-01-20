@@ -18,29 +18,29 @@ public class UnitType{
     //set based on level and unittype bonues
     protected var baseHealth:int;
     protected var baseMana:int;
-    protected var baseAttRange:float;
-    protected var basePursueRange:float;//range beyond attack that unit will chase
+    protected var pursueRange:int;//Used by scan to determine if pursue state should occur
     protected var isBuilding:boolean;
     protected var respawns:boolean;//most units do not respawn
+    protected var rank:int;
     //protectec var isTank:boolean;//for objects that move and still have a turret, not yet supported
     protected var nextState:Hashtable;//current state is key, next state is value
 
     //called by extended classes which have unique values
-    public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
-        initHelper(bh,bm,bar,pr,isbld);
+    public function UnitType(rnk:int,bh:int,bm:int,pr:int,isbld:boolean){
+        initHelper(rnk,bh,bm,pr,isbld);
         respawns=false;
     }
 
-    public function UnitType(bh:int,bm:int,bar:float,pr:float,isbld:boolean,rs:boolean){
-        initHelper(bh,bm,bar,pr,isbld);
+    public function UnitType(rnk:int,bh:int,bm:int,pr:int,isbld:boolean,rs:boolean){
+        initHelper(rnk,bh,bm,pr,isbld);
         respawns=rs;
     }
 
-    private function initHelper(bh:int,bm:int,bar:float,pr:float,isbld:boolean){
+    private function initHelper(rnk:int,bh:int,bm:int,pr:int,isbld:boolean){
+        rank=rnk;
         baseHealth=bh;
         baseMana=bm;
-        baseAttRange=bar;
-        basePursueRange=pr;
+        pursueRange=pr;
         isBuilding=isbld;
         initNextState();
     }
@@ -75,6 +75,10 @@ public class UnitType{
     public function getModelArr(umf: UnitModelFactory){
 
     }
+
+    public function getRank(){
+        return rank;
+    }
     
     //set by extended class
     public function getMaxHealth(lvl:int){
@@ -86,15 +90,10 @@ public class UnitType{
     	//return maxMana;
         return baseMana*(1+(0.1*lvl));
     }
-    //set by extended class, arbonus is the base bonus i believe
-    public function getAttackRange(arbonus:float){
-    	//return attRange;
-        return baseAttRange+arbonus;
-    }
+
     //set by extended class
     public function getPursueRange(){
-    	//return pursueRange;
-        return baseAttRange+basePursueRange;
+        return pursueRange;
     }
     //set by extended class
     public function isBuilding(){
@@ -151,6 +150,10 @@ public class UnitType{
         else{
             return "Idle";
         }
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        //abstract function used by extended classes
     }
 }
 

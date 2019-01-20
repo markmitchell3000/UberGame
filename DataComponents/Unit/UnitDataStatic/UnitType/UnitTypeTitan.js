@@ -1,9 +1,9 @@
 public class UnitTypeTitan extends UnitType{
     private static var utt:UnitTypeTitan;
 
-    public function UnitTypeTitan(){
-        //basehealth=240,basemana=240,baseAttrange 20, pursuerange 20, isbld false
-        super(240,240,20.0,20.0,false);
+    public function UnitTypeTitan(rnk:int,rng:int){
+        //basehealth=240,basemana=240,, isbld false
+        super(rnk,240,240,rng,false);
         super.overrideNextState("Scan", "Idle");//unit may select to walk if unit is away from base
     }
 
@@ -27,4 +27,7 @@ public class UnitTypeTitan extends UnitType{
         untCnt.titanCnt++;
     }
 
+    public function logKill(ukf:UnitKillFacts){
+        ukf.titanKills++;
+    }
 }

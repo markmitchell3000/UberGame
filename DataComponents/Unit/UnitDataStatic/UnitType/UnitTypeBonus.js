@@ -1,9 +1,9 @@
 public class UnitTypeBonus extends UnitType{
     private static var utb:UnitTypeBonus;
 
-    public function UnitTypeBonus(){
-        //basehealth=500,basemana=500,baseAttrange 20
-        super(500,500,20.0,0.0,true,true);
+    public function UnitTypeBonus(rnk:int,rng:int){
+        //basehealth=500,basemana=500
+        super(rnk,500,500,rng,true,true);
         super.overrideNextState("Scan","Idle");
     }
 
@@ -27,6 +27,10 @@ public class UnitTypeBonus extends UnitType{
         //width:int, height:int, pnt:Point, model:String, tempObjs:Hashtable
         placeTempObject(1,1,new Point(gbUnit.xCoord, gbUnit.yCoord), "bonus_holder", gb.getTempObjs());
         grid[gbUnit.yCoord, gbUnit.xCoord]=TileTempObj.getTile();
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        ukf.bonusKills++;
     }
 
 }

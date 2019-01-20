@@ -6,6 +6,34 @@ public class UnitStats extends BaseStats{
     public var curHealth: int;
 	public var curMana: int;	
 	public var xp: int;
-	public var nextLevelXP: int;
+	public var nextLevelXP: int;//some function based on the current level
 	public var wealth: int;
+
+	public function UnitStats(archetype:Archetype,unitType:UnitType,lvl:int){
+        powerLevel=lvl;
+        updateNextLevelXp();
+        rank=unitType.getRank();
+        super(archetype,unitType,lvl+rank);
+        super.setHPandMana(unitType,lvl+rank);
+        curHealth=super.health;
+        curMana=super.mana;
+	}
+
+    public function addXP(xpNum: int){
+        xp +=xpNum;
+        updateUnit();
+    }
+
+    public function updateUnit(){       
+      if(xp>nextLevelXP){
+        powerLevel++;
+        //update other stats make bonus stats for hero etc.
+        xp-=nextLevelXP;
+        updateNextLevelXp();
+      }
+    }
+
+	public function updateNextLevelXp(){
+        nextLevelXP = ((((powerLevel+1)*powerLevel)/2)*1000);
+    }
 }

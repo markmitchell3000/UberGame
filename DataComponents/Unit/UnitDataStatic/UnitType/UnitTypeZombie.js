@@ -1,9 +1,9 @@
 public class UnitTypeZombie extends UnitType{
     private static var utz:UnitTypeZombie;
 
-    public function UnitTypeZombie(){
-        //basehealth=40,basemana=40,baseAttrange 5, pursuerange 10, isbld false
-        super(40,40,5.0,10.0,false);
+    public function UnitTypeZombie(rnk:int,rng:int){
+        //basehealth=40,basemana=40, rng, isbld false
+        super(rnk,40,40,rng,false);
     }
 
     public static function getUT(){
@@ -24,5 +24,9 @@ public class UnitTypeZombie extends UnitType{
         gbUnit.xCoord=civZomTemp[1]+place.xOffset;
         safePlacement(gbUnit, gb.getGameGrid());
         untCnt.civOrZombCnt++;
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        ukf.zombieKills++;
     }
 }

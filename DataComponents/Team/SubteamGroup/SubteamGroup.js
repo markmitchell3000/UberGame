@@ -1,20 +1,29 @@
 public class SubteamGroup{
     public var groupId:int;
     public var powerLevel:int =1;
-    public var size:int=0;//when brought down to 0 group can be removed.
-    public var groupName:String;//subteam
+    public var isDestroyed:boolean;/*Group could have no units or no respawn 
+    locations left, then group is defeated*/
+
     public var mapType: String;//maybe pulled from teamStructure
-    public var modelStringFolder:String;//helps build reference for the Units, Units track the number that the are 
+    public var modelStringFolder:String;/*helps build reference for the Units, 
+    Units track the number that the are*/ 
     public var teamName:String;//Holds parent team name
-    private var units:UnitNode;//holds UnitData rather than units(which include models), id is key and unit is value.
+    public var groupName:String;//subteam
+
+    private var units:UnitNode;/*holds UnitData rather than units(which include 
+    models), id is key and unit is value.*/
+    private var idCnt:int;/* global because some groups spawn more units than 
+    the genesis spawn.  In order to keep hashids unique this number must persist*/
+    public var powerLevel:int;
 
     public function SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard){
         powerLevel=lvl;//in all cases except arena and mission, teams level is used, otherwise a level relative to the player.
-        units=new UnitNode();// new GBUnitCollection();
+        units=new UnitNode();
         teamName=tStr.getTeam();
         groupName=tStr.getSubTeam();
         modelStringFolder=tStr.getFilePath();
         groupId=grpId;
+        idCnt=0;//initialize count before units start being made
         generateUnits(ts, quadrant,gb);
     }
     
@@ -29,10 +38,11 @@ public class SubteamGroup{
         var mapType = teamStruct.getTSType();
         var idCnt:int=0;
         var up:UnitPlacement = teamStruct.getUnitPlacement(quadrant);
-        var untCnt:GBUnitTypeCounter = new GBUnitTypeCounter();
+        var untCnt:UnitTypeCounter = new UnitTypeCounter();
+        var nameGame =new RandomNameGenerator();
         //iterates through unit type counts
         var types= new UnitType[11];
-        //unit types need to be made
+        //unit types need to be made, ordering may be altered later
         types[0]= UnitTypeBase.getUT();
         types[1]= UnitTypeTower.getUT();
         types[2]= UnitTypeBonus.getUT();
@@ -44,36 +54,27 @@ public class SubteamGroup{
         types[8]= UnitTypeCivilian.getUT();
         types[9]= UnitTypeZombie.getUT();
         types[10]= UnitTypeWorker.getUT();
+
         for(var pos=0;pos<11;pos++){
             var spotCnt=cntList[pos];
             for(var uCnt=0;uCnt<spotCnt;uCnt++){
-                var tempUnit:GBUnit=new GBUnit();
-                tempUnit.unitType=types[pos];
-                tempUnit.unitType.placeUnitByType(up,tempUnit,unCnt, gb);
+                var unitName:String="";
                 if(pos>2){
-                    tempUnit.unitName= nameGame.createNewName();
+                    unitName= nameGame.createNewName();
                 }
                 else{
-                    tempUnit.unitName=groupName+" Structure "+idCnt;
+                    unitName=groupName+" Structure "+idCnt;
                 }
-                tempUnit.unitID=idCnt;
-                //future plans may set archetype to something here.
+                var utStr:String=UnitTypeHash.getUTString[((UnitType)types[pos]).getRank()]
+                var atStr:String=ArchetypeHash.getRandomString();//returns an archetype string
+                var tempUnit:UnitData=new UnitData(utStr,atStr,teamName,groupName,powerLevel,idCnt,unitName);
+                ((UnitType)types[pos]).placeUnitByType(up,tempUnit,unCnt, gb);
                 units.addUnit(tempUnit);
                 idCnt++;
             }
 
         }
 
-    }
-
-    protected function addId(){
-        var cnt:int=1;
-        var cur:GBUnitNode=units.getListHead();
-        while(cur!=null){
-            GBUnitNode.getData().unitID=cnt;
-            cnt++;
-            cur=cur.next;
-        }
     }
 
     /*this will create all gameobjects which in turn pair unitdata and 

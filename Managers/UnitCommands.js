@@ -15,36 +15,8 @@ public class UnitCommands{
             unitFacts.strongestFoeLevel=level;
             unitFacts.strongestFoeRank=rank;
         }
-        /*0-civilian, 1- worker, 2-zombie, 3-soldier, 4-lt or hunter, 
-        5- guardian, 6- tower, 7- titan, 8- base, maybe switch isn't the best*/
-        switch(rank){
-            case 0:
-                unitFacts.civilianKills++;
-                break;
-            case 1:
-                unitFacts.workerKills++;
-                break;
-            case 2:
-                unitFacts.zombieKills++;
-                break;
-            case 3:
-                unitFacts.soldierKills++;
-                break;
-            case 4:
-                unitFacts.ltHunterKills++;
-                break;
-            case 5:
-                unitFacts.guardianKills++;
-                break;
-            case 6:
-                unitFacts.towerKills++;
-                break;
-            case 7:
-                unitFacts.titanKills++;
-                break;
-            case 8:
-                unitFacts.baseKills++;
-                break;
-        }
+        /*0-civilian, 1- worker, 2-zombie, 3-soldier, 4-lt,5- hunter, 6- bonus
+        7- guardian, 8- tower, 9- titan, 10- base,*/
+        UnitTypeHash.getValue(rank).logKill(unitFacts);//logs kill based on enemy unit type
 	}
 }

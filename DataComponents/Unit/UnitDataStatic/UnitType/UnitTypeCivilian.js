@@ -1,9 +1,9 @@
 public class UnitTypeCivilian extends UnitType{
 	private static var utc:UnitTypeCivilian;
 
-    public function UnitTypeCivilain(){
-        //basehealth=20,basemana=20,baseAttrange 5, pursuerange 5, isbld false
-        super(20,20,5.0,5.0,false);
+    public function UnitTypeCivilain(rnk:int,rng:int){
+        //basehealth=20,basemana=20, isbld false
+        super(rnk,20,20,rng,false);
     }
 
     public static function getUT(){
@@ -24,6 +24,10 @@ public class UnitTypeCivilian extends UnitType{
         gbUnit.xCoord=civZomTemp[1]+place.xOffset;
         safePlacement(gbUnit, gb,getGameGrid());
         untCnt.civOrZombCnt++;
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        ukf.civilianKills++;
     }
 
 }

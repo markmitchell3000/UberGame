@@ -1,9 +1,9 @@
 public class UnitTypeTower extends UnitType{
     private static var utt:UnitTypeTower;
 
-    public function UnitTypeTower(){
+    public function UnitTypeTower(rnk:int,rng:int){
         //basehealth=1500,basemana=1500,baseAttrange 20, pursuerange 0, isbld true
-        super(1500,1500,20.0,0.0,true);
+        super(rnk,1500,1500,rng,true);
         super.overrideNextState("Scan","Idle");
     }
 
@@ -31,6 +31,10 @@ public class UnitTypeTower extends UnitType{
                 grid[gbUnit.yCoord+kto, gbUnit.xCoord+lto]=TileTempObj.getTile();
             }
         }
+    }
+
+    public function logKill(ukf:UnitKillFacts){
+        ukf.towerKills++;
     }
 
 }

@@ -1,9 +1,9 @@
 public class UnitTypeWorker extends UnitType{
     private static var utw:UnitTypeWorker;
 
-    public function UnitTypeWorker(){
-        //basehealth=30,basemana=30,baseAttrange 5, pursuerange 8, isbld false
-        super(30,30,5.0,8.0,false);
+    public function UnitTypeWorker(rnk:int,rng:int){
+        //basehealth=30,basemana=30,baseAttrange 5, rng, isbld false
+        super(rnk,30,30,rng,false);
     }
 
     public static function getUT(){
@@ -26,4 +26,7 @@ public class UnitTypeWorker extends UnitType{
         untCnt.workerCnt++;
     }
 
+    public function logKill(ukf:UnitKillFacts){
+        ukf.workerKills++;
+    }
 }

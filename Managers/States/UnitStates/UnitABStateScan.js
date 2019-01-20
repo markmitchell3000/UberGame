@@ -18,14 +18,14 @@ public class UnitABStateScan extends UnitABState{
     on which is the larger range.*/
     private function scan(unit:Unit){}
         //queries the grid hash table with a preset range of 1,2,3, or maybe 4 
-        //Ontop of the unit (0) is 3x3, 1 is 5x5, 2 is 7x7, 3 is 9x9
+        //Ontop of the unit (0) is 3x3, 1 is 5x5, 2 is 7x7, 3 is 9x9,4 is 11x11
 	    var unitLocHash :UnitLocation= UnitLocation.getUnitLocHash();
 	    unitLocHash.updateLoc(unit);//maybe this should only be called when moving
 	    var centerArr=unitLocHash.getUnitLoc(unitHash);
 	    /*check center, loop around the first value in array automatically 
 	    assume x+1,y - x, y+1, and x+1, y+1*/
-        var attRange:int = unit.unitData.attackCooldowns.selectAttack(unit.unitData.archetype);
-        var pursueRange:int = getAttackRange(unit);
+        var attRange:string = getAttackRange(unit);
+        var pursueRange:int = getPursueRange(unit);
         var maxRange:int;
         if(attRange>pursueRange){maxRange=attRange;}
         else{maxRange=pursueRange;}
@@ -74,8 +74,8 @@ public class UnitABStateScan extends UnitABState{
     }
 
     private function getAttackRange(unit:Unit){
-        var archString:Archetype= ArchetypeHash.getValue(unit.unitData.archetype);
-        var attPref:String=Archetype.attackPref;
+        var arch:Archetype= ArchetypeHash.getValue(unit.unitData.archetype);
+        var attPref:String=arch.attackPref;
         var attackStr:String=unit.unitData.attackCooldowns.selectAttack(attPref);
         if(attackStr!="None"){
             var attType:UnitAttackType=(UnitAttackType)UAHash.getValue(attackStr);
@@ -84,6 +84,11 @@ public class UnitABStateScan extends UnitABState{
         else{
             return 0;
         }
+    }
+
+    private function getPursueRange(unit:Unit){
+        var ut:UnitType= (UnitType)UnitTypeHash.getValue(unit.unitData.unitType);
+        return ut.getPursueRange();
     }
     
     /*Given an array of hashids, grab the first Uses hashid to retrieve 

@@ -18,7 +18,7 @@ public class UnitData{
     public var modelNum:int;//Used to load models
     public var portraitString:String;//used for portrait selection
 
-    public var pursueRange:int; //max, as the crow flies, distance that unit will pursue
+    //public var pursueRange:int; //max, as the crow flies, distance that unit will pursue
 
     public var traits:UnitTraitCollection;//make trait hashtable object that can output damage and possibly lingering effects.
     public var attackCooldowns:UnitAttackCooldowns;//class subtracts delta time from all cooldown values > 0, new attacks reset cooldown
@@ -27,14 +27,16 @@ public class UnitData{
     public var wornItems:Item[];//on unit, able to give them stat/trait boosts
     public var unitStats:UnitStats;//statistics/Data about units health, power etc.
 
-    public function UnitData(ut:String,at:String,tm:String,st:String,lvl:int){
+    public function UnitData(ut:String,at:String,tm:String,st:String,lvl:int,idNum:int,name:String){
         unitType=ut;
         archetype=at;
         team=tm;
         subTeam=st;
-        //lvl is passed to stat creation
+        id=idNum;
+        unitName=name;
+        hashid=unitName+((String)id);//maybe add subteam to avoid collisions
         traits=new UnitTraitCollection(archetype,lvl:int);
-        //do more stuff to populate stats
+        populateStats(lvl);
     }
 
     /*Player data should override this*/
@@ -56,7 +58,7 @@ public class UnitData{
         stateCountDown=HashUnitABState.getValue(unitState).getTimer();
     }
 
-    /*Unit does not exist yet*/
+    /*Unit does not exist yet, it will need to select a model to create a unit*/
     public function instantiateUnit(tgm:TempGroupModel){
         /*Instantiates a gameobject using data found in this class.  A unit is 
         created by pairing this with the gameobject.  Then the unit is added to 
@@ -73,25 +75,9 @@ public class UnitData{
         ((Unit)UnitCollection.getUC().getUnit(hashid)).spawnModel(model);
     }
 
+    private function populateStats(lvl:int){
+        unitStats=new UnitStats(archetype,unitType,lvl);
+    }
+
 }
 
-/*
-    public function addXP(xpNum: int){
-        xp +=xpNum;
-        updateHero();
-    }
-
-    public function updateHero(){       
-      if(xp>nextLevelXP){
-        powerLevel++;
-        //update other stats make bonus stats for hero etc.
-        xp-=nextLevelXP;
-        updateNextLevelXp();
-      }
-    }*/
-
-    /*
-        public function updateNextLevelXp(){
-        nextLevelXP = ((((powerLevel+1)*powerLevel)/2)*1000);
-    }
-    */

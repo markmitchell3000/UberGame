@@ -1,10 +1,10 @@
 public class UnitTypeBase extends UnitType{
     private static var utb:UnitTypeBase;
 
-    public function UnitTypeBase(){
+    public function UnitTypeBase(rnk:int,rng:int){
 
-        //basehealth=3000,basemana=3000,baseAttrange 20
-        super(3000,3000,20.0,0.0,true);
+        //basehealth=3000,basemana=3000
+        super(rnk,3000,3000,rng,true);
         super.overrideNextState("Scan","Idle");
     }
 
@@ -33,4 +33,7 @@ public class UnitTypeBase extends UnitType{
         }
     }
 
+    public function logKill(ukf:UnitKillFacts){
+        ukf.baseKills++;
+    }
 }

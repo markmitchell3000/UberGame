@@ -1,9 +1,9 @@
 public class UnitTypeSoldier extends UnitType{
     private static var uts:UnitTypeSoldier;
 
-    public function UnitTypeSoldier(){
+    public function UnitTypeSoldier(rnk:int,rng:int){
         //basehealth=20,basemana=20,baseAttrange 5, pursuerange 5, isbld false
-        super(40,40,5.0,10.0,false);
+        super(rnk,40,40,rng,false);
     }
 
     public static function getUT(){
@@ -26,4 +26,7 @@ public class UnitTypeSoldier extends UnitType{
         untCnt.soldierCnt++;
     }
 
+    public function logKill(ukf:UnitKillFacts){
+        ukf.soldierKills++;
+    }
 }

@@ -95,30 +95,31 @@ public class GameBoardWorldMap extends GameBoard{
 
     private function generateQuadrantsUnits(){
         //chance of units in 16 quadrants
+        /*
         var idNum:int=0;
         var lvl=dm.getPlayerData().powerLevel;//number is the playes level, used for relative challenges
         for(var i=0;i<quadrantSize;i++){
             var temp= Random.Range(0,10);// 50/50 for now
             if(temp<2){
-                var civ= new GBGroup(false, lvl, "civilians");
+                var civ= new SubteamGroupNode(false, lvl, "civilians");//SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard)
                 civ.teamName=TEAM_NAME.CIVILIAN_GROUP;
                 civ.groupId=idNum;
                 idNum++;
                 civ.groupName="civilians";
                 civ.setStringFolder(" ");
                 placeUnits(civ.generateUnits(), TeamStructureCivilian, i);
-                gbGroups.Add(civ);
+                super.addGroup(civ);
             }
             else if(temp<4){
-                var zom= new GBGroup(TeamStructureZombie, false, lvl);
+                var zom= new SubteamGroup(TeamStructureZombie, false, lvl);//SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard)
                 zom.teamName=TEAM_NAME.ZOMBIE_GROUP;
                 zom.groupId=idNum;
                 idNum++;
                 zom.groupName="zombies";
                 zom.setStringFolder(" ");
                 placeUnits(zom.generateUnits(), TeamStructureZombie, i);
-                gbGroups.Add(zom);
+                super.addGroup(zom);
             }
-        }
+        }*/
     }
 }

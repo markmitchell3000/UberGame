@@ -108,7 +108,7 @@ public class GameBoard{
         return groupListHead;
     }
 
-    public function addGBGroup(group: SubteamGroup){
+    public function addGroup(group: SubteamGroup){
         var tempNode:SubteamGroupNode= new SubteamGroupNode(group);
         tempNode.insertNext(groupListHead);
         groupListHead.insertLast(tempNode);

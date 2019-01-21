@@ -4,8 +4,8 @@ public class SectionBuilderWorkers extends SectionBuilder{
     private static var secBld:SectionBuilderWorkers;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int,gb: GameBoard){
-        var gp= new GBGroup(lvl, getSubteam(), groupID,ts, quadrant, gb);
-        return gp;//GBGroups are added to a collection
+        var gp= new SubteamGroup(lvl, getSubteam(), groupID,ts, quadrant, gb);
+        return gp;//SubteamGroups are added to a collection
     }
 
     /*randomly selects a team name from a list of teams, these are 

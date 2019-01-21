@@ -4,8 +4,8 @@ public class SectionBuilderCivilians extends SectionBuilder{
 	private static var secBld:SectionBuilderCivilians;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int,gb: GameBoard){
-        var civ= new GBGroup(lvl, getCivSubteam(), groupID,ts, quadrant, gb);
-        return civ;//GBGroups are added to a collection
+        var civ= new SubteamGroup(lvl, getCivSubteam(), groupID,ts, quadrant, gb);
+        return civ;//SubteamGroups are added to a collection
     }
 
     /*randomly selects a team name from a list of civilian teams, these are 

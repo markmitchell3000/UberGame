@@ -8,11 +8,12 @@ public class GameBoardWar extends GameBoard{
     private function warLayout(){
         //war scenes should get enemies and allies assigned by owners of territory and those adjacent
         //temporary team assignment
+        /*
         var pO:ProceduralObjects=new ProceduralObjects(this, true);
         pO.placeOutsideObjects();
         var lvl=dm.getPlayerData().powerLevel;
-        var enemy= new GBGroup(TEAM_STRUCTURE.SINGLE_LANE, false, lvl);
-        var ally= new GBGroup(TEAM_STRUCTURE.SINGLE_LANE, false, lvl);
+        var enemy= new SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard);
+        var ally= new SubteamGroup(lvl:int, tStr:TeamString, grpId:int,ts:TeamStructure, quadrant:int, gb:GameBoard);
         enemy.teamName=dm.getMapData().natR.pickTeam(true);//in future this will depend on world map data
         enemy.groupId=0;
         enemy.groupName=(dm.getMapData().natR.teamNameToString(enemy.teamName));//useful when main team is selected
@@ -26,8 +27,8 @@ public class GameBoardWar extends GameBoard{
         //quadrant 10 is the southwest corner
         placeUnits(ally.generateUnits(), TEAM_STRUCTURE.SINGLE_LANE, 10);
         //next place units 
-        gbGroups.Add(enemy);
-        gbGroups.Add(ally);
+        super.addGroup(enemy);
+        super.addGroup(ally);*/
 
     }
 }

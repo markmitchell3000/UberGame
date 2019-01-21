@@ -5,15 +5,15 @@ public class SectionBuilderPantheon extends SectionBuilder{
     private static var secBld:SectionBuilderPantheon;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var pa:GBGroup;
+        var pa:SubteamGroup;
         if(ts.getIsWar){
-            pa= new GBGroup(lvl, getPantheonMainTeam(), groupID,ts, quadrant, gb);
+            pa= new SubteamGroup(lvl, getPantheonMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            pa= new GBGroup(lvl, getPantheonSubteam(), groupID,ts,quadrant, gb);
+            pa= new SubteamGroup(lvl, getPantheonSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return pa;//GBGroups are added to a collection
+        return pa;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

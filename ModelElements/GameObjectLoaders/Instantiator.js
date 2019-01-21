@@ -72,12 +72,13 @@ public class Instantiator extends MonoBehaviour{
 	    }
 	    playerObj.transform.position.y = yPos;
 		//place units
-		for(var gId=0;gId<gB.gbGroups.Count;gId++){
-	        loadUnitModels(gB.gbGroups.Item[gId]);
+		//linked list now, so fix this maybe
+		for(var gId=0;gId<gB.groupListHead.Count;gId++){
+	        loadUnitModels(gB.groupListHead.Item[gId]);
 	    }
 	}
 
-	private function loadUnitModels(gp:GBGroup){
-		gp.teamStruct.LoadUnits(gp);
+	private function loadUnitModels(sg:SubteamGroup){
+		sg.teamStruct.LoadUnits(sg);
 	}
 }

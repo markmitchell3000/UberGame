@@ -10,18 +10,18 @@ public class Mission{
     public var objToDestroy= new ArrayList();/*If Objects are a goal this is filled with ids, 
     the hashtable for temp objs in game board are queried to see if they have been destoyed.*/
 
-    public var destroyEnemies:boolean=false;/*if true group ids are used to query the gbgroups 
+    public var destroyEnemies:boolean=false;/*if true group ids are used to query the subteamgroups 
     hashtable and check if groups have size 0 or have been removed.*/
     public var enemyGroupNames=new ArrayList();
-    public var groupsToDestroy=new ArrayList();//list of group ids used by gbgroups hashtable.
+    public var groupsToDestroy=new ArrayList();//list of group ids used by subteamgroups hashtable.
 
     public var protectObj:boolean=false;//if true a list of object ids are kept to protect.
     public var objToProtect=new ArrayList();//ids of objects to protect, if empty mission is faied.
 
-    public var protectAllies:boolean=false;/*if true group ids are used to query the gbgroups 
+    public var protectAllies:boolean=false;/*if true group ids are used to query the subteamgroups 
     hashtable and check if groups have size 0 or have been removed.  Allies can be civilians as well.*/
     public var allyGroupNames=new ArrayList();
-    public var groupsToProtect=new ArrayList();//list of group ids used by gbgroups hashtable.
+    public var groupsToProtect=new ArrayList();//list of group ids used by subteamgroups hashtable.
 
     public var childCnt:int=0;/*there is a 50% chance this mission has no child mission, 30% chance 
     it has 1 child and a 20% chance it has 2 child missions. The number of children is used for when the 

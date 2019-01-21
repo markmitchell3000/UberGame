@@ -4,8 +4,8 @@ public class SectionBuilderZombies extends SectionBuilder{
     private static var secBld:SectionBuilderZombies;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int,gb: GameBoard){
-        var zom= new GBGroup(lvl, getZombieSubteam(), groupID,ts, quadrant, gb);
-        return zom;//GBGroups are added to a collection
+        var zom= new SubteamGroup(lvl, getZombieSubteam(), groupID,ts, quadrant, gb);
+        return zom;//SubteamGroups are added to a collection
     }
 
     /*randomly selects a team name from a list of zombie teams, these are 

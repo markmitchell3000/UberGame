@@ -5,15 +5,15 @@ public class SectionBuilderSentaiClan extends SectionBuilder{
     private static var secBld:SectionBuilderSentaiClan;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var sc:GBGroup;
+        var sc:SubteamGroup;
         if(ts.getIsWar){
-            sc= new GBGroup(lvl, getSentaiClanMainTeam(), groupID,ts, quadrant, gb);
+            sc= new SubteamGroup(lvl, getSentaiClanMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            sc= new GBGroup(lvl, getSentaiClanSubteam(), groupID,ts,quadrant, gb);
+            sc= new SubteamGroup(lvl, getSentaiClanSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return sc;//GBGroups are added to a collection
+        return sc;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

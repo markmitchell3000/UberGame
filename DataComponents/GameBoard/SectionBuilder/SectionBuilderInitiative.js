@@ -5,15 +5,15 @@ public class SectionBuilderInitiative extends SectionBuilder{
     private static var secBld:SectionBuilderInitiative;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var in:GBGroup;
+        var in:SubteamGroup;
         if(ts.getIsWar){
-            in= new GBGroup(lvl, getInitiativeMainTeam(), groupID,ts, quadrant, gb);
+            in= new SubteamGroup(lvl, getInitiativeMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            in= new GBGroup(lvl, getInitiativeSubteam(), groupID,ts,quadrant, gb);
+            in= new SubteamGroup(lvl, getInitiativeSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return in;//GBGroups are added to a collection
+        return in;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

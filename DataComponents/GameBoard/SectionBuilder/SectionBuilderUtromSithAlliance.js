@@ -5,15 +5,15 @@ public class SectionBuilderUtromSithAlliance extends SectionBuilder{
     private static var secBld:SectionBuilderUtromSithAlliance;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var gp:GBGroup;
+        var gp:SubteamGroup;
         if(ts.getIsWar){
-            gp= new GBGroup(lvl, getMainTeam(), groupID,ts, quadrant, gb);
+            gp= new SubteamGroup(lvl, getMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            gp= new GBGroup(lvl, getSubteam(), groupID,ts,quadrant, gb);
+            gp= new SubteamGroup(lvl, getSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return gp;//GBGroups are added to a collection
+        return gp;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

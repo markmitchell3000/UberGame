@@ -5,15 +5,15 @@ public class SectionBuilderShadowEmpire extends SectionBuilder{
     private static var secBld:SectionBuilderShadowEmpire;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var se:GBGroup;
+        var se:SubteamGroup;
         if(ts.getIsWar){
-            se= new GBGroup(lvl, getShadowEmpireMainTeam(), groupID,ts, quadrant, gb);
+            se= new SubteamGroup(lvl, getShadowEmpireMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            se= new GBGroup(lvl, getShadowEmpireSubteam(), groupID,ts,quadrant, gb);
+            se= new SubteamGroup(lvl, getShadowEmpireSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return se;//GBGroups are added to a collection
+        return se;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

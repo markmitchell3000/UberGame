@@ -5,15 +5,15 @@ public class SectionBuilderEternianRepublic extends SectionBuilder{
     private static var secBld:SectionBuilderEternianRepublic;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var er:GBGroup;
+        var er:SubteamGroup;
         if(ts.getIsWar){
-            er= new GBGroup(lvl, getEternianMainTeam(), groupID,ts, quadrant, gb);
+            er= new SubteamGroup(lvl, getEternianMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            er= new GBGroup(lvl, getEternianSubteam(), groupID,ts,quadrant, gb);
+            er= new SubteamGroup(lvl, getEternianSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return er;//GBGroups are added to a collection
+        return er;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

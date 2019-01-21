@@ -5,15 +5,15 @@ public class SectionBuilderNightHorde extends SectionBuilder{
     private static var secBld:SectionBuilderNightHorde;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var nh:GBGroup;
+        var nh:SubteamGroup;
         if(ts.getIsWar){
-            nh= new GBGroup(lvl, getNightHordeMainTeam(), groupID,ts, quadrant, gb);
+            nh= new SubteamGroup(lvl, getNightHordeMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            nh= new GBGroup(lvl, getNightHordeSubteam(), groupID,ts,quadrant, gb);
+            nh= new SubteamGroup(lvl, getNightHordeSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return nh;//GBGroups are added to a collection
+        return nh;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

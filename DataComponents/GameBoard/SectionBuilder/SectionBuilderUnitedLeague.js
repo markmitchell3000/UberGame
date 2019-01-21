@@ -5,15 +5,15 @@ public class SectionBuilderUnitedLeague extends SectionBuilder{
     private static var secBld:SectionBuilderUnitedLeague;
 
     public function generateAndPlace(ts:TeamStructure, quadrant:int, groupID:int, gb: GameBoard){
-        var ul:GBGroup;
+        var ul:SubteamGroup;
         if(ts.getIsWar){
-            ul= new GBGroup(lvl, getUnitedLeagueMainTeam(), groupID,ts, quadrant, gb);
+            ul= new SubteamGroup(lvl, getUnitedLeagueMainTeam(), groupID,ts, quadrant, gb);
         }
         else{
-            ul= new GBGroup(lvl, getUnitedLeagueSubteam(), groupID,ts,quadrant, gb);
+            ul= new SubteamGroup(lvl, getUnitedLeagueSubteam(), groupID,ts,quadrant, gb);
         }
         
-        return ul;//GBGroups are added to a collection
+        return ul;//SubteamGroups are added to a collection
     }
 
     /*Currently this grabs a single path and name for the core team, however 

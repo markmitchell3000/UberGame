@@ -1,3 +1,6 @@
+/*Game board uses three kinds of objects: 1 - groups (which have units), 
+2 - objects (which take up space and can block movement), 3 - grid (made of 
+tile types)*/
 public class GameBoard{
     /*create or loads SubteamGroup these manage unit data and is used to create 
     units (the pairing of unit data and unit models). The models move which 
@@ -14,8 +17,8 @@ public class GameBoard{
     tiles will not have a corresponding hash value.  For example only the bottom 
     left corner will reference a 8X8 building and the other spaces will have no 
     value.*/
-	protected var staticObjs:Hashtable= new Hashtable();
-    protected var tempObjs:Hashtable= new Hashtable();
+	protected var objTable:Hashtable= new Hashtable();//events may remove specific objects
+    //protected var tempObjs:Hashtable= new Hashtable();//Move to making these a different class of units
     protected var gbSize:int;//Gameboards are square so this is the height and width
     protected var quadrantSize:int;
      
@@ -37,8 +40,9 @@ public class GameBoard{
         return gameGrid;
     }
 
-    public function getTempObjs(){
-        return tempObjs;
+    /*Maybe methods should be add, remove and check*/
+    public function getObjTable(){
+        return objTable;
     }
 
     public function getGBSize(){
@@ -85,8 +89,24 @@ public class GameBoard{
             curNode=curNode.next;
         }
     }
+
+    /*Creates the instance of the grid, objects and the units on the board*/
+    public function createRuntimeGB(){
+        instantiateGrid();
+        instantiateObjs();
+        instantiateUnits();
+    }
     
-    protected function instantiateUnits(){
+    protected function instantiateGrid(){
+
+    }
+
+    protected function instantiateObjs(){
+
+    }
+
+    /*Creates all units a group at a time. Called after grid is made */
+    private function instantiateUnits(){
         var tempNode:SubteamGroupNode=groupListHead;
         while(tempNode!=null){
             tempNode.getData().instantiateUnits();
@@ -94,10 +114,7 @@ public class GameBoard{
         }
     }
 
-    /*For placing units according to there saved location*/
-    protected function placeUnits(unitNodes:UnitNode){
-        //todo
-    }
+
 
     //abstract function extended by child classes.
     protected function generateQuadrantsUnits(){
@@ -116,10 +133,10 @@ public class GameBoard{
         
     }
 
-    public function updateGroups(){
+    public function updateGroups(time:float){
         var tempNode:SubteamGroupNode=groupListHead;
         while(tempNode!=null){
-            tempNode.getData().updateUnits();
+            tempNode.getData().updateUnits(time);
             tempNode=(SubteamGroupNode)tempNode.next;
         }
     }

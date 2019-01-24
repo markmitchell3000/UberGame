@@ -6,7 +6,8 @@ function Awake(){
 }
 
 function update(){
-	game.gm.updateGame();
+	var time:float=Time.deltaTime;
+	game.gm.updateGame(time);
 }
 
 public class Game{

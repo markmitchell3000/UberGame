@@ -22,4 +22,10 @@ public class GameManager{
 	public var changeGUIState(gg:GameGUIState){
 		gameGUI=gg;
 	}
+
+	public var setPlayerData(data:PlayerData){
+
+	}
+
+	
 }

@@ -5,7 +5,7 @@ public class GameStateMap extends GameState{
     	//special Map prep
     	/*There are no victory conditions but maps may have some spawners. Saves
     	happen on a timer.*/
-    	super(playerData,gameboard);
+    	super(playerData,gameboard,"Map");//Maps are often transistioned across to other maps
     }
 
 	public function cycleState(float:time){

@@ -6,8 +6,10 @@ public class GameStateHome extends GameState{
 	public function GameStateHome(playerData:PlayerData,gameboard:GameBoard){
     	//special home prep
     	/*Very little to do at home at the moment, saves happen on timer*/
-    	super(playerData,gameboard);
+    	super(playerData,gameboard,"Map");
     }
+
 	public function cycleState(time:float){
+		super.cycleState(time);
 	}
 }
